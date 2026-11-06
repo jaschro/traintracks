@@ -1,7 +1,7 @@
 {
   "id": "fifth",
   "name": "5th Street (old)",
-  "icon": "🌤",
+  "icon": "\ud83c\udf24",
   "isGeneric": false,
   "rooms": [
     {
@@ -11,7 +11,7 @@
         {
           "id": "f01",
           "name": "Combined Exerciser",
-          "musclesWorked": "Upper body — pull-ups, leg raises, dips",
+          "musclesWorked": "Upper body \u2014 pull-ups, leg raises, dips",
           "image": "MB.7.61 Combined Exerciser.jpg",
           "logType": "weight"
         },
@@ -39,7 +39,7 @@
         {
           "id": "f05",
           "name": "Bench Press",
-          "musclesWorked": "Chest, triceps, and front deltoids — full range of motion",
+          "musclesWorked": "Chest, triceps, and front deltoids \u2014 full range of motion",
           "image": "MB.7.64.Bench Press..jpg",
           "logType": "weight"
         },
@@ -87,5 +87,6 @@
         }
       ]
     }
-  ]
+  ],
+  "removed": true
 }
