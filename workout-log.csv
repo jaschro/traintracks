@@ -1,5 +1,7 @@
 datetime,gym,room,machine,machineId,set,weight,reps,duration,level,incline,hr,notes,zone1,zone2,zone3,zone4,zone5,garminId
-2026-11-06 11:01:00 AM,Common Machines,Cardio,Elliptical,elliptical,1,,,32.42,,,126,Mexico City hotel elliptical session (Garmin 24988451749; 32.4 min; started 10:01 AM local). At ~7,300 ft altitude. Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1.,1.97,25.4,4,1,,24988451749
+2026-11-06 11:01:00 AM,Common Machines,Cardio,Elliptical,elliptical,1,,,32.42,,,126,Mexico City hotel elliptical session (Garmin 24988451749; 32.4 min; started 10:01 AM local). At ~7 300 ft altitude. Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1.,1.97,25.4,4,1,,24988451749
+2026-11-06 11:15:34 AM,Common Machines,Bodyweight — No Equipment,Squats,squats,1,,20,,,,,,,,,,,
+2026-11-06 11:15:34 AM,Common Machines,Bodyweight — No Equipment,Squats,squats,2,,20,,,,,,,,,,,
 2026-11-05 12:14:40 PM,Common Machines,Bodyweight — No Equipment,Push Ups,push-ups,1,,30,,,,,,,,,,,
 2026-11-05 12:14:40 PM,Common Machines,Bodyweight — No Equipment,Push Ups,push-ups,2,,30,,,,,,,,,,,
 2026-11-05 12:14:40 PM,Common Machines,Bodyweight — No Equipment,Push Ups,push-ups,3,,30,,,,,,,,,,,
