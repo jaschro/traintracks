@@ -20,6 +20,7 @@ class Common(unittest.TestCase):
         self.assertEqual(C.tokens_format("  "), "none")
         self.assertEqual(C.tokens_format("H4sIAAAA..."), "tarball")
         self.assertEqual(C.tokens_format("eyJvYXV0aDEi..."), "blob")
+        self.assertEqual(C.tokens_format('{"di_token": "x"}'), "json")
 
     def test_local_tz_env(self):
         os.environ["GARMIN_TZ"] = "America/Los_Angeles"

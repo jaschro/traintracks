@@ -15,7 +15,7 @@ New outdoor walks, runs, rides and hikes are also posted into your workout log a
 
 1. **Make the token, once, on your computer** (needs Python 3.10+):
    ```
-   pip install garminconnect
+   pip install -U garminconnect
    python pipelines/garmin/garmin_login.py
    ```
    It asks for your Garmin email/password (and MFA code) and prints a long token blob. It is also saved to `garmin_tokens.json` — delete that file once step 2 is done.

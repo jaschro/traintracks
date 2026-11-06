@@ -49,7 +49,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install garminconnect
-        run: pip install --quiet garminconnect
+        run: pip install --quiet "garminconnect>=0.3.20"
 
       - name: Recent snapshot (garmin-recent.json)
         continue-on-error: true

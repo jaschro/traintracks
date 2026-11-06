@@ -1,10 +1,10 @@
 """
 Shared helpers for the Garmin pipelines.
 
-Auth: the GARMIN_TOKENS secret, in EITHER of the two formats people end up with:
-  * a garth ``dumps()`` base64 string blob (what garmin_login.py prints), or
-  * a base64 gzipped tarball of a ~/.garth directory (an older setup script).
-Falls back to ~/.garminconnect for local use when the variable is unset.
+Auth: the GARMIN_TOKENS secret — the JSON session string that garmin_login.py
+prints (garminconnect >= 0.3.20). Older base64 garth blobs and tarballs are
+detected and rejected with instructions, since the library can no longer
+resume them. Falls back to ~/.garminconnect for local use when unset.
 
 Time zone: the GARMIN_TZ repository variable (IANA name). Every date key the
 pipelines write — minute keys, daily rows, "today" — is in this zone, so a
@@ -39,10 +39,17 @@ def local_today() -> date:
 
 
 def tokens_format(tokens: str) -> str:
-    """'tarball' | 'blob' | 'none' for a GARMIN_TOKENS value."""
+    """'json' | 'tarball' | 'blob' | 'none' for a GARMIN_TOKENS value.
+
+    garminconnect >= 0.3.20 only accepts the JSON session string that
+    garmin_login.py prints. 'blob' (a base64 garth dump) and 'tarball' are the
+    two older formats; they can no longer be resumed and need a fresh login.
+    """
     t = (tokens or "").strip()
     if not t:
         return "none"
+    if t.startswith(("{", "[")):
+        return "json"
     # gzip magic bytes (1f 8b) base64-encode to "H4sI"
     return "tarball" if t.startswith("H4sI") else "blob"
 
@@ -65,13 +72,17 @@ def garmin_client():
 
     tokens = os.environ.get("GARMIN_TOKENS", "").strip()
     fmt = tokens_format(tokens)
+    if fmt in ("blob", "tarball"):
+        print("GARMIN_TOKENS is in the old garth format, which garminconnect no longer accepts.\n"
+              "Run `pip install -U garminconnect && python pipelines/garmin/garmin_login.py` once and\n"
+              "paste the JSON it prints into the GARMIN_TOKENS secret.", file=sys.stderr)
+        sys.exit(3)
     g = Garmin()
-    if fmt == "none":
-        g.login(os.path.expanduser("~/.garminconnect"))
-    elif fmt == "blob":
-        g.login(tokens)
-    else:
-        g.login(_extract_tarball(tokens))
+    try:
+        g.login(tokens if fmt == "json" else os.path.expanduser("~/.garminconnect"))
+    except Exception as e:  # noqa: BLE001
+        print(f"Garmin login failed ({e}). If the tokens are more than a year old, run garmin_login.py again.", file=sys.stderr)
+        sys.exit(3)
     dn = os.environ.get("GARMIN_DISPLAY_NAME", "").strip()
     if dn and not getattr(g, "display_name", None):
         g.display_name = dn
