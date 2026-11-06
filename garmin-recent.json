@@ -1,7 +1,20 @@
 {
-  "fetchedAt": "2026-11-06T15:34:43Z",
+  "fetchedAt": "2026-11-06T16:38:00Z",
   "today": "2026-11-06",
   "recentActivities": [
+    {
+      "activityId": 24988451749,
+      "date": "2026-11-06",
+      "type": "elliptical",
+      "name": "Elliptical",
+      "durationMins": 32.4,
+      "distanceMiles": null,
+      "avgHR": 126.0,
+      "maxHR": 148.0,
+      "calories": 311.0,
+      "elevationGain": null,
+      "avgSpeedMps": 0.0
+    },
     {
       "activityId": 24981382877,
       "date": "2026-11-05",
@@ -186,18 +199,18 @@
     }
   ],
   "todayStats": {
-    "steps": 221,
+    "steps": 270,
     "floors": 0.0,
     "restingHR": 50,
-    "activeCalories": 1.0,
+    "activeCalories": 2.0,
     "bodyBattery": 56,
     "stressAvg": 22,
-    "weeklySteps": 95391
+    "weeklySteps": 95440
   },
   "trainingReadiness": {
-    "score": 60,
-    "level": "MODERATE",
-    "feedback": "GOOD_SLEEP_LAST_NIGHT"
+    "score": 41,
+    "level": "LOW",
+    "feedback": "FOCUS_ON_ENERGY_LEVELS"
   },
   "vo2max": {
     "vo2max": 40.0
