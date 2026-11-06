@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-06T01:22:20Z",
+  "fetchedAt": "2026-11-06T15:34:43Z",
   "today": "2026-11-06",
   "recentActivities": [
     {
@@ -13,29 +13,7 @@
       "maxHR": 99.0,
       "calories": 378.0,
       "elevationGain": 39.0,
-      "avgPace": 1.0829999446868896,
-      "hrZones": [
-        {
-          "zone": 1,
-          "secsInZone": 2403.745
-        },
-        {
-          "zone": 2,
-          "secsInZone": 0.0
-        },
-        {
-          "zone": 3,
-          "secsInZone": 0.0
-        },
-        {
-          "zone": 4,
-          "secsInZone": 0.0
-        },
-        {
-          "zone": 5,
-          "secsInZone": 0.0
-        }
-      ]
+      "avgSpeedMps": 1.0829999446868896
     },
     {
       "activityId": 24964425470,
@@ -48,29 +26,7 @@
       "maxHR": 147.0,
       "calories": 199.0,
       "elevationGain": null,
-      "avgPace": 0.8859999775886536,
-      "hrZones": [
-        {
-          "zone": 1,
-          "secsInZone": 637.999
-        },
-        {
-          "zone": 2,
-          "secsInZone": 181.645
-        },
-        {
-          "zone": 3,
-          "secsInZone": 488.987
-        },
-        {
-          "zone": 4,
-          "secsInZone": 127.999
-        },
-        {
-          "zone": 5,
-          "secsInZone": 0.0
-        }
-      ]
+      "avgSpeedMps": 0.8859999775886536
     },
     {
       "activityId": 24958988894,
@@ -83,29 +39,7 @@
       "maxHR": 115.0,
       "calories": 257.0,
       "elevationGain": 27.0,
-      "avgPace": 1.3619999885559082,
-      "hrZones": [
-        {
-          "zone": 1,
-          "secsInZone": 2312.833
-        },
-        {
-          "zone": 2,
-          "secsInZone": 391.993
-        },
-        {
-          "zone": 3,
-          "secsInZone": 0.0
-        },
-        {
-          "zone": 4,
-          "secsInZone": 0.0
-        },
-        {
-          "zone": 5,
-          "secsInZone": 0.0
-        }
-      ]
+      "avgSpeedMps": 1.3619999885559082
     },
     {
       "activityId": 24946488433,
@@ -118,29 +52,7 @@
       "maxHR": 128.0,
       "calories": 299.0,
       "elevationGain": null,
-      "avgPace": 0.9900000095367432,
-      "hrZones": [
-        {
-          "zone": 1,
-          "secsInZone": 599.997
-        },
-        {
-          "zone": 2,
-          "secsInZone": 1328.228
-        },
-        {
-          "zone": 3,
-          "secsInZone": 461.001
-        },
-        {
-          "zone": 4,
-          "secsInZone": 0.0
-        },
-        {
-          "zone": 5,
-          "secsInZone": 0.0
-        }
-      ]
+      "avgSpeedMps": 0.9900000095367432
     },
     {
       "activityId": 24919910332,
@@ -153,29 +65,7 @@
       "maxHR": 104.0,
       "calories": 215.0,
       "elevationGain": 15.0,
-      "avgPace": 1.3370000123977661,
-      "hrZones": [
-        {
-          "zone": 1,
-          "secsInZone": 618.993
-        },
-        {
-          "zone": 2,
-          "secsInZone": 25.005
-        },
-        {
-          "zone": 3,
-          "secsInZone": 0.0
-        },
-        {
-          "zone": 4,
-          "secsInZone": 0.0
-        },
-        {
-          "zone": 5,
-          "secsInZone": 0.0
-        }
-      ]
+      "avgSpeedMps": 1.3370000123977661
     },
     {
       "activityId": 24911480716,
@@ -188,7 +78,7 @@
       "maxHR": 122.0,
       "calories": 450.0,
       "elevationGain": 24.0,
-      "avgPace": 1.3650000095367432
+      "avgSpeedMps": 1.3650000095367432
     },
     {
       "activityId": 24906316993,
@@ -201,7 +91,7 @@
       "maxHR": 134.0,
       "calories": 293.0,
       "elevationGain": null,
-      "avgPace": 1.3079999685287476
+      "avgSpeedMps": 1.3079999685287476
     },
     {
       "activityId": 24888762133,
@@ -214,7 +104,7 @@
       "maxHR": 101.0,
       "calories": 129.0,
       "elevationGain": 11.0,
-      "avgPace": 1.3550000190734863
+      "avgSpeedMps": 1.3550000190734863
     },
     {
       "activityId": 24882426334,
@@ -227,7 +117,7 @@
       "maxHR": 169.0,
       "calories": 323.0,
       "elevationGain": 18.0,
-      "avgPace": 1.8090000152587893
+      "avgSpeedMps": 1.8090000152587893
     },
     {
       "activityId": 24862187437,
@@ -240,7 +130,7 @@
       "maxHR": 111.0,
       "calories": 389.0,
       "elevationGain": 65.0,
-      "avgPace": 1.406999945640564
+      "avgSpeedMps": 1.406999945640564
     },
     {
       "activityId": 24857735309,
@@ -253,7 +143,7 @@
       "maxHR": 95.0,
       "calories": 179.0,
       "elevationGain": 53.0,
-      "avgPace": 1.3359999656677246
+      "avgSpeedMps": 1.3359999656677246
     },
     {
       "activityId": 24849017969,
@@ -266,7 +156,7 @@
       "maxHR": 133.0,
       "calories": 242.0,
       "elevationGain": 5.0,
-      "avgPace": 1.3869999647140503
+      "avgSpeedMps": 1.3869999647140503
     },
     {
       "activityId": 24840388908,
@@ -279,7 +169,7 @@
       "maxHR": 102.0,
       "calories": 190.0,
       "elevationGain": 13.0,
-      "avgPace": 1.4700000286102295
+      "avgSpeedMps": 1.4700000286102295
     },
     {
       "activityId": 24829567790,
@@ -292,50 +182,49 @@
       "maxHR": 97.0,
       "calories": 208.0,
       "elevationGain": 19.0,
-      "avgPace": 1.4570000171661375
+      "avgSpeedMps": 1.4570000171661375
     }
   ],
   "todayStats": {
-    "steps": 11627,
-    "floors": 13.56234,
+    "steps": 221,
+    "floors": 0.0,
     "restingHR": 50,
-    "activeCalories": 350.0,
-    "bodyBattery": null,
-    "stressAvg": 33,
-    "weeklySteps": 93760
+    "activeCalories": 1.0,
+    "bodyBattery": 56,
+    "stressAvg": 22,
+    "weeklySteps": 95391
   },
   "trainingReadiness": {
-    "score": null,
-    "level": null,
-    "feedback": null
+    "score": 60,
+    "level": "MODERATE",
+    "feedback": "GOOD_SLEEP_LAST_NIGHT"
   },
   "vo2max": {
-    "vo2max": 40.0,
-    "fitnessAge": null
+    "vo2max": 40.0
   },
   "intensityMinutes": {
     "moderate": 141,
     "vigorous": 23
   },
   "hrv": {
-    "weeklyAvg": 40,
+    "weeklyAvg": 39,
     "lastNight": null,
     "status": "BALANCED"
   },
   "sleep": {
-    "date": "2026-11-05",
-    "durationHours": 6.1,
-    "score": 56,
-    "deepSleepMins": 117,
-    "lightSleepMins": 232,
-    "remSleepMins": 19,
-    "awakeMins": 53,
+    "date": "2026-11-06",
+    "durationHours": 7.2,
+    "score": 81,
+    "deepSleepMins": 112,
+    "lightSleepMins": 234,
+    "remSleepMins": 86,
+    "awakeMins": 23,
     "avgRespirationRate": 15.0,
     "avgSpO2": 92.0
   },
-  "spo2Avg": null,
+  "spo2Avg": 91.0,
   "respiration": {
-    "avgWaking": null,
-    "avgSleep": null
+    "avgWaking": 16.0,
+    "avgSleep": 15.0
   }
 }
