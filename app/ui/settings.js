@@ -4,7 +4,7 @@ import { html, raw, act, setHTML, on, toast, $, qs, showLoading, hideLoading, co
 import { screen, nav, back, home } from './nav.js';
 import { connect, loadAll, saveProfile, checkTemplate, applyTemplate, runGarminNow } from '../data.js';
 import { APP_VERSION, TEMPLATE, STORAGE } from '../../lib/config.js';
-import { renderHome } from './home.js';
+import { renderHome, docUrl } from './home.js';
 
 export async function doConnect() {
   saveCfg();
@@ -55,7 +55,7 @@ function renderSettings() {
       <div class="sl" ${act('copy-url', { what: 'app' })}><span>Copy this app's URL</span><span class="ch">⧉</span></div>
     </div>
     <div class="status" id="updstatus"></div>
-    <div class="version">TrainTracks v${S.version || APP_VERSION} · <a href="docs/SETUP.md" target="_blank" rel="noopener">Setup guide</a> · <a href="docs/COACH.md" target="_blank" rel="noopener">Coach setup</a></div>`);
+    <div class="version">TrainTracks v${S.version || APP_VERSION} · <a href="${docUrl('SETUP.md')}" target="_blank" rel="noopener">Setup guide</a> · <a href="${docUrl('COACH.md')}" target="_blank" rel="noopener">Coach setup</a> · <a href="${docUrl('GARMIN.md')}" target="_blank" rel="noopener">Garmin</a></div>`);
   ['su', 'sr', 'sp'].forEach(id => $(id).addEventListener('input', readCfgFields));
   $('sremember').addEventListener('change', e => { S.remember = e.target.checked; saveCfg(); });
   $('stheme').addEventListener('change', e => applyTheme(e.target.value, true));

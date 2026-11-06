@@ -3,6 +3,9 @@ import { S, hasCfg, goalsCfg, genericGym, myGyms } from '../state.js';
 import { html, act, setHTML, on, esc } from './dom.js';
 import { screen, nav } from './nav.js';
 import { gymMachineCount } from '../../lib/gyms.js';
+import { TEMPLATE } from '../../lib/config.js';
+
+export function docUrl(name) { return `https://github.com/${TEMPLATE.owner}/${TEMPLATE.repo}/blob/main/docs/${name}`; }
 import { computeGoals, defaultGoals } from '../../lib/goals.js';
 import { planStatus } from '../../lib/plan.js';
 import { todayStr, fmtRange, fmtGoalNum } from '../../lib/format.js';
@@ -50,7 +53,7 @@ function weekStrip() {
 
 export function renderHome() {
   if (!hasCfg()) {
-    setHTML('homebody', html`<div class="empty" style="padding-top:60px"><div class="icon">🚉</div><p><b>Welcome aboard.</b><br>Connect your GitHub repository to get going.</p></div><button class="btn" ${act('nav', { to: 'settings' })}>Set up GitHub</button><p class="hint" style="text-align:center">New here? Read <a href="docs/SETUP.md" target="_blank" rel="noopener">the setup guide</a>.</p>`);
+    setHTML('homebody', html`<div class="empty" style="padding-top:60px"><div class="icon">🚉</div><p><b>Welcome aboard.</b><br>Connect your GitHub repository to get going.</p></div><button class="btn" ${act('nav', { to: 'settings' })}>Set up GitHub</button><p class="hint" style="text-align:center">New here? Read <a href="${docUrl('SETUP.md')}" target="_blank" rel="noopener">the setup guide</a>.</p>`);
     return;
   }
   if (!S.loaded) {

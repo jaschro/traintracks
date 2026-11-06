@@ -193,7 +193,6 @@ export async function saveGenericLocal() {
   const g = S.gyms.find(x => x.id === GENERIC_ID);
   if (!g) return;
   const ov = emptyOverrides();
-  const base = S.genericLocalBase || {};
   g.rooms.forEach(room => {
     if (room._local) ov.rooms.push({ id: room.id, name: room.name });
     room.machines.forEach(m => {
@@ -201,7 +200,6 @@ export async function saveGenericLocal() {
       if (m._local) { const { _local, hidden, ...rest } = m; ov.machines.push({ roomId: room.id, ...rest }); }
     });
   });
-  void base;
   S.genericLocal = ov;
   const res = await r.putWithRetry(FILES.genericLocal, JSON.stringify(ov, null, 2) + '\n', S.sha.genericLocal, 'Update generic gym overrides');
   S.sha.genericLocal = res.sha;
