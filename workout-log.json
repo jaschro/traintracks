@@ -16,7 +16,7 @@
     "hr_avg_bpm": 83,
     "garmin_id": "24999124400",
     "notes": "Miami Beach walk (Garmin 24999124400; 0.62 mi). All Zone 1 - max minute HR ~87 (Karvonen RHR 46 / max 168).",
-    "zone1_sec": 731
+    "zone1_min": 12.18
   },
   {
     "id": "emw6opqv0cmb02",
@@ -35,11 +35,11 @@
     "hr_avg_bpm": 129,
     "garmin_id": "24999512584",
     "notes": "Miami Beach Jog jog (Garmin 24999512584; 2.07 mi; +62 ft). Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1.",
-    "zone1_sec": 104,
-    "zone2_sec": 1183,
-    "zone3_sec": 300,
-    "zone4_sec": 60,
-    "zone5_sec": 60
+    "zone1_min": 1.73,
+    "zone2_min": 19.72,
+    "zone3_min": 5,
+    "zone4_min": 1,
+    "zone5_min": 1
   },
   {
     "id": "emw578gnnjk400",
@@ -63,10 +63,10 @@
     "distance_mi": null,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 118,
-    "zone2_sec": 1524,
-    "zone3_sec": 240,
-    "zone4_sec": 60
+    "zone1_min": 1.97,
+    "zone2_min": 25.4,
+    "zone3_min": 4,
+    "zone4_min": 1
   },
   {
     "id": "emw58jrmsp7v01",
@@ -332,7 +332,7 @@
     "distance_mi": 3.39,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 5640
+    "zone1_min": 94
   },
   {
     "machine_id": "leg-extension",
@@ -664,9 +664,9 @@
     "distance_mi": 1.04,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1359,
-    "zone2_sec": 420,
-    "zone3_sec": 120
+    "zone1_min": 22.65,
+    "zone2_min": 7,
+    "zone3_min": 2
   },
   {
     "machine_id": "lunges",
@@ -800,7 +800,7 @@
     "distance_mi": 2.45,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3164
+    "zone1_min": 52.73
   },
   {
     "machine_id": "squats",
@@ -978,8 +978,8 @@
     "distance_mi": 1.73,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 2507,
-    "zone2_sec": 300
+    "zone1_min": 41.78,
+    "zone2_min": 5
   },
   {
     "machine_id": "pw02",
@@ -1750,7 +1750,7 @@
     "distance_mi": 1.45,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1800
+    "zone1_min": 30
   },
   {
     "machine_id": "walk",
@@ -1774,7 +1774,7 @@
     "distance_mi": 2.13,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3291
+    "zone1_min": 54.85
   },
   {
     "machine_id": "leg-lifts",
@@ -1952,8 +1952,8 @@
     "distance_mi": 1.7,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 953,
-    "zone2_sec": 1140
+    "zone1_min": 15.88,
+    "zone2_min": 19
   },
   {
     "machine_id": "walk",
@@ -1977,7 +1977,7 @@
     "distance_mi": 4.33,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 5396
+    "zone1_min": 89.93
   },
   {
     "machine_id": "squats",
@@ -2353,11 +2353,11 @@
     "distance_mi": 2.77,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1142,
-    "zone2_sec": 598,
-    "zone3_sec": 540,
-    "zone4_sec": 180,
-    "zone5_sec": 60
+    "zone1_min": 19.03,
+    "zone2_min": 9.97,
+    "zone3_min": 9,
+    "zone4_min": 3,
+    "zone5_min": 1
   },
   {
     "machine_id": "push-ups",
@@ -2601,7 +2601,7 @@
     "distance_mi": 1.27,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1521
+    "zone1_min": 25.35
   },
   {
     "machine_id": "walk",
@@ -2625,7 +2625,7 @@
     "distance_mi": null,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 2176
+    "zone1_min": 36.27
   },
   {
     "machine_id": "walk",
@@ -2649,7 +2649,7 @@
     "distance_mi": 3.81,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 4499
+    "zone1_min": 74.98
   },
   {
     "machine_id": "pa05",
@@ -2673,8 +2673,8 @@
     "distance_mi": 1.72,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 640,
-    "zone2_sec": 1500
+    "zone1_min": 10.67,
+    "zone2_min": 25
   },
   {
     "machine_id": "pm02",
@@ -3380,7 +3380,7 @@
     "distance_mi": 1.82,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 2043
+    "zone1_min": 34.05
   },
   {
     "machine_id": "leg-lifts",
@@ -3624,7 +3624,7 @@
     "distance_mi": 1.98,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 2196
+    "zone1_min": 36.6
   },
   {
     "machine_id": "push-ups",
@@ -4044,7 +4044,7 @@
     "distance_mi": 1.76,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1848
+    "zone1_min": 30.8
   },
   {
     "machine_id": "m1788445570062",
@@ -4068,11 +4068,11 @@
     "distance_mi": 1.75,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 31,
-    "zone2_sec": 180,
-    "zone3_sec": 720,
-    "zone4_sec": 180,
-    "zone5_sec": 40
+    "zone1_min": 0.52,
+    "zone2_min": 3,
+    "zone3_min": 12,
+    "zone4_min": 3,
+    "zone5_min": 0.67
   },
   {
     "machine_id": "squats",
@@ -4382,9 +4382,9 @@
     "distance_mi": 1.7,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 374,
-    "zone2_sec": 540,
-    "zone3_sec": 222
+    "zone1_min": 6.23,
+    "zone2_min": 9,
+    "zone3_min": 3.7
   },
   {
     "machine_id": "m1792434947823",
@@ -4408,7 +4408,7 @@
     "distance_mi": 1.77,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1921
+    "zone1_min": 32.02
   },
   {
     "machine_id": "walk",
@@ -4432,7 +4432,7 @@
     "distance_mi": 2.68,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3117
+    "zone1_min": 51.95
   },
   {
     "machine_id": "elbow-planks",
@@ -4632,9 +4632,9 @@
     "distance_mi": 1.82,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 647,
-    "zone2_sec": 900,
-    "zone3_sec": 120
+    "zone1_min": 10.78,
+    "zone2_min": 15,
+    "zone3_min": 2
   },
   {
     "machine_id": "high-planks",
@@ -5494,9 +5494,9 @@
     "distance_mi": 1.61,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 393,
-    "zone2_sec": 960,
-    "zone3_sec": 60
+    "zone1_min": 6.55,
+    "zone2_min": 16,
+    "zone3_min": 1
   },
   {
     "machine_id": "elbow-planks",
@@ -5564,8 +5564,8 @@
     "distance_mi": 1.71,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 292,
-    "zone2_sec": 1560
+    "zone1_min": 4.87,
+    "zone2_min": 26
   },
   {
     "machine_id": "walk",
@@ -5589,7 +5589,7 @@
     "distance_mi": 3.36,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3926
+    "zone1_min": 65.43
   },
   {
     "machine_id": "leg-lifts",
@@ -6427,9 +6427,9 @@
     "distance_mi": 1.15,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 116,
-    "zone2_sec": 120,
-    "zone3_sec": 658
+    "zone1_min": 1.93,
+    "zone2_min": 2,
+    "zone3_min": 10.97
   },
   {
     "machine_id": "bike-ride",
@@ -6453,9 +6453,9 @@
     "distance_mi": 13.61,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3498,
-    "zone2_sec": 631,
-    "zone3_sec": 120
+    "zone1_min": 58.3,
+    "zone2_min": 10.52,
+    "zone3_min": 2
   },
   {
     "machine_id": "run",
@@ -6479,8 +6479,8 @@
     "distance_mi": 1.15,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 529,
-    "zone2_sec": 475
+    "zone1_min": 8.82,
+    "zone2_min": 7.92
   },
   {
     "machine_id": "walk",
@@ -6504,7 +6504,7 @@
     "distance_mi": 1.88,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 2255
+    "zone1_min": 37.58
   },
   {
     "machine_id": "jog",
@@ -6528,7 +6528,7 @@
     "distance_mi": 1.33,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1367,
+    "zone1_min": 22.78,
     "migrated_from": "Jog @ Common Machines (m1791398256648)"
   },
   {
@@ -6553,9 +6553,9 @@
     "distance_mi": 2.22,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1584,
-    "zone2_sec": 900,
-    "zone3_sec": 60
+    "zone1_min": 26.4,
+    "zone2_min": 15,
+    "zone3_min": 1
   },
   {
     "machine_id": "pw02",
@@ -6843,7 +6843,7 @@
     "distance_mi": 1.8,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1967
+    "zone1_min": 32.78
   },
   {
     "machine_id": "pa05",
@@ -6867,9 +6867,9 @@
     "distance_mi": 1.93,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 2321,
-    "zone2_sec": 420,
-    "zone3_sec": 120
+    "zone1_min": 38.68,
+    "zone2_min": 7,
+    "zone3_min": 2
   },
   {
     "machine_id": "pm01",
@@ -7311,7 +7311,7 @@
     "distance_mi": 1.23,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1965
+    "zone1_min": 32.75
   },
   {
     "machine_id": "walk",
@@ -7335,7 +7335,7 @@
     "distance_mi": 1.98,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 2182
+    "zone1_min": 36.37
   },
   {
     "machine_id": "pa05",
@@ -7359,8 +7359,8 @@
     "distance_mi": 1.7,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1141,
-    "zone2_sec": 780
+    "zone1_min": 19.02,
+    "zone2_min": 13
   },
   {
     "machine_id": "walk",
@@ -7384,7 +7384,7 @@
     "distance_mi": 2.22,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 2408
+    "zone1_min": 40.13
   },
   {
     "machine_id": "tricep-pulldown-extension",
@@ -7606,7 +7606,7 @@
     "distance_mi": 4.59,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 5379
+    "zone1_min": 89.65
   },
   {
     "machine_id": "push-ups",
@@ -7762,7 +7762,7 @@
     "distance_mi": 1.82,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1983
+    "zone1_min": 33.05
   },
   {
     "machine_id": "high-planks",
@@ -7808,7 +7808,7 @@
     "distance_mi": 1.36,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1758
+    "zone1_min": 29.3
   },
   {
     "machine_id": "walk",
@@ -7832,7 +7832,7 @@
     "distance_mi": 1.03,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1226
+    "zone1_min": 20.43
   },
   {
     "machine_id": "push-ups",
@@ -8098,8 +8098,8 @@
     "distance_mi": 4.85,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 7239,
-    "zone2_sec": 60
+    "zone1_min": 120.65,
+    "zone2_min": 1
   },
   {
     "machine_id": "leg-curl",
@@ -8541,9 +8541,9 @@
     "distance_mi": null,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1068,
-    "zone2_sec": 1020,
-    "zone3_sec": 240
+    "zone1_min": 17.8,
+    "zone2_min": 17,
+    "zone3_min": 4
   },
   {
     "machine_id": "pa05",
@@ -8567,9 +8567,9 @@
     "distance_mi": 2.1,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 359,
-    "zone2_sec": 1574,
-    "zone3_sec": 420
+    "zone1_min": 5.98,
+    "zone2_min": 26.23,
+    "zone3_min": 7
   },
   {
     "machine_id": "lat-pulldown",
@@ -8769,8 +8769,8 @@
     "distance_mi": 1.73,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 804,
-    "zone2_sec": 1020
+    "zone1_min": 13.4,
+    "zone2_min": 17
   },
   {
     "machine_id": "meditation",
@@ -8838,7 +8838,7 @@
     "distance_mi": 4.12,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 4692
+    "zone1_min": 78.2
   },
   {
     "machine_id": "push-ups",
@@ -8972,8 +8972,8 @@
     "distance_mi": null,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1643,
-    "zone2_sec": 180
+    "zone1_min": 27.38,
+    "zone2_min": 3
   },
   {
     "machine_id": "pm01",
@@ -9415,7 +9415,7 @@
     "distance_mi": 2.86,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3290
+    "zone1_min": 54.83
   },
   {
     "machine_id": "squats",
@@ -9549,7 +9549,7 @@
     "distance_mi": 1.18,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1308
+    "zone1_min": 21.8
   },
   {
     "machine_id": "elbow-planks",
@@ -9771,9 +9771,9 @@
     "distance_mi": null,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 832,
-    "zone2_sec": 660,
-    "zone3_sec": 600
+    "zone1_min": 13.87,
+    "zone2_min": 11,
+    "zone3_min": 10
   },
   {
     "machine_id": "m1788049323161",
@@ -10545,7 +10545,7 @@
     "distance_mi": 2.63,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3066
+    "zone1_min": 51.1
   },
   {
     "machine_id": "push-ups",
@@ -11383,7 +11383,7 @@
     "distance_mi": null,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1430
+    "zone1_min": 23.83
   },
   {
     "machine_id": "m1788048070768",
@@ -12683,9 +12683,9 @@
     "distance_mi": null,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 695,
-    "zone2_sec": 718,
-    "zone3_sec": 600
+    "zone1_min": 11.58,
+    "zone2_min": 11.97,
+    "zone3_min": 10
   },
   {
     "machine_id": "walk",
@@ -12709,7 +12709,7 @@
     "distance_mi": 1.99,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 2295
+    "zone1_min": 38.25
   },
   {
     "machine_id": "walk",
@@ -12733,7 +12733,7 @@
     "distance_mi": 2.78,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3968
+    "zone1_min": 66.13
   },
   {
     "machine_id": "f02",
@@ -12933,7 +12933,7 @@
     "distance_mi": 5.1,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 6896
+    "zone1_min": 114.93
   },
   {
     "machine_id": "m1789140015915",
@@ -13067,7 +13067,7 @@
     "distance_mi": 1.38,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1704
+    "zone1_min": 28.4
   },
   {
     "machine_id": "walk",
@@ -13091,7 +13091,7 @@
     "distance_mi": 1.76,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 2392
+    "zone1_min": 39.87
   },
   {
     "machine_id": "push-ups",
@@ -13159,10 +13159,10 @@
     "distance_mi": 3.3,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 420,
-    "zone2_sec": 1560,
-    "zone3_sec": 600,
-    "zone4_sec": 74
+    "zone1_min": 7,
+    "zone2_min": 26,
+    "zone3_min": 10,
+    "zone4_min": 1.23
   },
   {
     "machine_id": "push-ups",
@@ -13472,7 +13472,7 @@
     "distance_mi": 1.45,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1655
+    "zone1_min": 27.58
   },
   {
     "machine_id": "push-ups",
@@ -13694,7 +13694,7 @@
     "distance_mi": 0.95,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1208
+    "zone1_min": 20.13
   },
   {
     "machine_id": "walk",
@@ -13718,7 +13718,7 @@
     "distance_mi": 0.91,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1120
+    "zone1_min": 18.67
   },
   {
     "machine_id": "m1788445570062",
@@ -13742,11 +13742,11 @@
     "distance_mi": 1.79,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 398,
-    "zone2_sec": 60,
-    "zone3_sec": 420,
-    "zone4_sec": 300,
-    "zone5_sec": 24
+    "zone1_min": 6.63,
+    "zone2_min": 1,
+    "zone3_min": 7,
+    "zone4_min": 5,
+    "zone5_min": 0.4
   },
   {
     "machine_id": "squats",
@@ -13946,7 +13946,7 @@
     "distance_mi": 4.75,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 5344
+    "zone1_min": 89.07
   },
   {
     "machine_id": "meditation",
@@ -14190,7 +14190,7 @@
     "distance_mi": 1.59,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1884
+    "zone1_min": 31.4
   },
   {
     "machine_id": "run",
@@ -14214,10 +14214,10 @@
     "distance_mi": 1.16,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 273,
-    "zone2_sec": 420,
-    "zone3_sec": 60,
-    "zone4_sec": 60
+    "zone1_min": 4.55,
+    "zone2_min": 7,
+    "zone3_min": 1,
+    "zone4_min": 1
   },
   {
     "machine_id": "m1788047901383",
@@ -15561,7 +15561,7 @@
     "distance_mi": null,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 330
+    "zone1_min": 5.5
   },
   {
     "machine_id": "stationary-bike-upright",
@@ -15585,7 +15585,7 @@
     "distance_mi": null,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 305
+    "zone1_min": 5.08
   },
   {
     "machine_id": "stationary-bike-upright",
@@ -15609,7 +15609,7 @@
     "distance_mi": null,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 308
+    "zone1_min": 5.13
   },
   {
     "machine_id": "meditation",
@@ -15655,10 +15655,10 @@
     "distance_mi": 3.36,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 332,
-    "zone2_sec": 1258,
-    "zone3_sec": 1140,
-    "zone4_sec": 60
+    "zone1_min": 5.53,
+    "zone2_min": 20.97,
+    "zone3_min": 19,
+    "zone4_min": 1
   },
   {
     "machine_id": "meditation",
@@ -15704,9 +15704,9 @@
     "distance_mi": 14.55,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 4514,
-    "zone2_sec": 420,
-    "zone3_sec": 60
+    "zone1_min": 75.23,
+    "zone2_min": 7,
+    "zone3_min": 1
   },
   {
     "machine_id": "bike-ride",
@@ -15730,9 +15730,9 @@
     "distance_mi": 2.55,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 602,
-    "zone2_sec": 180,
-    "zone3_sec": 120
+    "zone1_min": 10.03,
+    "zone2_min": 3,
+    "zone3_min": 2
   },
   {
     "machine_id": "meditation",
@@ -16306,7 +16306,7 @@
     "distance_mi": 0.48,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 508
+    "zone1_min": 8.47
   },
   {
     "machine_id": "run",
@@ -16330,10 +16330,10 @@
     "distance_mi": 2.56,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 409,
-    "zone2_sec": 1178,
-    "zone3_sec": 300,
-    "zone4_sec": 120
+    "zone1_min": 6.82,
+    "zone2_min": 19.63,
+    "zone3_min": 5,
+    "zone4_min": 2
   },
   {
     "machine_id": "walk",
@@ -16357,7 +16357,7 @@
     "distance_mi": 2.95,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3629
+    "zone1_min": 60.48
   },
   {
     "machine_id": "meditation",
@@ -16403,10 +16403,10 @@
     "distance_mi": 4.29,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 853,
-    "zone2_sec": 970,
-    "zone3_sec": 540,
-    "zone4_sec": 180
+    "zone1_min": 14.22,
+    "zone2_min": 16.17,
+    "zone3_min": 9,
+    "zone4_min": 3
   },
   {
     "machine_id": "m1785620353523",
@@ -16429,10 +16429,10 @@
     "distance_mi": null,
     "speed_mph": 3,
     "level": null,
-    "zone1_sec": 425,
-    "zone2_sec": 295,
-    "zone3_sec": 1530,
-    "zone4_sec": 188
+    "zone1_min": 7.08,
+    "zone2_min": 4.92,
+    "zone3_min": 25.5,
+    "zone4_min": 3.13
   },
   {
     "machine_id": "m1785620353523",
@@ -17050,7 +17050,7 @@
     "distance_mi": 2.78,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3230
+    "zone1_min": 53.83
   },
   {
     "machine_id": "m1787006387384",
@@ -17799,7 +17799,7 @@
     "distance_mi": null,
     "speed_mph": 3.3,
     "level": null,
-    "zone1_sec": 2700
+    "zone1_min": 45
   },
   {
     "machine_id": "m1785620353523",
@@ -18306,9 +18306,9 @@
     "distance_mi": null,
     "speed_mph": 3.3,
     "level": null,
-    "zone1_sec": 196,
-    "zone2_sec": 1252,
-    "zone3_sec": 922
+    "zone1_min": 3.27,
+    "zone2_min": 20.87,
+    "zone3_min": 15.37
   },
   {
     "machine_id": "m1785619713315",
@@ -18486,7 +18486,7 @@
     "distance_mi": 1.62,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 1952
+    "zone1_min": 32.53
   },
   {
     "machine_id": "pa05",
@@ -18509,9 +18509,9 @@
     "distance_mi": null,
     "speed_mph": 3,
     "level": null,
-    "zone1_sec": 721,
-    "zone2_sec": 1357,
-    "zone3_sec": 293
+    "zone1_min": 12.02,
+    "zone2_min": 22.62,
+    "zone3_min": 4.88
   },
   {
     "machine_id": "pa05",
@@ -19063,10 +19063,10 @@
     "distance_mi": 2.06,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 86,
-    "zone2_sec": 768,
-    "zone3_sec": 998,
-    "zone4_sec": 63
+    "zone1_min": 1.43,
+    "zone2_min": 12.8,
+    "zone3_min": 16.63,
+    "zone4_min": 1.05
   },
   {
     "machine_id": "yoga-class",
@@ -19771,8 +19771,8 @@
     "distance_mi": null,
     "speed_mph": 3,
     "level": null,
-    "zone1_sec": 685,
-    "zone2_sec": 802
+    "zone1_min": 11.42,
+    "zone2_min": 13.37
   },
   {
     "machine_id": "m1785619713315",
@@ -19884,8 +19884,8 @@
     "distance_mi": 2.69,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3043,
-    "zone2_sec": 40
+    "zone1_min": 50.72,
+    "zone2_min": 0.67
   },
   {
     "machine_id": "m1785005256712",
@@ -20459,10 +20459,10 @@
     "distance_mi": null,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 119,
-    "zone2_sec": 689,
-    "zone3_sec": 708,
-    "zone4_sec": 10
+    "zone1_min": 1.98,
+    "zone2_min": 11.48,
+    "zone3_min": 11.8,
+    "zone4_min": 0.17
   },
   {
     "machine_id": "walk",
@@ -20486,10 +20486,10 @@
     "distance_mi": 3.44,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 280,
-    "zone2_sec": 3035,
-    "zone3_sec": 295,
-    "zone4_sec": 12
+    "zone1_min": 4.67,
+    "zone2_min": 50.58,
+    "zone3_min": 4.92,
+    "zone4_min": 0.2
   },
   {
     "machine_id": "meditation",
@@ -20799,9 +20799,9 @@
     "distance_mi": 2.65,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 2614,
-    "zone2_sec": 543,
-    "zone3_sec": 46
+    "zone1_min": 43.57,
+    "zone2_min": 9.05,
+    "zone3_min": 0.77
   },
   {
     "machine_id": "pw02",
@@ -21242,11 +21242,11 @@
     "distance_mi": 1.2,
     "speed_mph": null,
     "level": null,
-    "zone1_sec": 3537,
-    "zone2_sec": 77,
-    "zone3_sec": 243,
-    "zone4_sec": 139,
-    "zone5_sec": 304
+    "zone1_min": 58.95,
+    "zone2_min": 1.28,
+    "zone3_min": 4.05,
+    "zone4_min": 2.32,
+    "zone5_min": 5.07
   },
   {
     "machine_id": "walk",
