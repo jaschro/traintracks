@@ -6,7 +6,8 @@ const C = { raf: 0, parts: [], stop: 0, last: 0, timer: 0 };
 
 export function celebrate(total) {
   const el = $('cele'); if (!el) return;
-  $('cesub').innerHTML = total ? `All <b>${total}</b> planned stop${total !== 1 ? 's' : ''} logged.<br>Great work.` : 'Great work.';
+  const n = Math.max(0, Math.floor(Number(total) || 0));
+  $('cesub').innerHTML = n ? `All <b>${n}</b> planned stop${n !== 1 ? 's' : ''} logged.<br>Great work.` : 'Great work.';
   el.classList.add('on');
   const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduce) start();

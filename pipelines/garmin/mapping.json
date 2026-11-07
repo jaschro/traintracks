@@ -1,12 +1,12 @@
 {
-  "_comment": "Where indoor Garmin activities go. Keys are either a Garmin activity id (one-off) or a Garmin activity type (every activity of that type, e.g. 'indoor_cycling', 'treadmill_running', 'elliptical', 'other'). Value: { machineId, machine, gym, room, gymId, roomId, word }. Outdoor walk/run/ride/hike need no mapping \u2014 they post to the generic Outdoor Activities room.",
+  "_comment": "Where indoor Garmin activities go. Keys are a Garmin activity id (one activity) or an activity type (every activity of that type, e.g. 'indoor_cycling', 'treadmill_running', 'elliptical', 'other'). Value: { machine_id, machine, gym_id, gym, room_id, room, word }. Outdoor walk/run/ride/hike need no entry: they post to the common gym's Outdoor Activities room.",
   "other": {
-    "machineId": "m1791398256648",
+    "machine_id": "jog",
     "machine": "Jog",
     "gym": "Common Machines",
     "room": "Outdoor Activities",
-    "gymId": "generic",
-    "roomId": "outdoor-activities",
+    "gym_id": "generic",
+    "room_id": "outdoor-activities",
     "word": "jog"
   }
 }

@@ -3,15 +3,10 @@
 daily_wellness.py — pull per-day wellness stats from Garmin Connect and
 maintain a single, always-sorted daily-wellness.csv (one row per date).
 
-Spec (agreed with Jason, Sep 2026):
+Format version 2 (docs/DATA-FORMAT.md): snake_case columns, units in the
+names, durations in whole seconds.
   * One file: daily-wellness.csv, sorted ascending by date, one row per day.
-  * Columns: date, steps, distance_miles, floors, resting_hr,
-      active_calories, total_calories, avg_stress,
-      body_battery_high, body_battery_low,
-      intensity_moderate_min, intensity_vigorous_min,
-      sleep_hours, sleep_score, deep_sleep_min, light_sleep_min,
-      rem_sleep_min, awake_min, sleep_respiration, sleep_spo2,
-      hrv_last_night, hrv_status, vo2max
+  * Columns: see FIELDNAMES below.
   * Only COMPLETE days are recorded: the scan runs from YESTERDAY
     (GARMIN_TZ) backwards. Today's live numbers stay in
     garmin-recent.json.
@@ -52,25 +47,25 @@ PAUSE_SECONDS = float(os.environ.get("PAUSE_SECONDS", "1.0"))  # be polite to Ga
 FIELDNAMES = [
     "date",
     "steps",
-    "distance_miles",
+    "distance_mi",
     "floors",
-    "resting_hr",
-    "active_calories",
-    "total_calories",
-    "avg_stress",
+    "resting_hr_bpm",
+    "active_kcal",
+    "total_kcal",
+    "stress_avg",
     "body_battery_high",
     "body_battery_low",
-    "intensity_moderate_min",
-    "intensity_vigorous_min",
-    "sleep_hours",
+    "intensity_moderate_sec",
+    "intensity_vigorous_sec",
+    "sleep_sec",
     "sleep_score",
-    "deep_sleep_min",
-    "light_sleep_min",
-    "rem_sleep_min",
-    "awake_min",
-    "sleep_respiration",
-    "sleep_spo2",
-    "hrv_last_night",
+    "sleep_deep_sec",
+    "sleep_light_sec",
+    "sleep_rem_sec",
+    "sleep_awake_sec",
+    "sleep_respiration_brpm",
+    "sleep_spo2_pct",
+    "hrv_ms",
     "hrv_status",
     "vo2max",
 ]
@@ -86,38 +81,39 @@ def fetch_day(g, cdate: str) -> dict | None:
         got_anything = True
     row["steps"] = _num(summary.get("totalSteps"))
     dist_m = summary.get("totalDistanceMeters")
-    row["distance_miles"] = _num(dist_m / 1609.344, 2) if dist_m else ""
+    row["distance_mi"] = _num(dist_m / 1609.344, 2) if dist_m else ""
     row["floors"] = _num(summary.get("floorsAscended"), 1)
-    row["resting_hr"] = _num(summary.get("restingHeartRate"))
-    row["active_calories"] = _num(summary.get("activeKilocalories"))
-    row["total_calories"] = _num(summary.get("totalKilocalories"))
+    row["resting_hr_bpm"] = _num(summary.get("restingHeartRate"))
+    row["active_kcal"] = _num(summary.get("activeKilocalories"))
+    row["total_kcal"] = _num(summary.get("totalKilocalories"))
     stress = summary.get("averageStressLevel")
-    row["avg_stress"] = _num(stress) if stress is not None and float(stress) >= 0 else ""
+    row["stress_avg"] = _num(stress) if stress is not None and float(stress) >= 0 else ""
     row["body_battery_high"] = _num(summary.get("bodyBatteryHighestValue"))
     row["body_battery_low"] = _num(summary.get("bodyBatteryLowestValue"))
-    row["intensity_moderate_min"] = _num(summary.get("moderateIntensityMinutes"))
-    row["intensity_vigorous_min"] = _num(summary.get("vigorousIntensityMinutes"))
+    mod, vig = summary.get("moderateIntensityMinutes"), summary.get("vigorousIntensityMinutes")
+    row["intensity_moderate_sec"] = _num(mod * 60) if mod is not None else ""
+    row["intensity_vigorous_sec"] = _num(vig * 60) if vig is not None else ""
 
     sleep = _call(g.get_sleep_data, cdate) or {}
     dto = sleep.get("dailySleepDTO") or {}
     secs = dto.get("sleepTimeSeconds")
     if secs:
         got_anything = True
-        row["sleep_hours"] = _num(secs / 3600.0, 2)
+        row["sleep_sec"] = _num(secs, 0)
         scores = dto.get("sleepScores") or {}
         row["sleep_score"] = _num((scores.get("overall") or {}).get("value"))
-        row["deep_sleep_min"] = _num((dto.get("deepSleepSeconds") or 0) / 60.0, 0)
-        row["light_sleep_min"] = _num((dto.get("lightSleepSeconds") or 0) / 60.0, 0)
-        row["rem_sleep_min"] = _num((dto.get("remSleepSeconds") or 0) / 60.0, 0)
-        row["awake_min"] = _num((dto.get("awakeSleepSeconds") or 0) / 60.0, 0)
-        row["sleep_respiration"] = _num(dto.get("averageRespirationValue"), 1)
-        row["sleep_spo2"] = _num(dto.get("averageSpO2Value"), 1)
+        row["sleep_deep_sec"] = _num(dto.get("deepSleepSeconds") or 0, 0)
+        row["sleep_light_sec"] = _num(dto.get("lightSleepSeconds") or 0, 0)
+        row["sleep_rem_sec"] = _num(dto.get("remSleepSeconds") or 0, 0)
+        row["sleep_awake_sec"] = _num(dto.get("awakeSleepSeconds") or 0, 0)
+        row["sleep_respiration_brpm"] = _num(dto.get("averageRespirationValue"), 1)
+        row["sleep_spo2_pct"] = _num(dto.get("averageSpO2Value"), 1)
 
     hrv = _call(g.get_hrv_data, cdate) or {}
     hs = hrv.get("hrvSummary") or {}
     if hs.get("lastNightAvg") is not None:
         got_anything = True
-        row["hrv_last_night"] = _num(hs.get("lastNightAvg"))
+        row["hrv_ms"] = _num(hs.get("lastNightAvg"))
         row["hrv_status"] = str(hs.get("status") or "")
 
     metrics = _call(g.get_max_metrics, cdate) or []
@@ -182,8 +178,8 @@ def main() -> int:
         else:
             empty_streak = 0
             by_date[cdate] = row
-            print(f"  + {cdate}: steps={row['steps'] or '-'} rhr={row['resting_hr'] or '-'} "
-                  f"sleep={row['sleep_hours'] or '-'}h hrv={row['hrv_last_night'] or '-'}")
+            print(f"  + {cdate}: steps={row['steps'] or '-'} rhr={row['resting_hr_bpm'] or '-'} "
+                  f"sleep={row['sleep_sec'] or '-'}s hrv={row['hrv_ms'] or '-'}")
 
         if fetched % CHECKPOINT_EVERY == 0:
             write_all(CSV_PATH, by_date)

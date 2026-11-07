@@ -1,11 +1,1 @@
-{
-  "firstName": "Sam",
-  "birthYear": 1985,
-  "gender": "",
-  "goals": "Stay consistent",
-  "likes": "",
-  "dislikes": "",
-  "injuries": "",
-  "limitations": "",
-  "notes": ""
-}
+{ "first_name": "Sam", "birth_year": 1985, "goals": "Stay consistent" }

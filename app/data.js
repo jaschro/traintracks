@@ -1,41 +1,49 @@
 /**
  * Everything the app reads from or writes to GitHub. Screens call these and
- * never touch the network themselves.
- *
- * Rules (see docs/DECISIONS.md):
- *  - every read goes through the Contents API so it is live and returns a sha;
- *  - every write sends the sha it loaded; a conflict re-reads and re-applies;
- *  - raw.githubusercontent.com is used only for images in PUBLIC repos (fast,
- *    cached, no token) and for the public gym catalog.
+ * never touch the network themselves. Rules (docs/DECISIONS.md):
+ *  - reads go through the Contents API (live, returns the sha a write needs);
+ *  - single files are written with the sha they were loaded with, and on a
+ *    conflict re-read and written again;
+ *  - the log is written as one commit (lib/logstore.js);
+ *  - raw.githubusercontent.com is used only for images (display) and the
+ *    public gym catalog.
  */
-import { GitHubRepo, isConflict, b64encodeBytes } from '../lib/github.js';
-import { FILES, TEMPLATE, CATALOG, SYNC_PREFIXES } from '../lib/config.js';
-import { toCSV } from '../lib/csv.js';
+import { GitHubRepo, isConflict } from '../lib/github.js';
+import { loadLog as loadLogAt, commitLog as commitLogFiles } from '../lib/logstore.js';
+import { FILES, CATALOG, TEMPLATE } from '../lib/config.js';
+import { sortLog } from '../lib/log.js';
+import { applyGenericOverrides, genericOverridesFrom, serialiseGym, gymPathFor, GENERIC_ID } from '../lib/gyms.js';
 import { parseWellnessCSV, parseBucketsCSV } from '../lib/goals.js';
-import { normaliseLog, sortLog } from '../lib/log.js';
-import { applyGenericOverrides, serialiseGym, gymPathFor, GENERIC_ID, emptyOverrides } from '../lib/gyms.js';
-import { planUpdate, changelogBetween } from '../lib/updater.js';
+import { convertGym } from '../lib/migrate.js';
 import { S, hasCfg } from './state.js';
 
 export function connect() {
   S.repo = hasCfg() ? new GitHubRepo({ owner: S.cfg.user, repo: S.cfg.repo, token: S.cfg.token }) : null;
-  S.repoPrivate = null;
   return S.repo;
 }
 
-function repo() { if (!S.repo) connect(); if (!S.repo) throw new Error('Set up GitHub in Settings first'); return S.repo; }
+function repo() {
+  if (!S.repo) connect();
+  if (!S.repo) throw new Error('Set up GitHub in Settings first');
+  return S.repo;
+}
+
+const json = v => JSON.stringify(v, null, 2) + '\n';
 
 // ---------------------------------------------------------------- loading ----
 
-export async function loadAll(onStatus) {
+export async function loadAll(onStatus = () => {}) {
   const r = repo();
   S.loading = true;
-  const status = onStatus || (() => {});
   try {
-    status('Checking repository…');
-    try { S.repoPrivate = !!(await r.info()).private; } catch (e) { if (e.status === 404) throw new Error('Repository not found — check username, repository and that the token can see it'); throw e; }
-    status('Loading your data…');
-    await Promise.all([loadGyms(), loadLog(), loadProfile(), loadPlan(), loadGoals(), loadWellness(), loadBuckets(), loadVersion()]);
+    onStatus('Checking repository…');
+    try { await r.info(); } catch (e) {
+      if (e.status === 404) throw new Error('Repository not found. Check the username and repository, and that the token can see it.');
+      if (e.status === 401) throw new Error('GitHub did not accept the token. Check it in Settings.');
+      throw e;
+    }
+    onStatus('Loading your data…');
+    await Promise.all([loadGyms(), loadLog(), loadProfile(), loadPlan(), loadGoals(), loadVersion(), loadWellness(), loadBuckets()]);
     S.loaded = true;
   } finally { S.loading = false; }
 }
@@ -45,10 +53,10 @@ export async function loadGyms() {
   const gyms = [];
   S.sha.gym = {};
   const [gen, local] = await Promise.all([r.getJSON(FILES.generic), r.getJSON(FILES.genericLocal)]);
+  S.genericLocal = local ? local.data : null;
+  S.sha.genericLocal = local ? local.sha : null;
   if (gen) {
     S.sha.gym[FILES.generic] = gen.sha;
-    S.genericLocal = local ? local.data : null;
-    S.sha.genericLocal = local ? local.sha : null;
     const g = applyGenericOverrides(gen.data, S.genericLocal);
     g._path = 'equipment/generic';
     gyms.push(g);
@@ -60,53 +68,53 @@ export async function loadGyms() {
       const f = await r.getJSON(p);
       if (!f) return null;
       S.sha.gym[p] = f.sha;
-      f.data._path = `${FILES.myGyms}/${d.name}`;
-      if (!f.data.rooms) f.data.rooms = [];
-      return f.data;
+      return { rooms: [], ...f.data, _path: `${FILES.myGyms}/${d.name}` };
     } catch (e) { console.warn('gym', d.name, e); return null; }
   }));
   mine.filter(g => g && !g.removed).sort((a, b) => String(a.name).localeCompare(String(b.name))).forEach(g => gyms.push(g));
   S.gyms = gyms;
 }
 
+/** True when a log still holds version 1 entries (LogTrim / 0.1.0 field names). */
+export const isOldFormat = log => log.some(e => e && ('machineId' in e || 'datetime' in e || 'gymId' in e));
+
 export async function loadLog() {
-  const r = repo();
-  const f = await r.getText(FILES.log);
-  if (f) {
-    let parsed = [];
-    try { parsed = JSON.parse(f.text); } catch (e) { throw new Error('workout-log.json is not valid JSON'); }
-    S.log = sortLog(normaliseLog(Array.isArray(parsed) ? parsed : []));
-    S.sha.log = f.sha;
-  } else { S.log = []; S.sha.log = null; }
-  S.sha.csv = await r.shaOf(FILES.csv);
+  const { log } = await loadLogAt(repo());
+  S.oldFormat = isOldFormat(log);
+  S.log = sortLog(log);
 }
 
 export async function loadProfile() {
   const f = await repo().getJSON(FILES.profile);
-  S.profile = f ? (f.data || {}) : {};
+  S.profile = f ? f.data || {} : {};
   S.sha.profile = f ? f.sha : null;
 }
 
 export async function loadPlan() {
   try {
     const f = await repo().getJSON(FILES.plan);
-    S.plan = f ? f.data : null; S.sha.plan = f ? f.sha : null;
+    S.plan = f ? f.data : null;
+    S.sha.plan = f ? f.sha : null;
   } catch (e) { console.warn('plan:', e); S.plan = null; S.sha.plan = null; }
 }
 
 export async function loadGoals() {
-  const f = await repo().getJSON(FILES.goals);
-  S.goals = f ? f.data : null; S.sha.goals = f ? f.sha : null;
+  try {
+    const f = await repo().getJSON(FILES.goals);
+    S.goals = f ? f.data : null;
+    S.sha.goals = f ? f.sha : null;
+  } catch (e) { console.warn('goals:', e); S.goals = null; }
 }
 
+/** Garmin outputs are optional and only displayed; a missing or unreadable file just means no data. */
 export async function loadWellness() {
-  const f = await repo().getText(FILES.wellness);
-  S.wellness = f ? parseWellnessCSV(f.text) : [];
+  try { const f = await repo().getText(FILES.wellness); S.wellness = f ? parseWellnessCSV(f.text) : []; }
+  catch (e) { console.warn('wellness:', e); S.wellness = []; }
 }
 
 export async function loadBuckets() {
-  const f = await repo().getText(FILES.buckets);
-  S.buckets = f ? parseBucketsCSV(f.text) : {};
+  try { const f = await repo().getText(FILES.buckets); S.buckets = f ? parseBucketsCSV(f.text) : {}; }
+  catch (e) { console.warn('buckets:', e); S.buckets = {}; }
 }
 
 export async function loadVersion() {
@@ -116,224 +124,146 @@ export async function loadVersion() {
 
 // ----------------------------------------------------------------- images ----
 
-const _blobUrls = new Map();
-/** URL for a machine image. Public repo: raw CDN URL. Private: fetched through the API into an object URL (cached). */
-export async function imageUrl(gym, fileName) {
-  if (!fileName || !S.repo) return null;
-  const path = `${gym._path}/images/${fileName}`;
-  if (S.repoPrivate === false) return S.repo.rawUrl(path);
-  if (_blobUrls.has(path)) return _blobUrls.get(path);
-  const p = (async () => {
-    const bytes = await S.repo.getBytes(path);
-    if (!bytes) return null;
-    const url = URL.createObjectURL(new Blob([bytes], { type: 'image/jpeg' }));
-    return url;
-  })();
-  _blobUrls.set(path, p);
-  return p;
-}
-export function forgetImage(gym, fileName) { if (fileName) _blobUrls.delete(`${gym._path}/images/${fileName}`); }
+const localImages = new Map(); // path -> object URL, for photos uploaded this session (raw URLs lag ~5 min)
 
-// ------------------------------------------------------------------- log ------
+/** URL for a machine image. Repos are public, so the raw URL works; fresh uploads use a local copy. */
+export function imageUrl(gym, file) {
+  if (!file || !gym || !S.repo) return null;
+  const path = `${gym._path}/images/${file}`;
+  return localImages.get(path) || S.repo.rawUrl(path);
+}
+
+// -------------------------------------------------------------------- log ----
 
 /**
- * Apply a change to the log and write JSON + CSV. `apply(base) -> newLog`.
- * If GitHub reports the file moved underneath us (another device, the coach,
- * a Garmin Action), the log is re-read and the change re-applied once.
+ * Apply a change to the log and commit JSON + CSV together. `apply(log)` must
+ * work from the log it is given: after a conflict it runs again on a fresh copy.
  */
 export async function commitLog(apply, message) {
-  const r = repo();
-  let base = S.log;
-  for (let attempt = 0; attempt < 2; attempt++) {
-    const updated = sortLog(apply(base));
-    try {
-      const jr = await r.put(FILES.log, JSON.stringify(updated, null, 2) + '\n', S.sha.log, message || 'Update workout log');
-      S.sha.log = jr.sha;
-      S.log = updated;
-      await writeCsv(updated);
-      return updated;
-    } catch (e) {
-      if (attempt === 0 && isConflict(e)) {
-        await loadLog();
-        base = S.log;
-        continue;
-      }
-      throw e;
-    }
-  }
+  if (S.oldFormat) throw new Error('This repository still has data in the old format. It must be migrated before the new app can save.');
+  const res = await commitLogFiles(repo(), log => apply(log), message);
+  if (res) S.log = sortLog(res.log);
+  return S.log;
 }
 
-async function writeCsv(entries) {
+// ------------------------------------------------------------ single files ---
+
+/** Write one JSON file with the sha it was loaded with; on a conflict, re-read the sha and write again. */
+async function putJSON(path, data, sha, message) {
   const r = repo();
-  const csv = toCSV(entries);
-  try {
-    const cr = await r.put(FILES.csv, csv, S.sha.csv, 'Update workout log CSV');
-    S.sha.csv = cr.sha;
-  } catch (e) {
+  try { return await r.putFile(path, json(data), sha, message); }
+  catch (e) {
     if (!isConflict(e)) throw e;
-    S.sha.csv = await r.shaOf(FILES.csv);
-    const cr = await r.put(FILES.csv, csv, S.sha.csv, 'Update workout log CSV');
-    S.sha.csv = cr.sha;
+    const cur = await r.getText(path);
+    return r.putFile(path, json(data), cur ? cur.sha : null, message);
   }
 }
-
-// ------------------------------------------------------------------ gyms ------
 
 export async function saveGym(gym) {
-  const r = repo();
-  if (gym.id === GENERIC_ID) return saveGenericLocal();
+  if (gym.id === GENERIC_ID) return saveGenericLocal(gym);
   const path = `${gym._path}/gym.json`;
-  const res = await r.putWithRetry(path, JSON.stringify(serialiseGym(gym), null, 2) + '\n', S.sha.gym[path] || null, `Update gym: ${gym.name}`);
-  S.sha.gym[path] = res.sha;
+  S.sha.gym[path] = await putJSON(path, serialiseGym(gym), S.sha.gym[path] || null, `Update gym: ${gym.name}`);
 }
 
-/** Persist the user's changes to the read-only generic gym as generic.local.json. */
-export async function saveGenericLocal() {
-  const r = repo();
-  const g = S.gyms.find(x => x.id === GENERIC_ID);
-  if (!g) return;
-  const ov = emptyOverrides();
-  g.rooms.forEach(room => {
-    if (room._local) ov.rooms.push({ id: room.id, name: room.name });
-    room.machines.forEach(m => {
-      if (m.hidden) ov.hidden.push(m.id);
-      if (m._local) { const { _local, hidden, ...rest } = m; ov.machines.push({ roomId: room.id, ...rest }); }
-    });
-  });
+export async function saveGenericLocal(gym) {
+  const ov = genericOverridesFrom(gym);
+  S.sha.genericLocal = await putJSON(FILES.genericLocal, ov, S.sha.genericLocal, 'Update my changes to the common gym');
   S.genericLocal = ov;
-  const res = await r.putWithRetry(FILES.genericLocal, JSON.stringify(ov, null, 2) + '\n', S.sha.genericLocal, 'Update generic gym overrides');
-  S.sha.genericLocal = res.sha;
 }
-
-export async function uploadImage(gym, fileName, base64) {
-  const r = repo();
-  const path = `${gym._path}/images/${fileName}`;
-  const bytes = Uint8Array.from(atob(base64.replace(/\s/g, '')), c => c.charCodeAt(0));
-  const sha = await r.shaOf(path);
-  await r.put(path, bytes, sha, `Upload image ${fileName}`);
-  forgetImage(gym, fileName);
-}
-
-export async function deleteGymFiles(gym) {
-  // Removing a gym from the app does not delete its files (history is keyed by machine id; photos may be wanted again).
-  return true;
-}
-
-// --------------------------------------------------------- profile/goals -----
 
 export async function saveProfile(profile) {
-  const res = await repo().putWithRetry(FILES.profile, JSON.stringify(profile, null, 2) + '\n', S.sha.profile, 'Update profile');
-  S.sha.profile = res.sha; S.profile = profile;
+  S.sha.profile = await putJSON(FILES.profile, profile, S.sha.profile, 'Update profile');
+  S.profile = profile;
 }
 
 export async function saveGoals(goals) {
-  const res = await repo().putWithRetry(FILES.goals, JSON.stringify(goals, null, 2) + '\n', S.sha.goals, 'Update weekly goals');
-  S.sha.goals = res.sha; S.goals = goals;
+  S.sha.goals = await putJSON(FILES.goals, goals, S.sha.goals, 'Update weekly goals');
+  S.goals = goals;
 }
 
+/** Remove today's plan file. */
 export async function dismissPlan() {
-  if (S.sha.plan) {
-    try { await repo().delete(FILES.plan, S.sha.plan, 'Dismiss workout plan'); }
-    catch (e) { if (e.status !== 404) throw e; }
-  }
+  const r = repo();
+  const cur = await r.getText(FILES.plan);
+  if (cur) await r.deleteFile(FILES.plan, cur.sha, 'Dismiss workout plan');
   S.plan = null; S.sha.plan = null;
+}
+
+// ----------------------------------------------------------------- photos ----
+
+/** Upload a JPEG (base64) as a gym image. Shown from a local copy this session, since raw URLs lag behind. */
+export async function uploadImage(gym, file, base64) {
+  const r = repo();
+  const path = `${gym._path}/images/${file}`;
+  const bytes = Uint8Array.from(atob(base64.replace(/\s/g, '')), c => c.charCodeAt(0));
+  const cur = await r.listDir(`${gym._path}/images`);
+  const existing = cur.find(f => f.name === file);
+  await r.putFile(path, bytes, existing ? existing.sha : null, `Upload image ${file}`);
+  localImages.set(path, URL.createObjectURL(new Blob([bytes], { type: 'image/jpeg' })));
 }
 
 // ---------------------------------------------------------------- catalog ----
 
-function catalogRaw(path) { return `https://raw.githubusercontent.com/${CATALOG.owner}/${CATALOG.repo}/${CATALOG.branch}/${path}`; }
+const catalogRaw = p => `https://raw.githubusercontent.com/${CATALOG.owner}/${CATALOG.repo}/${CATALOG.branch}/${p.split('/').map(encodeURIComponent).join('/')}`;
 
+/** The public catalog's index (read-only, no token needed). */
 export async function loadCatalog() {
-  const r = await fetch(`${catalogRaw('index.json')}?t=${Date.now()}`);
-  if (!r.ok) throw new Error(`Could not load catalog (HTTP ${r.status})`);
-  S.catalog = await r.json();
+  const res = await fetch(catalogRaw('index.json'), { cache: 'no-store' });
+  if (!res.ok) throw new Error(`Could not load the catalog (HTTP ${res.status})`);
+  S.catalog = await res.json();
   return S.catalog;
 }
 
-async function fetchBytes(url) {
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`Download failed (HTTP ${r.status})`);
-  return new Uint8Array(await r.arrayBuffer());
-}
-
-/** Copy a catalog gym (gym.json + images) into the user's repo. onStatus(msg). */
-export async function importCatalogGym(id, onStatus) {
+/**
+ * Copy a catalog gym (gym.json + photos) into the user's repo. The catalog
+ * is in format version 1, so gym.json is converted. onStatus(message).
+ */
+export async function importCatalogGym(id, onStatus = () => {}) {
   const r = repo();
-  const c = ((S.catalog && S.catalog.gyms) || []).find(c => c.id === id);
-  if (!c) throw new Error('Gym not in catalog');
-  const status = onStatus || (() => {});
+  const c = ((S.catalog && S.catalog.gyms) || []).find(x => x.id === id);
+  if (!c) throw new Error('That gym is not in the catalog');
+  if (id === GENERIC_ID) throw new Error('The common gym comes with the app and is updated with it');
   const path = gymPathFor(id);
-  status(`Reading ${c.name}…`);
-  const gres = await fetch(`${catalogRaw(`gyms/${id}/gym.json`)}?t=${Date.now()}`);
+  onStatus(`Reading ${c.name}…`);
+  const gres = await fetch(catalogRaw(`gyms/${id}/gym.json`), { cache: 'no-store' });
   if (!gres.ok) throw new Error(`gym.json download failed (HTTP ${gres.status})`);
-  const gd = await gres.json();
-  const images = [];
-  (gd.rooms || []).forEach(room => (room.machines || []).forEach(m => { if (m.image) images.push(m.image); }));
-  const existing = {};
-  (await r.listDir(`${path}/images`)).forEach(f => { existing[f.name] = f.sha; });
-  for (let i = 0; i < images.length; i++) {
-    status(`Importing ${c.name}…\nphoto ${i + 1} of ${images.length}`);
-    const fn = images[i];
-    const bytes = await fetchBytes(catalogRaw(`gyms/${id}/images/${encodeURIComponent(fn)}`));
-    await r.put(`${path}/images/${fn}`, bytes, existing[fn] || null, `Import image ${fn}`);
-    forgetImage({ _path: path }, fn);
+  const gym = convertGym(await gres.json());
+  const images = [...new Set(gym.rooms.flatMap(room => room.machines.map(m => m.image).filter(Boolean)))];
+  const have = Object.fromEntries((await r.listDir(`${path}/images`)).map(f => [f.name, f.sha]));
+  for (const [i, file] of images.entries()) {
+    onStatus(`Importing ${c.name}…\nphoto ${i + 1} of ${images.length}`);
+    const res = await fetch(catalogRaw(`gyms/${id}/images/${file}`));
+    if (!res.ok) { console.warn('catalog image missing:', file); continue; }
+    const bytes = new Uint8Array(await res.arrayBuffer());
+    await r.putFile(`${path}/images/${file}`, bytes, have[file] || null, `Import image ${file}`);
+    localImages.set(`${path}/images/${file}`, URL.createObjectURL(new Blob([bytes], { type: 'image/jpeg' })));
   }
-  status(`Importing ${c.name}…\nsaving gym`);
-  gd.source = `${CATALOG.owner}/${CATALOG.repo}@${S.catalog.version || S.catalog.updated || 'main'}`;
-  if (id === GENERIC_ID) {
-    // the generic gym is template-managed; importing it just refreshes equipment/generic
-    const sha = S.sha.gym[FILES.generic] || await r.shaOf(FILES.generic);
-    const res = await r.put(FILES.generic, JSON.stringify(gd, null, 2) + '\n', sha, 'Import generic gym from catalog');
-    S.sha.gym[FILES.generic] = res.sha;
-  } else {
-    const p = `${path}/gym.json`;
-    const sha = S.sha.gym[p] || await r.shaOf(p);
-    const res = await r.put(p, JSON.stringify(serialiseGym(gd), null, 2) + '\n', sha, `Import gym: ${gd.name}`);
-    S.sha.gym[p] = res.sha;
-  }
+  onStatus(`Importing ${c.name}…\nsaving gym`);
+  gym.source = `${CATALOG.owner}/${CATALOG.repo}@${S.catalog.version || 'main'}`;
+  delete gym.removed;
+  const p = `${path}/gym.json`;
+  const cur = await r.getText(p);
+  S.sha.gym[p] = await r.putFile(p, json(serialiseGym(gym)), cur ? cur.sha : null, `Import gym: ${gym.name}`);
   await loadGyms();
 }
 
+/** Start the Garmin workflow (needs Actions: read & write on the token). */
+export const runGarminNow = () => repo().dispatch('garmin.yml', {});
+
 // ---------------------------------------------------------------- updater ----
+import { checkForUpdate, applyUpdate, templateRepo } from '../lib/updater.js';
 
-/**
- * Compare the user's repo with the template and (if `apply`) copy changed
- * app files across with the user's token. Returns { plan, changelog, templateVersion }.
- */
-export async function checkTemplate(onStatus) {
-  const r = repo();
-  const status = onStatus || (() => {});
-  status('Comparing with template…');
-  const tpl = new GitHubRepo({ owner: TEMPLATE.owner, repo: TEMPLATE.repo, branch: TEMPLATE.branch, token: '' });
-  const [tplTree, mineTree, verFile] = await Promise.all([tpl.tree(), r.tree(), tpl.getText('VERSION')]);
-  const plan = planUpdate(tplTree, mineTree, SYNC_PREFIXES);
-  const templateVersion = verFile ? verFile.text.trim() : null;
-  let changelog = '';
-  if (plan.all.includes('CHANGELOG.md') || templateVersion !== S.version) {
-    const cl = await tpl.getText('CHANGELOG.md');
-    if (cl) changelog = changelogBetween(cl.text, S.version || '0', templateVersion || '999');
-  }
-  return { plan, changelog, templateVersion, tpl, tplTree, mineTree };
+/** Compare this repo with the template: { plan, templateVersion, changelog }. */
+export const checkTemplate = () => checkForUpdate(templateRepo(), repo(), S.version);
+
+/** Copy the changed app files in one commit. Returns how many files. */
+export function applyTemplate(check, onStatus) {
+  // Raw downloads at the pinned template commit: exact, and not subject to the
+  // 60-requests-an-hour limit on unauthenticated API calls.
+  const download = async p => {
+    const res = await fetch(`https://raw.githubusercontent.com/${TEMPLATE.owner}/${TEMPLATE.repo}/${check.templateHead}/${p.split('/').map(encodeURIComponent).join('/')}`);
+    if (!res.ok) throw new Error(`Could not download ${p} (HTTP ${res.status})`);
+    return new Uint8Array(await res.arrayBuffer());
+  };
+  return applyUpdate(templateRepo(), repo(), check, onStatus, { download });
 }
-
-export async function applyTemplate(check, onStatus) {
-  const r = repo();
-  const status = onStatus || (() => {});
-  const { plan, tpl, mineTree } = check;
-  let done = 0;
-  for (const p of plan.all) {
-    status(`Updating ${p} (${done + 1}/${plan.all.length})…`);
-    const bytes = await tpl.getBytes(p);
-    if (bytes == null) continue;
-    await r.put(p, bytes, mineTree[p] || null, `Update ${p} from template`);
-    done++;
-  }
-  return done;
-}
-
-/** Trigger the Garmin workflow (needs Actions: write on the token). */
-export async function runGarminNow() {
-  return repo().dispatch('garmin.yml', {});
-}
-
-export { b64encodeBytes };

@@ -7,6 +7,10 @@
 #     Variables: GARMIN_ENABLED = true
 #                GARMIN_TZ      = America/New_York   (your IANA time zone)
 #
+# Writes (format version 2, docs/DATA-FORMAT.md): garmin-recent.json,
+# cardio-minutes.csv, cardio-buckets.csv, daily-wellness.csv,
+# body-composition.csv, blood-pressure.csv, and new Garmin rows in the log.
+#
 # Each step is independent (continue-on-error), so a Garmin hiccup in one
 # feed never blocks the others. Everything is committed once at the end,
 # after a pull --rebase so the app's own commits are never clobbered.
@@ -76,6 +80,10 @@ jobs:
           MAX_DAYS: ${{ inputs.max_days || '40' }}
         run: python pipelines/garmin/daily_wellness.py
 
+      - name: Weigh-ins and blood pressure (body-composition.csv, blood-pressure.csv)
+        continue-on-error: true
+        run: python pipelines/garmin/body_and_bp.py
+
       - name: Post cardio rows to the workout log
         continue-on-error: true
         run: |
@@ -85,7 +93,9 @@ jobs:
 
       - name: Commit and push
         run: |
-          git add -A -- garmin-recent.json cardio-minutes.csv cardio-buckets.csv daily-wellness.csv workout-log.json workout-log.csv 2>/dev/null || true
+          for f in garmin-recent.json cardio-minutes.csv cardio-buckets.csv daily-wellness.csv body-composition.csv blood-pressure.csv workout-log.json workout-log.csv; do
+            if [ -f "$f" ]; then git add -- "$f"; fi
+          done
           if git diff --cached --quiet; then
             echo "No changes."
             exit 0

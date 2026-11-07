@@ -2,7 +2,7 @@
   "id": "5th-street-new",
   "name": "5th Street (New)",
   "icon": "🏋️",
-  "isGeneric": false,
+  "is_generic": false,
   "rooms": [
     {
       "id": "main",
@@ -11,86 +11,86 @@
         {
           "id": "m1791726194462",
           "name": "Row",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791726194462.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1791726252344",
           "name": "Squat",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791726252344.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1791726280605",
           "name": "Combo Lift",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791726280605.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1791726300768",
           "name": "Leg Press",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791726300768.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1791726337000",
           "name": "Dips",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791726337000.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1791726370971",
           "name": "Leg Lifts",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791726370971.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1791726427962",
           "name": "Chest Press",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791726427962.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1791726491514",
           "name": "Slant Press",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791726491514.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1791726524534",
           "name": "Shoulder Press",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791726524534.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1791726559972",
           "name": "Situp Bench",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791726559972.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1791726592348",
           "name": "Reverse Situp",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791726592348.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1791727070548",
           "name": "Pull Down",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1791727070548.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         }
       ]
     }

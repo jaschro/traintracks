@@ -3,9 +3,10 @@
 sync_recent.py — write garmin-recent.json: a "today" snapshot for the coach
 (recent activities, today's stats, readiness, HRV, sleep, ...).
 
-The file is only rewritten when something other than `fetchedAt` changed, so
-a run with nothing new makes no commit (and no Pages rebuild). `fetchedAt`
-itself goes to garmin-recent.meta.json, which is not committed.
+Format version 2: snake_case keys, units in the names (docs/DATA-FORMAT.md).
+The file is only rewritten when something other than `fetched_at` changed, so
+a run with nothing new makes no commit (and no Pages rebuild). `fetched_at`
+itself also goes to garmin-recent.meta.json, which is not committed.
 """
 from __future__ import annotations
 
@@ -32,18 +33,21 @@ def fetch(g) -> dict:
     for a in raw:
         dist_m = a.get("distance") or 0
         dur_s = a.get("duration") or 0
+        speed = a.get("averageSpeed")
+        elev = a.get("elevationGain")
         activities.append({
-            "activityId": a.get("activityId"),
+            "activity_id": str(a.get("activityId")),
             "date": (a.get("startTimeLocal") or "")[:10],
+            "start_time": (a.get("startTimeLocal") or "")[11:19],
             "type": (a.get("activityType") or {}).get("typeKey", "unknown"),
             "name": a.get("activityName", ""),
-            "durationMins": round(dur_s / 60, 1),
-            "distanceMiles": round(dist_m / 1609.344, 2) if dist_m else None,
-            "avgHR": a.get("averageHR"),
-            "maxHR": a.get("maxHR"),
-            "calories": a.get("calories"),
-            "elevationGain": a.get("elevationGain"),
-            "avgSpeedMps": a.get("averageSpeed"),
+            "duration_sec": int(round(dur_s)),
+            "distance_mi": round(dist_m / 1609.344, 2) if dist_m else None,
+            "hr_avg_bpm": a.get("averageHR"),
+            "hr_max_bpm": a.get("maxHR"),
+            "active_kcal": a.get("calories"),
+            "elevation_gain_ft": round(elev * 3.28084) if elev else None,
+            "speed_avg_mph": round(speed * 2.236936, 2) if speed else None,
         })
 
     print("daily stats…")
@@ -68,7 +72,7 @@ def fetch(g) -> dict:
     hrv = None
     if hrv_raw:
         s = hrv_raw.get("hrvSummary") or {}
-        hrv = {"weeklyAvg": s.get("weeklyAvg"), "lastNight": s.get("lastNight"), "status": s.get("status")}
+        hrv = {"weekly_avg_ms": s.get("weeklyAvg"), "last_night_ms": s.get("lastNight") or s.get("lastNightAvg"), "status": s.get("status")}
 
     print("sleep…")
     sleep_raw = call(g.get_sleep_data, today_s, default=None, quiet=True)
@@ -82,14 +86,14 @@ def fetch(g) -> dict:
         scores = dto.get("sleepScores") or {}
         sleep = {
             "date": sleep_date,
-            "durationHours": round((dto.get("sleepTimeSeconds") or 0) / 3600, 1),
+            "sleep_sec": dto.get("sleepTimeSeconds"),
             "score": (scores.get("overall") or {}).get("value"),
-            "deepSleepMins": round((dto.get("deepSleepSeconds") or 0) / 60),
-            "lightSleepMins": round((dto.get("lightSleepSeconds") or 0) / 60),
-            "remSleepMins": round((dto.get("remSleepSeconds") or 0) / 60),
-            "awakeMins": round((dto.get("awakeSleepSeconds") or 0) / 60),
-            "avgRespirationRate": dto.get("averageRespirationValue"),
-            "avgSpO2": dto.get("averageSpO2Value"),
+            "deep_sec": dto.get("deepSleepSeconds"),
+            "light_sec": dto.get("lightSleepSeconds"),
+            "rem_sec": dto.get("remSleepSeconds"),
+            "awake_sec": dto.get("awakeSleepSeconds"),
+            "respiration_brpm": dto.get("averageRespirationValue"),
+            "spo2_pct": dto.get("averageSpO2Value"),
         }
 
     print("stress, readiness, intensity, spo2, respiration…")
@@ -109,14 +113,16 @@ def fetch(g) -> dict:
         ud = prof.get("userData") or {}
         v = ud.get("vo2MaxRunning") or ud.get("vo2MaxCycling")
         if v:
-            vo2max = {"vo2max": v}
+            vo2max = v
 
     im_raw = call(g.get_intensity_minutes_data, today_s, default=None, quiet=True) or {}
     intensity = None
     if im_raw:
+        mod = im_raw.get("weeklyModerate") or im_raw.get("moderateMinutes")
+        vig = im_raw.get("weeklyVigorous") or im_raw.get("vigorousMinutes")
         intensity = {
-            "moderate": im_raw.get("weeklyModerate") or im_raw.get("moderateMinutes"),
-            "vigorous": im_raw.get("weeklyVigorous") or im_raw.get("vigorousMinutes"),
+            "week_moderate_sec": mod * 60 if mod is not None else None,
+            "week_vigorous_sec": vig * 60 if vig is not None else None,
         }
 
     spo2_raw = call(g.get_spo2_data, today_s, default=None, quiet=True)
@@ -125,29 +131,29 @@ def fetch(g) -> dict:
         spo2 = spo2_raw.get("averageSpO2") or (spo2_raw.get("spO2SleepSummary") or {}).get("averageSpO2")
 
     resp_raw = call(g.get_respiration_data, today_s, default=None, quiet=True) or {}
-    respiration = {"avgWaking": resp_raw.get("avgWakingRespirationValue"), "avgSleep": resp_raw.get("avgSleepRespirationValue")} if resp_raw else None
+    respiration = {"waking_brpm": resp_raw.get("avgWakingRespirationValue"), "sleep_brpm": resp_raw.get("avgSleepRespirationValue")} if resp_raw else None
 
     steps_raw = call(g.get_daily_steps, week_ago, today_s, default=None, quiet=True)
     weekly_steps = sum((d.get("totalSteps") or 0) for d in steps_raw if isinstance(d, dict)) if isinstance(steps_raw, list) else None
 
     return {
         "today": today_s,
-        "recentActivities": activities,
-        "todayStats": {
+        "recent_activities": activities,
+        "today_stats": {
             "steps": stats.get("totalSteps"),
             "floors": stats.get("floorsAscended"),
-            "restingHR": stats.get("restingHeartRate"),
-            "activeCalories": stats.get("activeKilocalories"),
-            "bodyBattery": body_battery,
-            "stressAvg": stress_avg or stats.get("averageStressLevel"),
-            "weeklySteps": weekly_steps,
+            "resting_hr_bpm": stats.get("restingHeartRate"),
+            "active_kcal": stats.get("activeKilocalories"),
+            "body_battery": body_battery,
+            "stress_avg": stress_avg or stats.get("averageStressLevel"),
+            "week_steps": weekly_steps,
         },
-        "trainingReadiness": training_readiness,
+        "training_readiness": training_readiness,
         "vo2max": vo2max,
-        "intensityMinutes": intensity,
+        "intensity": intensity,
         "hrv": hrv,
         "sleep": sleep,
-        "spo2Avg": spo2,
+        "spo2_avg_pct": spo2,
         "respiration": respiration,
     }
 
@@ -160,7 +166,7 @@ def content_changed(path: str, data: dict) -> bool:
             old = json.load(f)
     except (OSError, ValueError):
         return True
-    old.pop("fetchedAt", None)
+    old.pop("fetched_at", None)
     return old != data
 
 
@@ -170,14 +176,14 @@ def main() -> int:
     data = fetch(g)
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     with open(OUT.replace(".json", ".meta.json"), "w", encoding="utf-8") as f:
-        json.dump({"fetchedAt": now}, f)
+        json.dump({"fetched_at": now}, f)
     if not content_changed(OUT, data):
         print(f"{OUT}: nothing changed since last run; not rewritten")
         return 0
     with open(OUT, "w", encoding="utf-8") as f:
-        json.dump({"fetchedAt": now, **data}, f, indent=2, default=str)
+        json.dump({"fetched_at": now, **data}, f, indent=2, default=str)
         f.write("\n")
-    print(f"wrote {OUT} ({len(data['recentActivities'])} activities in the last 14 days)")
+    print(f"wrote {OUT} ({len(data['recent_activities'])} activities in the last 14 days)")
     return 0
 
 

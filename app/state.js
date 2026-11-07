@@ -1,65 +1,63 @@
 /**
- * Central app state. One object, mutated in place by data.js and read by the
- * screens. Nothing here touches the network or the DOM.
+ * Central app state: one object, changed by data.js and read by the screens.
+ * Nothing here touches the network or the DOM.
  */
 import { STORAGE } from '../lib/config.js';
 
 export const S = {
   cfg: { user: '', repo: 'traintracks', token: '' },
-  remember: true,          // keep the token in localStorage (else sessionStorage)
-  repo: null,              // GitHubRepo instance
-  repoPrivate: null,       // true/false once known
-  gyms: [],                // loaded gyms (generic first, with overrides applied)
-  genericLocal: null,      // equipment/generic.local.json contents
-  log: [],
+  repo: null,            // GitHubRepo
+  gyms: [],              // generic first (with the user's overrides), then the user's gyms
+  genericLocal: null,    // equipment/generic.local.json
+  log: [],               // format version 2, newest first
+  oldFormat: false,      // the repo still holds version 1 data: show a notice, don't write
   profile: {},
   plan: null,
   goals: null,
   wellness: [],
   buckets: {},
-  version: null,           // VERSION file contents
-  sha: { log: null, csv: null, profile: null, plan: null, goals: null, genericLocal: null, gym: {} },
+  version: null,         // the repo's VERSION file
+  sha: { profile: null, plan: null, goals: null, genericLocal: null, gym: {} },
   loaded: false,
   loading: false,
-  // navigation
+  // navigation and screen state
   stack: ['home'],
   gym: null, room: null, machine: null,
-  editSession: null,       // { gymId, machineId, date } when editing
+  editSession: null,     // { gym_id, machine_id, date, variant } when editing
+  logVariant: [],        // the variant chosen in the log form
   fromPlan: false,
+  historyAll: false,
   weekOffset: 0,
-  catalog: null,
-  pendingPhoto: null       // base64 jpeg from the camera, waiting to be saved
+  catalog: null
 };
 
-export function hasCfg() { return !!(S.cfg.user && S.cfg.repo && S.cfg.token); }
+export const hasCfg = () => !!(S.cfg.user && S.cfg.repo && S.cfg.token);
 
+/** Read the saved connection. 0.1.0 may have kept it in sessionStorage; that copy is moved to localStorage. */
 export function loadCfg() {
   try {
-    S.remember = localStorage.getItem(STORAGE.remember) !== 'no';
-    const src = S.remember ? localStorage : sessionStorage;
-    const saved = JSON.parse(src.getItem(STORAGE.cfg) || '{}');
-    // token may have been left in localStorage by an older setting; honour whichever has it
-    const alt = JSON.parse((S.remember ? sessionStorage : localStorage).getItem(STORAGE.cfg) || '{}');
-    Object.assign(S.cfg, alt, saved);
+    const local = JSON.parse(localStorage.getItem(STORAGE.cfg) || '{}');
+    let session = {};
+    try { session = JSON.parse(sessionStorage.getItem(STORAGE.cfg) || '{}'); } catch { /* none */ }
+    Object.assign(S.cfg, session, local);
     if (!S.cfg.repo) S.cfg.repo = 'traintracks';
-  } catch (e) { /* storage unavailable */ }
+    if (session.token && !local.token) saveCfg();
+  } catch { /* storage unavailable */ }
 }
 
 export function saveCfg() {
   try {
-    localStorage.setItem(STORAGE.remember, S.remember ? 'yes' : 'no');
-    const dst = S.remember ? localStorage : sessionStorage, other = S.remember ? sessionStorage : localStorage;
-    dst.setItem(STORAGE.cfg, JSON.stringify(S.cfg));
-    other.removeItem(STORAGE.cfg);
-  } catch (e) { /* storage unavailable */ }
+    localStorage.setItem(STORAGE.cfg, JSON.stringify(S.cfg));
+    sessionStorage.removeItem(STORAGE.cfg);
+    localStorage.removeItem('tt-remember'); // 0.1.0's option, no longer used
+  } catch { /* storage unavailable */ }
 }
 
-export function clearCfg() {
+export function clearToken() {
   S.cfg = { user: S.cfg.user, repo: S.cfg.repo, token: '' };
-  try { localStorage.removeItem(STORAGE.cfg); sessionStorage.removeItem(STORAGE.cfg); } catch (e) { /* ignore */ }
+  saveCfg();
 }
 
-export function goalsCfg() { return S.goals && Array.isArray(S.goals.goals) ? S.goals : null; }
-export function haveBuckets() { return Object.keys(S.buckets).length > 0; }
-export function genericGym() { return S.gyms.find(g => g.id === 'generic') || null; }
-export function myGyms() { return S.gyms.filter(g => g.id !== 'generic'); }
+export const goalsCfg = () => (S.goals && Array.isArray(S.goals.goals) ? S.goals : null);
+export const genericGym = () => S.gyms.find(g => g.id === 'generic') || null;
+export const myGyms = () => S.gyms.filter(g => g.id !== 'generic');

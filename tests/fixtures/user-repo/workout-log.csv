@@ -1,13 +1,6 @@
-datetime,gym,room,machine,machineId,set,weight,reps,duration,level,incline,hr,notes,zone1,zone2,zone3,zone4,zone5,garminId
-2026-11-05 07:10:00 AM,Common Machines,Bodyweight — No Equipment,Push Ups,push-ups,1,,30,,,,,,,,,,,
-2026-11-05 07:10:00 AM,Common Machines,Bodyweight — No Equipment,Push Ups,push-ups,2,,25,,,,,,,,,,,
-2026-11-05 06:00:00 PM,Common Machines,Outdoor Activities,Walk,walk,1,,,42,2.1,,,Evening loop,,,,,,
-2026-11-04 07:10:00 AM,Common Machines,Bodyweight — No Equipment,Push Ups,push-ups,1,,30,,,,,,,,,,,
-2026-11-04 07:10:00 AM,Common Machines,Bodyweight — No Equipment,Push Ups,push-ups,2,,25,,,,,,,,,,,
-2026-11-04 06:00:00 PM,Common Machines,Outdoor Activities,Walk,walk,1,,,42,2.1,,,Evening loop,,,,,,
-2026-11-02 07:10:00 AM,Common Machines,Bodyweight — No Equipment,Push Ups,push-ups,1,,30,,,,,,,,,,,
-2026-11-02 07:10:00 AM,Common Machines,Bodyweight — No Equipment,Push Ups,push-ups,2,,25,,,,,,,,,,,
-2026-11-02 06:00:00 PM,Common Machines,Outdoor Activities,Walk,walk,1,,,42,2.1,,,Evening loop,,,,,,
-2026-10-30 07:10:00 AM,Common Machines,Bodyweight — No Equipment,Push Ups,push-ups,1,,30,,,,,,,,,,,
-2026-10-30 07:10:00 AM,Common Machines,Bodyweight — No Equipment,Push Ups,push-ups,2,,25,,,,,,,,,,,
-2026-10-30 06:00:00 PM,Common Machines,Outdoor Activities,Walk,walk,1,,,42,2.1,,,Evening loop,,,,,,
+id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,reps,duration_sec,distance_mi,speed_mph,level,incline_pct,hr_avg_bpm,garmin_id,zone1_sec,zone2_sec,zone3_sec,zone4_sec,zone5_sec,notes
+f1,2026-11-04,18:00:00,example-gym,Example Gym,weights,Weight Room,r02,Seated Row,,1,60,12,,,,,,,,,,,,,
+f2,2026-11-04,18:00:00,example-gym,Example Gym,weights,Weight Room,r02,Seated Row,,2,70,10,,,,,,,,,,,,,
+f3,2026-11-02,18:00:00,example-gym,Example Gym,weights,Weight Room,assist,Assisted Pull-up,,1,-100,8,,,,,,,,,,,,,harder than expected
+f4,2026-11-01,18:00:00,example-gym,Example Gym,cardio,Cardio,tm,Treadmill,,1,,,1800,,3.3,,4,118,,,,,,,
+f5,2026-10-30,18:00:00,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,,1,,20,,,,,,,,,,,,,

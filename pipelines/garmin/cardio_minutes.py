@@ -3,7 +3,9 @@
 cardio_minutes.py — per-minute heart rate for every Garmin activity, kept in
 cardio-minutes.csv (the finest record; buckets and zones are built from it).
 
-  columns: date, activity_id, activity_type, minute, avg_hr_weighted, seconds_covered
+  columns: date, activity_id, activity_type, minute, hr_avg_bpm, covered_sec
+  (format version 2: hr_avg_bpm is the time-weighted average, covered_sec the
+  seconds of sensor coverage in that minute, rounded to whole seconds)
 
 * Time-weighted average: each HR reading is forward-filled to the next
   reading's timestamp (Garmin "smart recording"), capped at GAP_CAP_SECONDS.
@@ -31,7 +33,7 @@ ACTIVITY_FETCH_LIMIT = int(os.environ.get("ACTIVITY_FETCH_LIMIT", "30"))
 REFETCH_DAYS = int(os.environ.get("REFETCH_DAYS", "3"))
 MAXCHART = 200_000
 
-FIELDNAMES = ["date", "activity_id", "activity_type", "minute", "avg_hr_weighted", "seconds_covered"]
+FIELDNAMES = ["date", "activity_id", "activity_type", "minute", "hr_avg_bpm", "covered_sec"]
 
 
 def weighted_intervals(samples):
@@ -72,7 +74,7 @@ def activity_to_rows(activity_id, activity_type, samples, tz=None):
             continue
         rows.append({
             "date": minute_key[:10], "activity_id": str(activity_id), "activity_type": activity_type,
-            "minute": minute_key, "avg_hr_weighted": f"{hr_seconds / seconds:.1f}", "seconds_covered": f"{seconds:.1f}",
+            "minute": minute_key, "hr_avg_bpm": f"{hr_seconds / seconds:.1f}", "covered_sec": str(int(round(seconds))),
         })
     return rows
 

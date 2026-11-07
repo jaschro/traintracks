@@ -12,12 +12,8 @@ late-evening activity lands on the day you lived it, not the UTC day.
 """
 from __future__ import annotations
 
-import base64
-import io
 import os
 import sys
-import tarfile
-import tempfile
 import time
 from datetime import date, datetime
 from zoneinfo import ZoneInfo
@@ -52,18 +48,6 @@ def tokens_format(tokens: str) -> str:
         return "json"
     # gzip magic bytes (1f 8b) base64-encode to "H4sI"
     return "tarball" if t.startswith("H4sI") else "blob"
-
-
-def _extract_tarball(tokens: str) -> str:
-    buf = io.BytesIO(base64.b64decode(tokens))
-    tmp = tempfile.mkdtemp(prefix="garth-")
-    with tarfile.open(fileobj=buf, mode="r:gz") as tar:
-        if hasattr(tarfile, "data_filter"):
-            tar.extractall(tmp, filter="data")
-        else:  # pragma: no cover — Python < 3.12
-            tar.extractall(tmp)
-    token_dir = os.path.join(tmp, ".garth")
-    return token_dir if os.path.isdir(token_dir) else tmp
 
 
 def garmin_client():
@@ -103,16 +87,16 @@ def call(fn, *args, retries: int = 1, pause: float = 10.0, default=None, quiet: 
 
 
 def num(x, digits: int | None = None) -> str:
-    """None-safe number -> CSV cell ('' for None/unparsable)."""
+    """None-safe number -> CSV cell ('' for None/unparsable). Whole numbers are written without ".0"."""
     if x is None:
         return ""
     try:
         v = float(x)
     except (TypeError, ValueError):
         return ""
-    if digits is None:
-        return str(int(v)) if v == int(v) else f"{v}"
-    return f"{v:.{digits}f}"
+    if digits is not None:
+        v = round(v, digits)
+    return str(int(v)) if v == int(v) else repr(v)
 
 
 def ensure_garminconnect() -> None:

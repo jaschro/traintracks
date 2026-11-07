@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 build_buckets.py — turn cardio-minutes.csv into cardio-buckets.csv:
-one row per Garmin activity, with the minutes spent in each 5-bpm heart-rate
-bucket.
+one row per Garmin activity, with the time (whole seconds) spent in each
+5-bpm heart-rate bucket. Format version 2 (docs/DATA-FORMAT.md).
 
 Why buckets and not zones: a zone is an interpretation (a boundary table that
 changes with every retest, formula or coach); a bucket is just a count. The app
@@ -12,7 +12,7 @@ displays them, so changing a boundary never requires rewriting stored data.
   cardio-minutes.csv   per-minute average HR          (the finest record)
         |  this script, rerun in full on every Action run
         v
-  cardio-buckets.csv   per-activity 5-bpm minute counts (what the app reads)
+  cardio-buckets.csv   per-activity 5-bpm seconds (what the app reads)
 
 The output is rebuilt from scratch each run and is never edited by hand or by
 the app. Hand corrections live in corrections.json, next to this script:
@@ -21,17 +21,17 @@ the app. Hand corrections live in corrections.json, next to this script:
     "<activity_id>": {
       "note":   "why (free text, ignored by the script)",
       "keep":   ["YYYY-MM-DD HH:MM", "YYYY-MM-DD HH:MM"],   # inclusive window; minutes outside are dropped
-      "set_hr": [{"from": "...", "to": "...", "hr": 127}],  # sensor misread: treat those minutes as this HR
-      "add":    [{"minutes": 9.4, "hr": 85}]                 # watch was paused: add minutes at this HR
+      "set_hr": [{"from": "...", "to": "...", "hr_bpm": 127}],  # sensor misread: treat those minutes as this HR
+      "add":    [{"duration_sec": 564, "hr_bpm": 85}]            # watch was paused: add time at this HR
     }
   }
 
 Conventions shared with post_zone_records.py:
   * a minute with < 10 s of sensor coverage is ignored;
-  * every other minute contributes seconds_covered / 60 (fractional minutes).
+  * every other minute contributes its covered_sec.
 
 A minute's average HR h lands in the bucket [lo, lo+5) with lo = floor(h/5)*5.
-Columns: hr_under70, hr70_74, hr75_79, ... hr180_184, hr185_up.
+Columns: hr_under70_sec, hr70_74_sec, ... hr180_184_sec, hr185_up_sec.
 
 Usage:
   python pipelines/garmin/build_buckets.py \
@@ -54,12 +54,12 @@ MIN_COVERAGE_SECONDS = 10.0
 
 BUCKET_LOWS = list(range(LOW_EDGE, HIGH_EDGE, BUCKET_WIDTH))
 BUCKET_COLUMNS = (
-    [f"hr_under{LOW_EDGE}"]
-    + [f"hr{lo}_{lo + BUCKET_WIDTH - 1}" for lo in BUCKET_LOWS]
-    + [f"hr{HIGH_EDGE}_up"]
+    [f"hr_under{LOW_EDGE}_sec"]
+    + [f"hr{lo}_{lo + BUCKET_WIDTH - 1}_sec" for lo in BUCKET_LOWS]
+    + [f"hr{HIGH_EDGE}_up_sec"]
 )
-FIELDNAMES = ["date", "start", "activity_id", "activity_type", "minutes",
-              "avg_hr", "max_minute_hr", "corrected"] + BUCKET_COLUMNS
+FIELDNAMES = ["date", "start", "activity_id", "activity_type", "duration_sec",
+              "hr_avg_bpm", "hr_max_minute_bpm", "corrected"] + BUCKET_COLUMNS
 CORRECTION_KEYS = {"note", "keep", "set_hr", "add"}
 
 
@@ -91,37 +91,35 @@ def apply_corrections(minutes: list[dict], corr: dict | None) -> list[tuple[floa
         m = r["minute"]
         if keep and not (keep[0] <= m <= keep[1]):
             continue
-        hr = float(r["avg_hr_weighted"])
+        hr = float(r["hr_avg_bpm"])
         for s in corr.get("set_hr") or []:
             if s["from"] <= m <= s["to"]:
-                hr = float(s["hr"])
-        out.append((hr, float(r["seconds_covered"])))
+                hr = float(s["hr_bpm"])
+        out.append((hr, float(r["covered_sec"])))
     for a in corr.get("add") or []:
-        out.append((float(a["hr"]), float(a["minutes"]) * 60.0))
+        out.append((float(a["hr_bpm"]), float(a["duration_sec"])))
     return out
 
 
 def summarise(samples: list[tuple[float, float]]):
-    """[(hr, seconds)] -> (bucket minutes list, total minutes, avg hr, max minute hr)."""
+    """[(hr, seconds)] -> (bucket seconds list, total seconds, avg hr, max minute hr)."""
     buckets = [0.0] * len(BUCKET_COLUMNS)
     total = hr_seconds = max_hr = 0.0
     for hr, sec in samples:
         if sec < MIN_COVERAGE_SECONDS:
             continue
-        buckets[bucket_index(hr)] += sec / 60.0
-        total += sec / 60.0
+        buckets[bucket_index(hr)] += sec
+        total += sec
         hr_seconds += hr * sec
         max_hr = max(max_hr, hr)
-    avg = hr_seconds / (total * 60.0) if total else 0.0
+    avg = hr_seconds / total if total else 0.0
     return buckets, total, avg, max_hr
 
 
 def fmt(v: float) -> str:
-    """Minutes to 2 decimals, trailing zeros trimmed; zero is an empty cell."""
-    if v <= 0:
-        return ""
-    s = f"{v:.2f}".rstrip("0").rstrip(".")
-    return s or ""
+    """Whole seconds; zero is an empty cell."""
+    n = int(round(v))
+    return str(n) if n > 0 else ""
 
 
 def build_rows(cardio_rows: list[dict], corrections: dict) -> list[dict]:
@@ -151,9 +149,9 @@ def build_rows(cardio_rows: list[dict], corrections: dict) -> list[dict]:
             "start": kept[0]["minute"],
             "activity_id": aid,
             "activity_type": mins[0]["activity_type"],
-            "minutes": fmt(total) or "0",
-            "avg_hr": f"{avg:.0f}",
-            "max_minute_hr": f"{max_hr:.0f}",
+            "duration_sec": fmt(total) or "0",
+            "hr_avg_bpm": f"{avg:.0f}",
+            "hr_max_minute_bpm": f"{max_hr:.0f}",
             "corrected": "y" if corr else "",
         }
         for col, v in zip(BUCKET_COLUMNS, buckets):

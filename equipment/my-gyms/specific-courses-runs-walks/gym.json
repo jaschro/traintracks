@@ -2,7 +2,7 @@
   "id": "specific-courses-runs-walks",
   "name": "Specific Courses (Runs/Walks)",
   "icon": "🏋️",
-  "isGeneric": false,
+  "is_generic": false,
   "rooms": [
     {
       "id": "mv-lower-loop-1787177743113",
@@ -11,9 +11,9 @@
         {
           "id": "m1787177783082",
           "name": "Lower Loop",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": null,
-          "logType": "pace"
+          "log_type": "pace"
         }
       ]
     },
@@ -24,9 +24,9 @@
         {
           "id": "m1788445570062",
           "name": "Central Park - Lower Loop - from Tavern on the Green",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": null,
-          "logType": "walk"
+          "log_type": "walk"
         }
       ]
     },
@@ -37,16 +37,16 @@
         {
           "id": "m1788831284335",
           "name": "Lake Hollywood Reservoir Loop",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": null,
-          "logType": "walk"
+          "log_type": "walk"
         },
         {
           "id": "m1792434947823",
           "name": "Laguna Loop",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": null,
-          "logType": "walk"
+          "log_type": "walk"
         }
       ]
     }

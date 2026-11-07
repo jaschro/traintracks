@@ -2,7 +2,7 @@
   "id": "mb-jcc",
   "name": "MB JCC",
   "icon": "🏋️",
-  "isGeneric": false,
+  "is_generic": false,
   "rooms": [
     {
       "id": "aerobic-machines-1786026379720",
@@ -11,44 +11,44 @@
         {
           "id": "m1786026454342",
           "name": "Elliptical (TechnoGym)",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786026454342.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786026715362",
           "name": "Stair Master w Cable (TechnoGym)",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786026715362.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786027278972",
           "name": "Treadmill (TechnoGym)",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786027278972.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786027312288",
           "name": "Stationary Bike",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786027312288.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786027351545",
           "name": "Stair Stepper (TechnoGym)",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786027351545.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786027400495",
           "name": "Recumbent Bike (True)",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786027400495.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         }
       ]
     },
@@ -59,72 +59,72 @@
         {
           "id": "m1786026962087",
           "name": "Chest Press (True Palladium)",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786026962087.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786027001333",
           "name": "Shoulder Press (True Palladium)",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786027001333.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786027045955",
           "name": "Lat Pulldown (True Palladium)",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786027045955.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786027086051",
           "name": "Pec Fly (True Palladium)",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786027086051.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786027107204",
           "name": "Rear Delt",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786027107204.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786027148284",
           "name": "Leg Press",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786027148284.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786027189881",
           "name": "Seated Leg Curl",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786027189881.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786027213090",
           "name": "Glute Press",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786027213090.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786029637068",
           "name": "Leg Extension",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786029637068.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         },
         {
           "id": "m1786029912579",
           "name": "Knee Lift",
-          "musclesWorked": "",
+          "muscles_worked": "",
           "image": "m1786029912579.jpg",
-          "logType": "weight"
+          "log_type": "weight"
         }
       ]
     }
