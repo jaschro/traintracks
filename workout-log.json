@@ -41,6 +41,38 @@
     "zone4_min": 1
   },
   {
+    "weight_lb": null,
+    "reps": 20,
+    "gym": "Common Machines",
+    "room_id": "bodyweight-no-equipment",
+    "room": "Bodyweight — No Equipment",
+    "machine": "Leg Lifts",
+    "time": "15:44:05",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-08",
+    "machine_id": "leg-lifts",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8avmlovvz01"
+  },
+  {
+    "weight_lb": null,
+    "reps": 20,
+    "gym": "Common Machines",
+    "room_id": "bodyweight-no-equipment",
+    "room": "Bodyweight — No Equipment",
+    "machine": "Leg Lifts",
+    "time": "15:44:05",
+    "notes": "",
+    "set": 2,
+    "date": "2026-11-08",
+    "machine_id": "leg-lifts",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8avmlon2602"
+  },
+  {
     "id": "emw6opquz90u01",
     "date": "2026-11-07",
     "time": "10:18:00",
