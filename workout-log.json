@@ -393,6 +393,38 @@
     "id": "emw8cl74yc5c0v"
   },
   {
+    "weight_lb": null,
+    "reps": 20,
+    "gym": "Common Machines",
+    "room_id": "bodyweight-no-equipment",
+    "room": "Bodyweight — No Equipment",
+    "machine": "Squats",
+    "time": "16:37:46",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-08",
+    "machine_id": "squats",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8csposu7e0w"
+  },
+  {
+    "weight_lb": null,
+    "reps": 20,
+    "gym": "Common Machines",
+    "room_id": "bodyweight-no-equipment",
+    "room": "Bodyweight — No Equipment",
+    "machine": "Squats",
+    "time": "16:37:46",
+    "notes": "",
+    "set": 2,
+    "date": "2026-11-08",
+    "machine_id": "squats",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8csposkut0x"
+  },
+  {
     "id": "emw6opquz90u01",
     "date": "2026-11-07",
     "time": "10:18:00",
