@@ -329,7 +329,7 @@
     "id": "emw8c89x1vzj0i"
   },
   {
-    "weight_lb": null,
+    "weight_lb": 0,
     "reps": 10,
     "gym": "5th Street (New)",
     "room_id": "main",
