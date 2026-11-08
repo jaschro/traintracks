@@ -377,6 +377,22 @@
     "id": "emw8cggua1qw0u"
   },
   {
+    "weight_lb": 20,
+    "reps": 20,
+    "gym": "5th Street (New)",
+    "room_id": "main",
+    "room": "5th Street (New)",
+    "machine": "Pull Down",
+    "time": "16:31:53",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-08",
+    "machine_id": "m1791727070548",
+    "gym_id": "5th-street-new",
+    "variant": [],
+    "id": "emw8cl74yc5c0v"
+  },
+  {
     "id": "emw6opquz90u01",
     "date": "2026-11-07",
     "time": "10:18:00",
