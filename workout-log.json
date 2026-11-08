@@ -169,6 +169,38 @@
     "id": "emw8b5hfv6sv08"
   },
   {
+    "weight_lb": 25,
+    "reps": 10,
+    "gym": "Common Machines",
+    "room_id": "free-weights",
+    "room": "Free Weights",
+    "machine": "Dumbbell Incline Press",
+    "time": "15:54:32",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-08",
+    "machine_id": "dumbbell-incline-press",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8b9iqi57e09"
+  },
+  {
+    "weight_lb": 25,
+    "reps": 10,
+    "gym": "Common Machines",
+    "room_id": "free-weights",
+    "room": "Free Weights",
+    "machine": "Dumbbell Incline Press",
+    "time": "15:54:32",
+    "notes": "",
+    "set": 2,
+    "date": "2026-11-08",
+    "machine_id": "dumbbell-incline-press",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8b9iqi6wt0a"
+  },
+  {
     "id": "emw6opquz90u01",
     "date": "2026-11-07",
     "time": "10:18:00",
