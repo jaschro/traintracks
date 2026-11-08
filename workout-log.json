@@ -41,6 +41,25 @@
     "zone4_min": 1
   },
   {
+    "id": "emw8fyi3b2lp01",
+    "date": "2026-11-08",
+    "time": "15:03:00",
+    "gym_id": "generic",
+    "gym": "Common Machines",
+    "room_id": "outdoor-activities",
+    "room": "Outdoor Activities",
+    "machine_id": "walk",
+    "machine": "Walk",
+    "variant": [],
+    "set": 1,
+    "duration_sec": 4658,
+    "distance_mi": 2.39,
+    "hr_avg_bpm": 92,
+    "garmin_id": "25014075284",
+    "notes": "Miami Beach walk (Garmin 25014075284; 2.39 mi; +46 ft). All Zone 1 - max minute HR ~117 (Karvonen RHR 46 / max 168).",
+    "zone1_min": 77.48
+  },
+  {
     "weight_lb": null,
     "reps": 20,
     "gym": "Common Machines",

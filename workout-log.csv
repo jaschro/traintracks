@@ -1,6 +1,7 @@
 id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,reps,duration_sec,duration_min,distance_mi,speed_mph,level,incline_pct,hr_avg_bpm,garmin_id,zone1_min,zone2_min,zone3_min,zone4_min,zone5_min,notes
 emw84dm2quf101,2026-11-08,10:44:00,generic,Common Machines,outdoor-activities,Outdoor Activities,walk,Walk,,1,,,879,14.65,0.64,,,,77,25011106472,14.65,,,,,Miami Beach walk (Garmin 25011106472; 0.64 mi). All Zone 1 - max minute HR ~81 (Karvonen RHR 46 / max 168).
 emw84dm2qiog02,2026-11-08,11:01:00,generic,Common Machines,outdoor-activities,Outdoor Activities,jog,Jog,,1,,,1697,28.28,2.01,,,,123,25011498175,4.18,22,1,1,,Miami Beach Jog (Garmin 25011498175; 2.01 mi; +49 ft). Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1.
+emw8fyi3b2lp01,2026-11-08,15:03:00,generic,Common Machines,outdoor-activities,Outdoor Activities,walk,Walk,,1,,,4658,77.63,2.39,,,,92,25014075284,77.48,,,,,Miami Beach walk (Garmin 25014075284; 2.39 mi; +46 ft). All Zone 1 - max minute HR ~117 (Karvonen RHR 46 / max 168).
 emw8avmlovvz01,2026-11-08,15:44:05,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,,1,,20,,,,,,,,,,,,,,
 emw8avmlon2602,2026-11-08,15:44:05,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,,2,,20,,,,,,,,,,,,,,
 emw8awv1b5iq03,2026-11-08,15:44:58,portofino,Portofino Gym,machines,Machines Room,pm07,Back Extension Bench,,1,,20,,,,,,,,,,,,,,
