@@ -137,6 +137,38 @@
     "id": "emw8azicb27106"
   },
   {
+    "weight_lb": 25,
+    "reps": 10,
+    "gym": "Common Machines",
+    "room_id": "free-weights",
+    "room": "Free Weights",
+    "machine": "Dumbbell Press",
+    "time": "15:51:40",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-08",
+    "machine_id": "dumbbell-press",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8b5hfvh5u07"
+  },
+  {
+    "weight_lb": 25,
+    "reps": 10,
+    "gym": "Common Machines",
+    "room_id": "free-weights",
+    "room": "Free Weights",
+    "machine": "Dumbbell Press",
+    "time": "15:51:40",
+    "notes": "",
+    "set": 2,
+    "date": "2026-11-08",
+    "machine_id": "dumbbell-press",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8b5hfv6sv08"
+  },
+  {
     "id": "emw6opquz90u01",
     "date": "2026-11-07",
     "time": "10:18:00",
