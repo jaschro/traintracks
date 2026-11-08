@@ -1,7 +1,35 @@
 {
-  "fetched_at": "2026-11-08T06:03:30Z",
+  "fetched_at": "2026-11-08T17:41:59Z",
   "today": "2026-11-08",
   "recent_activities": [
+    {
+      "activity_id": "25011498175",
+      "date": "2026-11-08",
+      "start_time": "11:01:54",
+      "type": "other",
+      "name": "Miami Beach Jog",
+      "duration_sec": 1696,
+      "distance_mi": 2.01,
+      "hr_avg_bpm": 123.0,
+      "hr_max_bpm": 164.0,
+      "active_kcal": 287.0,
+      "elevation_gain_ft": 49,
+      "speed_avg_mph": 4.27
+    },
+    {
+      "activity_id": "25011106472",
+      "date": "2026-11-08",
+      "start_time": "10:44:41",
+      "type": "walking",
+      "name": "Miami Beach Walking",
+      "duration_sec": 815,
+      "distance_mi": 0.64,
+      "hr_avg_bpm": 77.0,
+      "hr_max_bpm": 85.0,
+      "active_kcal": 65.0,
+      "elevation_gain_ft": null,
+      "speed_avg_mph": 2.83
+    },
     {
       "activity_id": "24999512584",
       "date": "2026-11-07",
@@ -214,43 +242,43 @@
     }
   ],
   "today_stats": {
-    "steps": 10415,
+    "steps": 806,
     "floors": 0.0,
     "resting_hr_bpm": 47,
-    "active_kcal": 394.0,
-    "body_battery": null,
-    "stress_avg": 31,
-    "week_steps": 83993
+    "active_kcal": 10.0,
+    "body_battery": 72,
+    "stress_avg": 25,
+    "week_steps": 84799
   },
   "training_readiness": {
-    "score": 47,
+    "score": 43,
     "level": "LOW",
-    "feedback": "LISTEN_TO_YOUR_BODY"
+    "feedback": "BALANCE_YOUR_TRAINING_LOAD"
   },
-  "vo2max": 41.0,
+  "vo2max": 42.0,
   "intensity": {
     "week_moderate_sec": 9600,
     "week_vigorous_sec": 4980
   },
   "hrv": {
     "weekly_avg_ms": 39,
-    "last_night_ms": 40,
+    "last_night_ms": 45,
     "status": "BALANCED"
   },
   "sleep": {
-    "date": "2026-11-07",
-    "sleep_sec": 26040,
-    "score": 86,
-    "deep_sec": 7020,
-    "light_sec": 13500,
-    "rem_sec": 5520,
+    "date": "2026-11-08",
+    "sleep_sec": 26880,
+    "score": 85,
+    "deep_sec": 7080,
+    "light_sec": 13920,
+    "rem_sec": 5880,
     "awake_sec": 0,
     "respiration_brpm": 14.0,
-    "spo2_pct": 96.0
+    "spo2_pct": 95.0
   },
-  "spo2_avg_pct": null,
+  "spo2_avg_pct": 94.0,
   "respiration": {
-    "waking_brpm": null,
-    "sleep_brpm": null
+    "waking_brpm": 13.0,
+    "sleep_brpm": 14.0
   }
 }
