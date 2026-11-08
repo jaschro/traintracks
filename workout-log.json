@@ -201,6 +201,38 @@
     "id": "emw8b9iqi6wt0a"
   },
   {
+    "weight_lb": 25,
+    "reps": 25,
+    "gym": "Common Machines",
+    "room_id": "free-weights",
+    "room": "Free Weights",
+    "machine": "Overhead Tricep Extension",
+    "time": "15:57:20",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-08",
+    "machine_id": "overhead-tricep-extension",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8bcy1ag470b"
+  },
+  {
+    "weight_lb": 25,
+    "reps": 20,
+    "gym": "Common Machines",
+    "room_id": "free-weights",
+    "room": "Free Weights",
+    "machine": "Overhead Tricep Extension",
+    "time": "15:57:20",
+    "notes": "",
+    "set": 2,
+    "date": "2026-11-08",
+    "machine_id": "overhead-tricep-extension",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8bcy1aily0c"
+  },
+  {
     "id": "emw6opquz90u01",
     "date": "2026-11-07",
     "time": "10:18:00",
