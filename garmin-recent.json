@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-08T17:41:59Z",
+  "fetched_at": "2026-11-08T19:42:24Z",
   "today": "2026-11-08",
   "recent_activities": [
     {
@@ -242,13 +242,13 @@
     }
   ],
   "today_stats": {
-    "steps": 806,
+    "steps": 8612,
     "floors": 0.0,
     "resting_hr_bpm": 47,
-    "active_kcal": 10.0,
-    "body_battery": 72,
-    "stress_avg": 25,
-    "week_steps": 84799
+    "active_kcal": 346.0,
+    "body_battery": 49,
+    "stress_avg": 29,
+    "week_steps": 92605
   },
   "training_readiness": {
     "score": 43,
@@ -257,8 +257,8 @@
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 9600,
-    "week_vigorous_sec": 4980
+    "week_moderate_sec": 10620,
+    "week_vigorous_sec": 6600
   },
   "hrv": {
     "weekly_avg_ms": 39,
@@ -278,7 +278,7 @@
   },
   "spo2_avg_pct": 94.0,
   "respiration": {
-    "waking_brpm": 13.0,
+    "waking_brpm": 15.0,
     "sleep_brpm": 14.0
   }
 }
