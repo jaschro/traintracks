@@ -105,6 +105,38 @@
     "id": "emw8awv1bh9704"
   },
   {
+    "weight_lb": 25,
+    "reps": 10,
+    "gym": "Common Machines",
+    "room_id": "free-weights",
+    "room": "Free Weights",
+    "machine": "Standing Dumbbell Curl",
+    "time": "15:46:57",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-08",
+    "machine_id": "standing-dumbbell-curl",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8azicbkqx05"
+  },
+  {
+    "weight_lb": 25,
+    "reps": 10,
+    "gym": "Common Machines",
+    "room_id": "free-weights",
+    "room": "Free Weights",
+    "machine": "Standing Dumbbell Curl",
+    "time": "15:46:57",
+    "notes": "",
+    "set": 2,
+    "date": "2026-11-08",
+    "machine_id": "standing-dumbbell-curl",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8azicb27106"
+  },
+  {
     "id": "emw6opquz90u01",
     "date": "2026-11-07",
     "time": "10:18:00",
