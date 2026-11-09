@@ -508,6 +508,36 @@
     "id": "emw8cx4y7ack10"
   },
   {
+    "duration_sec": 45,
+    "gym": "Common Machines",
+    "room_id": "bodyweight-no-equipment",
+    "room": "Bodyweight — No Equipment",
+    "machine": "Elbow Planks",
+    "time": "20:39:01",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-08",
+    "machine_id": "elbow-planks",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8lew6itcb01"
+  },
+  {
+    "duration_sec": 45,
+    "gym": "Common Machines",
+    "room_id": "bodyweight-no-equipment",
+    "room": "Bodyweight — No Equipment",
+    "machine": "Elbow Planks",
+    "time": "20:39:01",
+    "notes": "",
+    "set": 2,
+    "date": "2026-11-08",
+    "machine_id": "elbow-planks",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8lew6jvhc02"
+  },
+  {
     "id": "emw6opquz90u01",
     "date": "2026-11-07",
     "time": "10:18:00",
