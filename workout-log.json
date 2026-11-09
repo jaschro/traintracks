@@ -538,6 +538,36 @@
     "id": "emw8lew6jvhc02"
   },
   {
+    "duration_sec": 30,
+    "gym": "Common Machines",
+    "room_id": "bodyweight-no-equipment",
+    "room": "Bodyweight — No Equipment",
+    "machine": "Side Planks",
+    "time": "20:39:43",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-08",
+    "machine_id": "side-planks",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8lfv6ya4d01"
+  },
+  {
+    "duration_sec": 30,
+    "gym": "Common Machines",
+    "room_id": "bodyweight-no-equipment",
+    "room": "Bodyweight — No Equipment",
+    "machine": "Side Planks",
+    "time": "20:39:43",
+    "notes": "",
+    "set": 2,
+    "date": "2026-11-08",
+    "machine_id": "side-planks",
+    "gym_id": "generic",
+    "variant": [],
+    "id": "emw8lfv6y2z502"
+  },
+  {
     "id": "emw6opquz90u01",
     "date": "2026-11-07",
     "time": "10:18:00",
