@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-09T11:34:37Z",
+  "fetched_at": "2026-11-09T22:23:40Z",
   "today": "2026-11-09",
   "recent_activities": [
     {
@@ -242,43 +242,43 @@
     }
   ],
   "today_stats": {
-    "steps": 19581,
-    "floors": 4.60827,
-    "resting_hr_bpm": 47,
-    "active_kcal": 626.0,
-    "body_battery": null,
-    "stress_avg": 35,
-    "week_steps": 91837
+    "steps": 827,
+    "floors": 0.0,
+    "resting_hr_bpm": 49,
+    "active_kcal": 7.0,
+    "body_battery": 61,
+    "stress_avg": 24,
+    "week_steps": 92664
   },
   "training_readiness": {
-    "score": null,
-    "level": null,
-    "feedback": null
+    "score": 54,
+    "level": "MODERATE",
+    "feedback": "WORKING_HARD"
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": null,
-    "week_vigorous_sec": null
+    "week_moderate_sec": 0,
+    "week_vigorous_sec": 0
   },
   "hrv": {
     "weekly_avg_ms": 39,
-    "last_night_ms": 45,
+    "last_night_ms": 38,
     "status": "BALANCED"
   },
   "sleep": {
-    "date": "2026-11-08",
-    "sleep_sec": 26880,
-    "score": 85,
-    "deep_sec": 7080,
-    "light_sec": 13920,
-    "rem_sec": 5880,
-    "awake_sec": 0,
-    "respiration_brpm": 14.0,
-    "spo2_pct": 95.0
+    "date": "2026-11-09",
+    "sleep_sec": 24600,
+    "score": 78,
+    "deep_sec": 3600,
+    "light_sec": 13860,
+    "rem_sec": 7140,
+    "awake_sec": 120,
+    "respiration_brpm": 13.0,
+    "spo2_pct": 96.0
   },
-  "spo2_avg_pct": null,
+  "spo2_avg_pct": 95.0,
   "respiration": {
-    "waking_brpm": null,
-    "sleep_brpm": null
+    "waking_brpm": 15.0,
+    "sleep_brpm": 13.0
   }
 }
