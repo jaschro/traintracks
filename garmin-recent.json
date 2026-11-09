@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-09T22:23:40Z",
+  "fetched_at": "2026-11-09T23:55:25Z",
   "today": "2026-11-09",
   "recent_activities": [
+    {
+      "activity_id": "25025563406",
+      "date": "2026-11-09",
+      "start_time": "18:39:01",
+      "type": "walking",
+      "name": "Miami Beach Walking",
+      "duration_sec": 825,
+      "distance_mi": 1.2,
+      "hr_avg_bpm": 134.0,
+      "hr_max_bpm": 167.0,
+      "active_kcal": 147.0,
+      "elevation_gain_ft": 26,
+      "speed_avg_mph": 5.25
+    },
     {
       "activity_id": "25014075284",
       "date": "2026-11-08",
@@ -251,9 +265,9 @@
     "week_steps": 92664
   },
   "training_readiness": {
-    "score": 54,
-    "level": "MODERATE",
-    "feedback": "WORKING_HARD"
+    "score": 35,
+    "level": "LOW",
+    "feedback": "BALANCE_YOUR_TRAINING_LOAD"
   },
   "vo2max": 42.0,
   "intensity": {
