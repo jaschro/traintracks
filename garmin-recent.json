@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-11-08T23:57:03Z",
-  "today": "2026-11-08",
+  "fetched_at": "2026-11-09T11:34:37Z",
+  "today": "2026-11-09",
   "recent_activities": [
     {
       "activity_id": "25014075284",
@@ -239,40 +239,26 @@
       "active_kcal": 179.0,
       "elevation_gain_ft": 174,
       "speed_avg_mph": 2.99
-    },
-    {
-      "activity_id": "24849017969",
-      "date": "2026-10-25",
-      "start_time": "11:35:04",
-      "type": "walking",
-      "name": "Walking",
-      "duration_sec": 1991,
-      "distance_mi": 1.72,
-      "hr_avg_bpm": 119.0,
-      "hr_max_bpm": 133.0,
-      "active_kcal": 242.0,
-      "elevation_gain_ft": 16,
-      "speed_avg_mph": 3.1
     }
   ],
   "today_stats": {
-    "steps": 18886,
+    "steps": 19581,
     "floors": 4.60827,
     "resting_hr_bpm": 47,
-    "active_kcal": 616.0,
-    "body_battery": 32,
-    "stress_avg": 33,
-    "week_steps": 102879
+    "active_kcal": 626.0,
+    "body_battery": null,
+    "stress_avg": 35,
+    "week_steps": 91837
   },
   "training_readiness": {
-    "score": 46,
-    "level": "LOW",
-    "feedback": "BALANCE_YOUR_TRAINING_LOAD"
+    "score": null,
+    "level": null,
+    "feedback": null
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 11880,
-    "week_vigorous_sec": 6600
+    "week_moderate_sec": null,
+    "week_vigorous_sec": null
   },
   "hrv": {
     "weekly_avg_ms": 39,
@@ -290,9 +276,9 @@
     "respiration_brpm": 14.0,
     "spo2_pct": 95.0
   },
-  "spo2_avg_pct": 94.0,
+  "spo2_avg_pct": null,
   "respiration": {
-    "waking_brpm": 15.0,
-    "sleep_brpm": 14.0
+    "waking_brpm": null,
+    "sleep_brpm": null
   }
 }
