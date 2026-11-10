@@ -291,6 +291,27 @@
     "id": "emwax47t441t0a"
   },
   {
+    "id": "emwb6ezzs6xw01",
+    "date": "2026-11-10",
+    "time": "15:24:00",
+    "gym_id": "generic",
+    "gym": "Common Machines",
+    "room_id": "outdoor-activities",
+    "room": "Outdoor Activities",
+    "machine_id": "jog",
+    "machine": "Jog",
+    "variant": [],
+    "set": 1,
+    "duration_sec": 857,
+    "distance_mi": 0.94,
+    "hr_avg_bpm": 122,
+    "garmin_id": "25035909799",
+    "notes": "Miami Beach Jog (Garmin 25035909799; 0.94 mi; +13 ft). Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1.",
+    "zone1_min": 4.17,
+    "zone2_min": 9,
+    "zone3_min": 1
+  },
+  {
     "id": "emw9x5oki3vd01",
     "date": "2026-11-09",
     "time": "18:39:00",

@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-10T18:54:20Z",
+  "fetched_at": "2026-11-10T21:02:21Z",
   "today": "2026-11-10",
   "recent_activities": [
+    {
+      "activity_id": "25035909799",
+      "date": "2026-11-10",
+      "start_time": "15:24:50",
+      "type": "other",
+      "name": "Miami Beach Jog",
+      "duration_sec": 856,
+      "distance_mi": 0.94,
+      "hr_avg_bpm": 122.0,
+      "hr_max_bpm": 136.0,
+      "active_kcal": 145.0,
+      "elevation_gain_ft": 13,
+      "speed_avg_mph": 3.93
+    },
     {
       "activity_id": "25034461776",
       "date": "2026-11-10",
@@ -242,23 +256,23 @@
     }
   ],
   "today_stats": {
-    "steps": 358,
-    "floors": 0.0,
+    "steps": 12297,
+    "floors": 6.56759,
     "resting_hr_bpm": 48,
-    "active_kcal": 4.0,
-    "body_battery": 54,
-    "stress_avg": 26,
-    "week_steps": 87785
+    "active_kcal": 411.0,
+    "body_battery": 39,
+    "stress_avg": 28,
+    "week_steps": 99724
   },
   "training_readiness": {
-    "score": 55,
-    "level": "MODERATE",
-    "feedback": "RECOVERED_AND_READY"
+    "score": 46,
+    "level": "LOW",
+    "feedback": "BALANCE_YOUR_TRAINING_LOAD"
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 360,
-    "week_vigorous_sec": 840
+    "week_moderate_sec": 3060,
+    "week_vigorous_sec": 1740
   },
   "hrv": {
     "weekly_avg_ms": 39,
