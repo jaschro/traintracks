@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-11-09T23:55:25Z",
-  "today": "2026-11-09",
+  "fetched_at": "2026-11-10T07:20:39Z",
+  "today": "2026-11-10",
   "recent_activities": [
     {
       "activity_id": "25025563406",
@@ -225,54 +225,26 @@
       "active_kcal": 323.0,
       "elevation_gain_ft": 59,
       "speed_avg_mph": 4.05
-    },
-    {
-      "activity_id": "24862187437",
-      "date": "2026-10-26",
-      "start_time": "14:25:18",
-      "type": "walking",
-      "name": "Miami Beach Walking",
-      "duration_sec": 4352,
-      "distance_mi": 3.81,
-      "hr_avg_bpm": 88.0,
-      "hr_max_bpm": 111.0,
-      "active_kcal": 389.0,
-      "elevation_gain_ft": 213,
-      "speed_avg_mph": 3.15
-    },
-    {
-      "activity_id": "24857735309",
-      "date": "2026-10-26",
-      "start_time": "09:54:40",
-      "type": "walking",
-      "name": "Miami Beach Walking",
-      "duration_sec": 2137,
-      "distance_mi": 1.77,
-      "hr_avg_bpm": 79.0,
-      "hr_max_bpm": 95.0,
-      "active_kcal": 179.0,
-      "elevation_gain_ft": 174,
-      "speed_avg_mph": 2.99
     }
   ],
   "today_stats": {
-    "steps": 827,
-    "floors": 0.0,
+    "steps": 7556,
+    "floors": 2.57448,
     "resting_hr_bpm": 49,
-    "active_kcal": 7.0,
-    "body_battery": 61,
-    "stress_avg": 24,
-    "week_steps": 92664
+    "active_kcal": 285.0,
+    "body_battery": null,
+    "stress_avg": 36,
+    "week_steps": 87427
   },
   "training_readiness": {
-    "score": 35,
-    "level": "LOW",
-    "feedback": "BALANCE_YOUR_TRAINING_LOAD"
+    "score": null,
+    "level": null,
+    "feedback": null
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 0,
-    "week_vigorous_sec": 0
+    "week_moderate_sec": 360,
+    "week_vigorous_sec": 840
   },
   "hrv": {
     "weekly_avg_ms": 39,
@@ -290,9 +262,9 @@
     "respiration_brpm": 13.0,
     "spo2_pct": 96.0
   },
-  "spo2_avg_pct": 95.0,
+  "spo2_avg_pct": null,
   "respiration": {
-    "waking_brpm": 15.0,
-    "sleep_brpm": 13.0
+    "waking_brpm": null,
+    "sleep_brpm": null
   }
 }
