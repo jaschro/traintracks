@@ -144,6 +144,38 @@
     "id": "emwawp6whq8n02"
   },
   {
+    "weight_lb": 20,
+    "reps": 15,
+    "gym": "5th Street (New)",
+    "room_id": "main",
+    "room": "5th Street (New)",
+    "machine": "Pull Down",
+    "time": "11:34:04",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-10",
+    "machine_id": "m1791727070548",
+    "gym_id": "5th-street-new",
+    "variant": [],
+    "id": "emwawtwgaiq803"
+  },
+  {
+    "weight_lb": 30,
+    "reps": 15,
+    "gym": "5th Street (New)",
+    "room_id": "main",
+    "room": "5th Street (New)",
+    "machine": "Pull Down",
+    "time": "11:34:04",
+    "notes": "",
+    "set": 2,
+    "date": "2026-11-10",
+    "machine_id": "m1791727070548",
+    "gym_id": "5th-street-new",
+    "variant": [],
+    "id": "emwawtwgakcl04"
+  },
+  {
     "id": "emw9x5oki3vd01",
     "date": "2026-11-09",
     "time": "18:39:00",
