@@ -112,6 +112,38 @@
     "id": "emwawj6blcjr0r"
   },
   {
+    "weight_lb": 40,
+    "reps": 15,
+    "gym": "5th Street (New)",
+    "room_id": "main",
+    "room": "5th Street (New)",
+    "machine": "Chest Press",
+    "time": "11:30:29",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-10",
+    "machine_id": "m1791726427962",
+    "gym_id": "5th-street-new",
+    "variant": [],
+    "id": "emwawp6whimn01"
+  },
+  {
+    "weight_lb": 40,
+    "reps": 15,
+    "gym": "5th Street (New)",
+    "room_id": "main",
+    "room": "5th Street (New)",
+    "machine": "Chest Press",
+    "time": "11:30:29",
+    "notes": "",
+    "set": 2,
+    "date": "2026-11-10",
+    "machine_id": "m1791726427962",
+    "gym_id": "5th-street-new",
+    "variant": [],
+    "id": "emwawp6whq8n02"
+  },
+  {
     "id": "emw9x5oki3vd01",
     "date": "2026-11-09",
     "time": "18:39:00",
