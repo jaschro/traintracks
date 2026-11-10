@@ -1,22 +1,6 @@
 [
   {
     "weight_lb": null,
-    "reps": 20,
-    "gym": "5th Street (New)",
-    "room_id": "main",
-    "room": "5th Street (New)",
-    "machine": "Leg Lifts",
-    "time": "11:23:19",
-    "notes": "",
-    "set": 1,
-    "date": "2026-11-10",
-    "machine_id": "m1791726370971",
-    "gym_id": "5th-street-new",
-    "variant": [],
-    "id": "emwawg070mke01"
-  },
-  {
-    "weight_lb": null,
     "reps": 10,
     "gym": "5th Street (New)",
     "room_id": "main",
@@ -254,6 +238,38 @@
     "gym_id": "generic",
     "variant": [],
     "id": "emwax0lzjwh209"
+  },
+  {
+    "weight_lb": null,
+    "reps": 20,
+    "gym": "5th Street (New)",
+    "room_id": "main",
+    "room": "5th Street (New)",
+    "machine": "Leg Lifts",
+    "time": "11:23:19",
+    "notes": "",
+    "set": 1,
+    "date": "2026-11-10",
+    "machine_id": "m1791726370971",
+    "gym_id": "5th-street-new",
+    "variant": [],
+    "id": "emwawg070mke01"
+  },
+  {
+    "weight_lb": null,
+    "reps": 20,
+    "gym": "5th Street (New)",
+    "room_id": "main",
+    "room": "5th Street (New)",
+    "machine": "Leg Lifts",
+    "time": "11:23:19",
+    "notes": "",
+    "set": 2,
+    "date": "2026-11-10",
+    "machine_id": "m1791726370971",
+    "gym_id": "5th-street-new",
+    "variant": [],
+    "id": "emwax47t441t0a"
   },
   {
     "id": "emw9x5oki3vd01",
