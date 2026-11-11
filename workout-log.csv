@@ -1,4 +1,5 @@
 id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,reps,duration_sec,duration_min,distance_mi,speed_mph,level,incline_pct,hr_avg_bpm,garmin_id,zone1_min,zone2_min,zone3_min,zone4_min,zone5_min,notes
+emwcozxqmzsj01,2026-11-11,12:06:00,generic,Common Machines,outdoor-activities,Outdoor Activities,bike-ride,Bike Ride,,1,,,2836,47.27,3.96,,,,83,25046088203,47.27,,,,,Miami Beach ride (Garmin 25046088203; 3.96 mi; +56 ft). All Zone 1 - max minute HR ~109 (Karvonen RHR 46 / max 168).
 emwci0nnt3al01,2026-11-11,14:15:02,mb-jcc,MB JCC,weight-machines-1786026388213,Weight Machines,m1786029912579,Knee Lift,,1,,20,,,,,,,,,,,,,,
 emwci0nntceg02,2026-11-11,14:15:02,mb-jcc,MB JCC,weight-machines-1786026388213,Weight Machines,m1786029912579,Knee Lift,,2,,20,,,,,,,,,,,,,,
 emwci1o76una04,2026-11-11,14:15:50,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,,1,,20,,,,,,,,,,,,,,
