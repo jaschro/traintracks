@@ -1,4 +1,6 @@
 id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,reps,duration_sec,duration_min,distance_mi,speed_mph,level,incline_pct,hr_avg_bpm,garmin_id,zone1_min,zone2_min,zone3_min,zone4_min,zone5_min,notes
+emwci0nnt3al01,2026-11-11,14:15:02,mb-jcc,MB JCC,weight-machines-1786026388213,Weight Machines,m1786029912579,Knee Lift,,1,,20,,,,,,,,,,,,,,
+emwci0nntceg02,2026-11-11,14:15:02,mb-jcc,MB JCC,weight-machines-1786026388213,Weight Machines,m1786029912579,Knee Lift,,2,,20,,,,,,,,,,,,,,
 emwb1ucoazex01,2026-11-10,10:52:00,generic,Common Machines,outdoor-activities,Outdoor Activities,walk,Walk,,1,,,4331,72.18,2.71,,,,86,25034461776,72.1,,,,,Miami Beach walk (Garmin 25034461776; 2.71 mi; +66 ft). All Zone 1 - max minute HR ~107 (Karvonen RHR 46 / max 168).
 emwawhy8xczs0i,2026-11-10,11:24:17,5th-street-new,5th Street (New),main,5th Street (New),m1791726559972,Situp Bench,,1,,10,,,,,,,,,,,,,,
 emwawhy8xij40j,2026-11-10,11:24:17,5th-street-new,5th Street (New),main,5th Street (New),m1791726559972,Situp Bench,,2,,15,,,,,,,,,,,,,,
