@@ -256,6 +256,38 @@
     "variant": []
   },
   {
+    "weight_lb": 40,
+    "reps": 10,
+    "gym": "MB JCC",
+    "room_id": "weight-machines-1786026388213",
+    "room": "Weight Machines",
+    "machine": "Seated Leg Curl",
+    "time": "14:41:54",
+    "notes": "",
+    "id": "emwciz7nbcuw0o",
+    "set": 1,
+    "date": "2026-11-11",
+    "machine_id": "m1786027189881",
+    "gym_id": "mb-jcc",
+    "variant": []
+  },
+  {
+    "weight_lb": 55,
+    "reps": 15,
+    "gym": "MB JCC",
+    "room_id": "weight-machines-1786026388213",
+    "room": "Weight Machines",
+    "machine": "Seated Leg Curl",
+    "time": "14:41:54",
+    "notes": "",
+    "id": "emwciz7nbvrp0p",
+    "set": 2,
+    "date": "2026-11-11",
+    "machine_id": "m1786027189881",
+    "gym_id": "mb-jcc",
+    "variant": []
+  },
+  {
     "id": "emwb1ucoazex01",
     "date": "2026-11-10",
     "time": "10:52:00",
