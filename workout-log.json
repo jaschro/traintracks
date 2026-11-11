@@ -1,24 +1,5 @@
 [
   {
-    "id": "emwcozxqmzsj01",
-    "date": "2026-11-11",
-    "time": "12:06:00",
-    "gym_id": "generic",
-    "gym": "Common Machines",
-    "room_id": "outdoor-activities",
-    "room": "Outdoor Activities",
-    "machine_id": "bike-ride",
-    "machine": "Bike Ride",
-    "variant": [],
-    "set": 1,
-    "duration_sec": 2836,
-    "distance_mi": 3.96,
-    "hr_avg_bpm": 83,
-    "garmin_id": "25046088203",
-    "notes": "Miami Beach ride (Garmin 25046088203; 3.96 mi; +56 ft). All Zone 1 - max minute HR ~109 (Karvonen RHR 46 / max 168).",
-    "zone1_min": 47.27
-  },
-  {
     "weight_lb": null,
     "reps": 20,
     "gym": "MB JCC",
@@ -305,6 +286,25 @@
     "machine_id": "m1786027189881",
     "gym_id": "mb-jcc",
     "variant": []
+  },
+  {
+    "id": "emwcozxqmzsj01",
+    "date": "2026-11-11",
+    "time": "12:06:00",
+    "gym_id": "generic",
+    "gym": "Common Machines",
+    "room_id": "outdoor-activities",
+    "room": "Outdoor Activities",
+    "machine_id": "bike-ride",
+    "machine": "Bike Ride",
+    "variant": [],
+    "set": 1,
+    "duration_sec": 1276,
+    "distance_mi": 3.96,
+    "hr_avg_bpm": 83,
+    "garmin_id": "25046088203",
+    "notes": "Miami Beach ride (Garmin 25046088203; 3.96 mi; +56 ft). All Zone 1 - max minute HR ~109 (Karvonen RHR 46 / max 168).",
+    "zone1_min": 47.27
   },
   {
     "id": "emwb1ucoazex01",
