@@ -29,5 +29,12 @@
         "hr_bpm": 85
       }
     ]
+  },
+  "25046088203": {
+    "note": "2026-11-11 Miami Beach bike ride. Watch left recording ~27 min after the ride; trimmed to the actual ride window 12:06-12:27 PM (21.9 min).",
+    "keep": [
+      "2026-11-11 12:06",
+      "2026-11-11 12:27"
+    ]
   }
 }
