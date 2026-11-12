@@ -326,6 +326,38 @@
     "zone1_min": 77.85
   },
   {
+    "weight_lb": null,
+    "reps": 20,
+    "gym": "Common Machines",
+    "room_id": "bodyweight-no-equipment",
+    "room": "Bodyweight — No Equipment",
+    "machine": "Push Ups",
+    "time": "22:15:03",
+    "notes": "",
+    "id": "emwcz5y9ibz302",
+    "set": 1,
+    "date": "2026-11-11",
+    "machine_id": "push-ups",
+    "gym_id": "generic",
+    "variant": []
+  },
+  {
+    "weight_lb": null,
+    "reps": 20,
+    "gym": "Common Machines",
+    "room_id": "bodyweight-no-equipment",
+    "room": "Bodyweight — No Equipment",
+    "machine": "Push Ups",
+    "time": "22:15:03",
+    "notes": "",
+    "id": "emwcz5y9ib5903",
+    "set": 2,
+    "date": "2026-11-11",
+    "machine_id": "push-ups",
+    "gym_id": "generic",
+    "variant": []
+  },
+  {
     "id": "emwb1ucoazex01",
     "date": "2026-11-10",
     "time": "10:52:00",
