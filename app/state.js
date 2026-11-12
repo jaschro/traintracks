@@ -11,6 +11,8 @@ export const S = {
   genericLocal: null,    // equipment/generic.local.json
   log: [],               // format version 2, newest first
   oldFormat: false,      // the repo still holds version 1 data: show a notice, don't write
+  needsSplit: false,     // the log is still one file (format version 2): show a notice, don't write
+  legacyLogToo: false,   // workout-log.json is (back) next to the months: ignored, with a notice
   profile: {},
   plan: null,
   goals: null,
@@ -20,6 +22,8 @@ export const S = {
   sha: { profile: null, plan: null, goals: null, genericLocal: null, gym: {} },
   loaded: false,
   loading: false,
+  fromDevice: false,     // showing the copy kept on this device; GitHub not checked yet
+  lastSyncError: null,   // { message, status, at }: the last background-save error (Settings)
   // navigation and screen state
   stack: ['home'],
   gym: null, room: null, machine: null,
