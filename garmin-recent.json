@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-12T02:56:52Z",
-  "today": "2026-11-11",
+  "fetched_at": "2026-11-12T11:13:59Z",
+  "today": "2026-11-12",
   "recent_activities": [
+    {
+      "activity_id": "25050229823",
+      "date": "2026-11-11",
+      "start_time": "22:19:49",
+      "type": "stop_watch",
+      "name": "Stopwatch",
+      "duration_sec": 134,
+      "distance_mi": null,
+      "hr_avg_bpm": null,
+      "hr_max_bpm": null,
+      "active_kcal": null,
+      "elevation_gain_ft": null,
+      "speed_avg_mph": null
+    },
     {
       "activity_id": "25050071587",
       "date": "2026-11-11",
@@ -253,49 +267,21 @@
       "active_kcal": 293.0,
       "elevation_gain_ft": null,
       "speed_avg_mph": 2.93
-    },
-    {
-      "activity_id": "24888762133",
-      "date": "2026-10-28",
-      "start_time": "23:23:01",
-      "type": "walking",
-      "name": "Miami Beach Walking",
-      "duration_sec": 1505,
-      "distance_mi": 1.27,
-      "hr_avg_bpm": 84.0,
-      "hr_max_bpm": 101.0,
-      "active_kcal": 129.0,
-      "elevation_gain_ft": 36,
-      "speed_avg_mph": 3.03
-    },
-    {
-      "activity_id": "24882426334",
-      "date": "2026-10-28",
-      "start_time": "10:23:24",
-      "type": "walking",
-      "name": "Miami Beach Walking",
-      "duration_sec": 2460,
-      "distance_mi": 2.77,
-      "hr_avg_bpm": 113.0,
-      "hr_max_bpm": 169.0,
-      "active_kcal": 323.0,
-      "elevation_gain_ft": 59,
-      "speed_avg_mph": 4.05
     }
   ],
   "today_stats": {
-    "steps": 13264,
-    "floors": 2.1542,
-    "resting_hr_bpm": 47,
-    "active_kcal": 536.0,
-    "body_battery": 28,
-    "stress_avg": 32,
-    "week_steps": 110493
+    "steps": 229,
+    "floors": 0.0,
+    "resting_hr_bpm": 51,
+    "active_kcal": 2.0,
+    "body_battery": 27,
+    "stress_avg": 24,
+    "week_steps": 93481
   },
   "training_readiness": {
-    "score": 55,
-    "level": "MODERATE",
-    "feedback": "RECOVERED_AND_READY"
+    "score": null,
+    "level": null,
+    "feedback": null
   },
   "vo2max": 42.0,
   "intensity": {
@@ -318,9 +304,9 @@
     "respiration_brpm": 14.0,
     "spo2_pct": 95.0
   },
-  "spo2_avg_pct": 95.0,
+  "spo2_avg_pct": 93.0,
   "respiration": {
-    "waking_brpm": 16.0,
-    "sleep_brpm": 14.0
+    "waking_brpm": 14.0,
+    "sleep_brpm": null
   }
 }
