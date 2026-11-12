@@ -1,20 +1,5 @@
 [
   {
-    "duration_sec": 60,
-    "gym": "Common Machines",
-    "room_id": "bodyweight-no-equipment",
-    "room": "Bodyweight — No Equipment",
-    "machine": "Meditation",
-    "time": "01:04:14",
-    "notes": "",
-    "id": "emwd57jebn7801",
-    "set": 1,
-    "date": "2026-11-12",
-    "machine_id": "meditation",
-    "gym_id": "generic",
-    "variant": []
-  },
-  {
     "weight_lb": null,
     "reps": 20,
     "gym": "MB JCC",
