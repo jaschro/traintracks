@@ -1,4 +1,5 @@
 id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,reps,duration_sec,duration_min,distance_mi,speed_mph,level,incline_pct,hr_avg_bpm,garmin_id,zone1_min,zone2_min,zone3_min,zone4_min,zone5_min,notes
+emwf4rreg3j801,2026-11-13,09:43:00,generic,Common Machines,outdoor-activities,Outdoor Activities,jog,Jog,,1,,,987,16.45,1.15,,,,109,25066098614,13,3.43,,,,Miami Beach Jog (Garmin 25066098614; 1.15 mi; +20 ft). Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1.
 emwdy3zcx1vy04,2026-11-12,14:33:17,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,meditation,Meditation,,1,,,60,1,,,,,,,,,,,,
 emwdy3zcxjqf05,2026-11-12,14:33:17,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,meditation,Meditation,,2,,,60,1,,,,,,,,,,,,
 emwe3tkzptbp01,2026-11-12,17:13:10,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,,1,,25,,,,,,,,,,,,,,
