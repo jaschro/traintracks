@@ -49,7 +49,15 @@
     {
       "id": "miami-mweh2u77",
       "name": "Miami",
-      "machines": []
+      "machines": [
+        {
+          "id": "m1794543902497",
+          "name": "South Point Loop: Gelato Store to Portofino Entrance",
+          "muscles_worked": "",
+          "image": null,
+          "log_type": "weight"
+        }
+      ]
     }
   ],
   "id": "specific-courses-runs-walks",
