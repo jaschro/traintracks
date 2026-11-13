@@ -1,8 +1,4 @@
 {
-  "id": "specific-courses-runs-walks",
-  "name": "Specific Courses (Runs/Walks)",
-  "icon": "🏋️",
-  "is_generic": false,
   "rooms": [
     {
       "id": "mv-lower-loop-1787177743113",
@@ -49,6 +45,15 @@
           "log_type": "walk"
         }
       ]
+    },
+    {
+      "id": "miami-mweh2u77",
+      "name": "Miami",
+      "machines": []
     }
-  ]
+  ],
+  "id": "specific-courses-runs-walks",
+  "name": "Specific Courses (Runs/Walks)",
+  "icon": "🏋️",
+  "is_generic": false
 }
