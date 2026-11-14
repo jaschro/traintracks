@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-14T18:04:05Z",
+  "fetched_at": "2026-11-14T22:25:38Z",
   "today": "2026-11-14",
   "recent_activities": [
+    {
+      "activity_id": "25080878376",
+      "date": "2026-11-14",
+      "start_time": "17:01:15",
+      "type": "treadmill_running",
+      "name": "Treadmill Running",
+      "duration_sec": 909,
+      "distance_mi": 0.28,
+      "hr_avg_bpm": 89.0,
+      "hr_max_bpm": 97.0,
+      "active_kcal": 74.0,
+      "elevation_gain_ft": null,
+      "speed_avg_mph": 1.12
+    },
     {
       "activity_id": "25066098614",
       "date": "2026-11-13",
@@ -270,22 +284,22 @@
     }
   ],
   "today_stats": {
-    "steps": 285,
-    "floors": 0.0,
-    "resting_hr_bpm": 47,
-    "active_kcal": 2.0,
-    "body_battery": 78,
-    "stress_avg": 21,
-    "week_steps": 97562
+    "steps": 3943,
+    "floors": 1.0,
+    "resting_hr_bpm": 46,
+    "active_kcal": 78.0,
+    "body_battery": 89,
+    "stress_avg": 20,
+    "week_steps": 101220
   },
   "training_readiness": {
-    "score": 75,
+    "score": 81,
     "level": "HIGH",
-    "feedback": "WELL_RECOVERED"
+    "feedback": "ENERGIZING_NAP"
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 12660,
+    "week_moderate_sec": 13500,
     "week_vigorous_sec": 2520
   },
   "hrv": {
