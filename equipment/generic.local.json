@@ -1,5 +1,14 @@
 {
   "hidden": [],
-  "machines": [],
+  "machines": [
+    {
+      "room_id": "bodyweight-no-equipment",
+      "id": "m1794718776135",
+      "name": "Side Leg Lifts",
+      "muscles_worked": "Abductors",
+      "image": null,
+      "log_type": "reps"
+    }
+  ],
   "rooms": []
 }
