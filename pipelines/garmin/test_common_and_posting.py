@@ -1,4 +1,5 @@
 """Tests for common.py, logfmt.py, post_zone_records.py and cardio_minutes.py — run: npm run test:py"""
+import csv
 import json
 import os
 import shutil
@@ -164,7 +165,7 @@ class Posting(unittest.TestCase):
         posted, _ = P.plan_entries(cardio, [], {}, mapping, 46, 168)
         self.assertEqual((posted[0][2]["machine_id"], posted[0][2]["gym_id"]), ("m1", "home"))
         # a hand-logged timed entry overlapping the window -> skipped for review
-        log = [{"date": "2026-11-03", "time": "07:05:00", "machine_id": "x", "duration_sec": 1800, "machine": "Bike"}]
+        log = [{"date": "2026-11-03", "time": "07:01:00", "machine_id": "x", "duration_sec": 1800, "machine": "Bike"}]
         posted, skipped = P.plan_entries(cardio, log, {}, mapping, 46, 168)
         self.assertEqual(posted, [])
         self.assertIn("duplicate", skipped[0][2])
@@ -188,11 +189,13 @@ class Posting(unittest.TestCase):
 GYMS = [
     {"id": "generic", "name": "Common Machines", "rooms": [
         {"id": "outdoor-activities", "name": "Outdoor Activities", "machines": [{"id": "walk", "name": "Walk"}, {"id": "swim", "name": "Swim"}]},
-        {"id": "cardio", "name": "Cardio", "machines": [{"id": "treadmill", "name": "Treadmill"}, {"id": "elliptical", "name": "Elliptical"},
+        {"id": "bodyweight-no-equipment", "name": "Bodyweight", "machines": [{"id": "meditation", "name": "Meditation", "log_type": "time"},
+            {"id": "elbow-planks", "name": "Elbow Planks", "log_type": "time"}]},
+        {"id": "cardio", "name": "Cardio", "machines": [{"id": "treadmill", "name": "Treadmill", "log_type": "pace"}, {"id": "elliptical", "name": "Elliptical"},
             {"id": "stationary-bike-upright", "name": "Stationary Bike (Upright)"}, {"id": "other-cardio", "name": "Other Cardio"}]}]},
     {"id": "eg", "name": "Example Gym", "rooms": [
         {"id": "w", "name": "Weights", "machines": [{"id": "r02", "name": "Seated Row"}]},
-        {"id": "c", "name": "Cardio Deck", "machines": [{"id": "m1", "name": "Treadmill"}, {"id": "m2", "name": "Elliptical Cross Trainer"},
+        {"id": "c", "name": "Cardio Deck", "machines": [{"id": "m1", "name": "Treadmill", "log_type": "pace"}, {"id": "m2", "name": "Elliptical Cross Trainer"},
             {"id": "m3", "name": "Peloton", "hidden": True}]}]},
     {"id": "hotel", "name": "Hotel Gym", "rooms": [{"id": "x", "name": "Gym", "machines": [{"id": "h1", "name": "Treadmill"}]}]},
 ]
@@ -288,7 +291,7 @@ class IndoorRouting(unittest.TestCase):
         self.assertEqual(e["machine_id"], "swim")
 
     def test_hand_logged_duplicate_still_held_back(self):
-        log = [{"date": "2026-11-05", "time": "07:05:00", "gym_id": "eg", "machine_id": "m1", "machine": "Treadmill", "duration_sec": 1800}]
+        log = [{"date": "2026-11-05", "time": "07:01:00", "gym_id": "eg", "machine_id": "m1", "machine": "Treadmill", "duration_sec": 1800}]
         e, skipped = self.post(A("treadmill_running"), log)
         self.assertIsNone(e)
         self.assertIn("duplicate", skipped[0][2])
@@ -315,6 +318,103 @@ MONTH_SAMPLE = [
     {"id": "c", "date": "2026-11-05", "set": 2, "reps": 0},
     {"id": "d", "date": "2026-11-05", "set": 1, "reps": 3},
 ]
+
+
+def jog(aid="24000000020", day="2026-11-15", start="11:36", end="12:15", atype="other"):
+    t0, t1 = datetime.strptime(f"{day} {start}", "%Y-%m-%d %H:%M"), datetime.strptime(f"{day} {end}", "%Y-%m-%d %H:%M")
+    out = []
+    while t0 <= t1:
+        out.append(M(t0.strftime("%Y-%m-%d %H:%M"), 125, aid=aid, atype=atype))
+        t0 += P.timedelta(minutes=1)
+    return out
+
+
+def hand(time, machine_id, gym_id="generic", day="2026-11-15", **fields):
+    return {"date": day, "time": time, "gym_id": gym_id, "machine_id": machine_id, "machine": machine_id.replace("-", " ").title(), **fields}
+
+
+class PossibleDuplicates(unittest.TestCase):
+    """Only hand-logged cardio that really overlaps the activity in time holds it back."""
+    def run_plan(self, cardio, log, **kw):
+        return P.plan_entries(cardio, log, {}, {}, 46, 168, gyms=GYMS, **kw)
+
+    def test_meditation_just_after_a_jog_does_not_block_it(self):
+        # the reported case: jog 11:36-12:15, Meditation (60 s, nothing else) logged at 12:19:51
+        log = [hand("12:19:51", "meditation", duration_sec=60)]
+        posted, skipped = self.run_plan(jog(), log)
+        self.assertEqual([p[0] for p in posted], ["24000000020"], skipped)
+        # also on timing alone, when the machine is unknown (gyms not loaded)
+        posted, skipped = P.plan_entries(jog(atype="running"), log, {}, {}, 46, 168)
+        self.assertEqual((len(posted), skipped), (1, []))
+
+    def test_cardio_logged_15_minutes_after_does_not_block(self):
+        log = [hand("12:31:00", "treadmill", duration_sec=1200, distance_mi=1.5)]
+        posted, skipped = self.run_plan(jog(), log)
+        self.assertEqual(len(posted), 1, skipped)
+
+    def test_overlapping_hand_logged_cardio_is_held_back(self):
+        for e in (hand("11:40:00", "treadmill", duration_sec=1800),                 # pace machine, duration only
+                  hand("11:30:00", "seated-row", gym_id="eg", duration_sec=600, speed_mph=3),  # speed makes it cardio
+                  hand("12:17:00", "treadmill", duration_sec=600),                 # starts 1 min after the end: within tolerance
+                  hand("11:00:00", "treadmill", duration_sec=2040)):                # ends 11:34, the watch started 2 min late
+            posted, skipped = self.run_plan(jog(), [e])
+            self.assertEqual(posted, [], e)
+            self.assertEqual(skipped[0][0], "24000000020")
+            self.assertIn("possible manual duplicate", skipped[0][2])
+            self.assertIn("--post-possible-duplicates or --activity-ids", skipped[0][2])
+
+    def test_cardio_beyond_the_tolerance_does_not_block(self):
+        for e in (hand("12:20:00", "treadmill", duration_sec=600), hand("10:30:00", "treadmill", duration_sec=3600)):  # 4 min after / 6 min before
+            posted, skipped = self.run_plan(jog(), [e])
+            self.assertEqual(len(posted), 1, (e, skipped))
+
+    def test_timed_strength_and_sets_during_the_activity_do_not_block(self):
+        log = [hand("11:50:00", "elbow-planks", duration_sec=300),
+               hand("11:45:00", "meditation", duration_sec=900),
+               hand("11:40:00", "r02", gym_id="eg", reps=10, weight_lb=80, duration_sec=60)]
+        posted, skipped = self.run_plan(jog(), log)
+        self.assertEqual(len(posted), 1, skipped)
+
+    def test_overrides_post_a_held_back_activity(self):
+        log = [hand("11:40:00", "treadmill", duration_sec=1800)]
+        posted, _ = self.run_plan(jog(), log, allow_dupes=True)
+        self.assertEqual(len(posted), 1)
+        posted, _ = self.run_plan(jog() + jog(aid="24000000021", start="11:50", end="11:55"), log, only_ids=["24000000020"])
+        self.assertEqual([p[0] for p in posted], ["24000000020"])
+
+    def test_override_flags_from_the_command_line(self):
+        import tempfile
+        d = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, d, True)
+        with open(os.path.join(d, "cardio-minutes.csv"), "w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=list(jog()[0]))
+            w.writeheader()
+            w.writerows(jog(atype="running"))
+        L.write_months(os.path.join(d, "log"), {}, [{"id": "e1", **hand("11:40:00", "treadmill", duration_sec=1800)}])
+        def run(*extra):
+            r = subprocess.run([sys.executable, os.path.join(HERE, "post_zone_records.py"), "--cardio", "cardio-minutes.csv", "--log-dir", "log",
+                                "--equipment", "none", "--dry-run", *extra], cwd=d, capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            return r.stdout
+        self.assertIn("possible manual duplicate", run())
+        for flags in (["--post-possible-duplicates"], ["--activity-ids", "24000000020"]):
+            out = run(*flags)
+            self.assertNotIn("possible manual duplicate", out)
+            self.assertIn("+ 24000000020 running", out)
+
+    def test_classify_entry_matches_lib_classify(self):
+        m = P.machine_info_map(GYMS)
+        cases = [({"machine_id": "meditation", "gym_id": "generic", "duration_sec": 60}, "other"),
+                 ({"machine_id": "elbow-planks", "gym_id": "generic", "duration_sec": 60}, "strength"),
+                 ({"machine_id": "treadmill", "gym_id": "generic", "duration_sec": 60}, "cardio"),
+                 ({"machine_id": "walk", "gym_id": "generic"}, "other"),           # no log_type in the fixture: weight
+                 ({"machine_id": "r02", "gym_id": "eg", "reps": 10}, "strength"),
+                 ({"machine_id": "r02", "gym_id": "eg", "hr_avg_bpm": 120}, "cardio"),
+                 ({"machine_id": "r02", "gym_id": "eg", "zone2_min": 1.5}, "cardio"),
+                 ({"machine_id": "gone", "duration_sec": 600}, "cardio"),          # machine no longer exists
+                 ({"machine_id": "gone"}, "other")]
+        for e, want in cases:
+            self.assertEqual(P.classify_entry(e, m), want, e)
 
 
 def rd(path):
