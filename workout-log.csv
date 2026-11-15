@@ -1,6 +1,8 @@
 id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,reps,duration_sec,duration_min,distance_mi,speed_mph,level,incline_pct,hr_avg_bpm,garmin_id,zone1_min,zone2_min,zone3_min,zone4_min,zone5_min,notes
 emwi3n418nj201,2026-11-15,12:19:13,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,,1,,20,,,,,,,,,,,,,,
 emwi3nb17wor03,2026-11-15,12:19:22,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,squats,Squats,,1,,30,,,,,,,,,,,,,,
+emwi3ng85hmc05,2026-11-15,12:19:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,lunges,Lunges,,1,,10,,,,,,,,,,,,,,
+emwi3nkpdc2p07,2026-11-15,12:19:34,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,,1,,20,,,,,,,,,,,,,,
 emwgx99pm4ee01,2026-11-14,16:32:43,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,,1,,25,,,,,,,,,,,,,,
 emwgx99pni7902,2026-11-14,16:32:43,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,,2,,15,,,,,,,,,,,,,,
 emwgx99pnbgd03,2026-11-14,16:32:43,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,,3,,25,,,,,,,,,,,,,,
