@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-15T16:23:00Z",
+  "fetched_at": "2026-11-15T17:23:40Z",
   "today": "2026-11-15",
   "recent_activities": [
+    {
+      "activity_id": "25089824870",
+      "date": "2026-11-15",
+      "start_time": "11:36:29",
+      "type": "other",
+      "name": "Jupiter Jog",
+      "duration_sec": 2331,
+      "distance_mi": 2.72,
+      "hr_avg_bpm": 120.0,
+      "hr_max_bpm": 133.0,
+      "active_kcal": 369.0,
+      "elevation_gain_ft": 13,
+      "speed_avg_mph": 4.2
+    },
     {
       "activity_id": "25081393631",
       "date": "2026-11-14",
@@ -284,43 +298,43 @@
     }
   ],
   "today_stats": {
-    "steps": 246,
+    "steps": 7946,
     "floors": 0.0,
     "resting_hr_bpm": 45,
-    "active_kcal": 2.0,
-    "body_battery": 94,
+    "active_kcal": 344.0,
+    "body_battery": 80,
     "stress_avg": 17,
-    "week_steps": 97418
+    "week_steps": 105118
   },
   "training_readiness": {
-    "score": null,
-    "level": null,
-    "feedback": null
+    "score": 70,
+    "level": "MODERATE",
+    "feedback": "RECOVERY_IN_PROGRESS"
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 15660,
-    "week_vigorous_sec": 2520
+    "week_moderate_sec": 16080,
+    "week_vigorous_sec": 4560
   },
   "hrv": {
     "weekly_avg_ms": 42,
-    "last_night_ms": 45,
+    "last_night_ms": 43,
     "status": "BALANCED"
   },
   "sleep": {
-    "date": "2026-11-14",
-    "sleep_sec": 25260,
-    "score": 79,
-    "deep_sec": 4260,
-    "light_sec": 15360,
-    "rem_sec": 5640,
-    "awake_sec": 1740,
+    "date": "2026-11-15",
+    "sleep_sec": 31560,
+    "score": 86,
+    "deep_sec": 4140,
+    "light_sec": 18780,
+    "rem_sec": 8640,
+    "awake_sec": 1560,
     "respiration_brpm": 14.0,
-    "spo2_pct": 95.0
+    "spo2_pct": 96.0
   },
   "spo2_avg_pct": 95.0,
   "respiration": {
     "waking_brpm": 14.0,
-    "sleep_brpm": null
+    "sleep_brpm": 14.0
   }
 }
