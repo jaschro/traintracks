@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 (15 Nov 2026)
+
+- **Garmin activities are no longer held back by unrelated entries.** An activity was skipped as a "possible manual duplicate" whenever *any* timed entry (planks, meditation, stretching) was logged within 20 minutes of it, and the skip repeated on every run, so it never posted. Now only a hand-logged **cardio** entry that really overlaps the activity in time (give or take 3 minutes) holds it back. A hand-logged treadmill run during a Garmin treadmill session is still skipped. Activities skipped this way before post on the next run after you update.
+- `--activity-ids` now also posts an activity held back as a possible duplicate, as the skip message always said it would.
 ## 0.3.0 (12 Nov 2026)
 
 **This update changes how the log is stored, and needs two more steps after you press Update.** Until they are done, the app shows your log but saving is turned off. Read "Upgrading to 0.3.0" in the setup guide (`docs/SETUP.md`) before you start; it takes about ten minutes on a computer with git and Node.js. Let any "Saving…" note finish on every device first.

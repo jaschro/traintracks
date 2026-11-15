@@ -24,7 +24,11 @@ Conventions:
       4. anything else (indoor cardio, HIIT, classes, unknown types) → the common
          gym's "Other Cardio", to be moved to the right machine in the app.
     Strength training is never posted (those sessions are logged as sets).
-  * Activities overlapping a hand-logged timed entry are skipped for review.
+  * An activity is skipped for review as a possible manual duplicate only when a
+    hand-logged CARDIO entry (classify_entry, the same rule as lib/classify.js)
+    overlaps it in time: [start, start + duration_sec] against [first minute,
+    last minute + 1 min], with DUPLICATE_TOLERANCE on each side. Planks,
+    meditation and other timed strength/mobility entries never block a post.
   * Log order: date blocks newest first, entries within a day by time.
   * The log is written exactly as the app writes it (logfmt.py), in the repo's layout:
       - log/YYYY-MM.json (format version 3, `--log-dir log`): only the months that
@@ -78,6 +82,14 @@ INDOOR_TYPES = {
     "stair_climbing": ("stair-climber", r"stair|step ?mill|climber", "stair climb"),
 }
 OTHER_CARDIO = "other-cardio"
+# Slack between the two intervals in the duplicate check, for entries logged with a time
+# rounded to the nearest 5 minutes (at most 2.5 min off) and clocks a minute apart
+# (docs/DECISIONS.md, "Possible manual duplicates").
+DUPLICATE_TOLERANCE = timedelta(minutes=3)
+# Kept in step with lib/classify.js.
+CARDIO_LOG_TYPES = ("walk", "pace", "cardio", "mins")
+NON_TRAINING = ("meditation", "downward-dog")
+OUTDOOR_ROOM = "outdoor-activities"
 NEVER_POST = {"strength_training"}
 NAME_SUFFIXES = ("Cycling", "Running", "Walking", "Hiking", "Ride", "Run", "Walk")
 
@@ -104,6 +116,58 @@ def entry_start(e: dict) -> datetime | None:
         return datetime.strptime(f"{e['date']} {e['time']}", "%Y-%m-%d %H:%M:%S")
     except (KeyError, ValueError, TypeError):
         return None
+
+
+def machine_info_map(gyms) -> dict:
+    """`gym_id:machine_id` and, as a fallback, `machine_id` (first gym wins) -> {log_type, room_id}; as machineInfoMap in lib/classify.js."""
+    out = {}
+    for g in gyms or []:
+        for r in g.get("rooms") or []:
+            for m in r.get("machines") or []:
+                info = {"log_type": m.get("log_type") or "weight", "room_id": r.get("id")}
+                out[f"{g.get('id')}:{m.get('id')}"] = info
+                out.setdefault(m.get("id"), info)
+    return out
+
+
+def _has(v) -> bool:
+    return v is not None and v != ""
+
+
+def _num(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
+def classify_entry(e: dict, machines: dict) -> str:
+    """'cardio' | 'strength' | 'other', exactly as classifyEntry in lib/classify.js."""
+    mi = (e.get("gym_id") and machines.get(f"{e['gym_id']}:{e.get('machine_id')}")) or machines.get(e.get("machine_id"))
+    zones = any(_num(e.get(f"zone{i}_min")) is not None or _num(e.get(f"zone{i}_sec")) is not None for i in range(1, 6))
+    hr = _num(e.get("hr_avg_bpm"))
+    if zones or garmin_id_of(e) or (hr is not None and hr > 0) or any(_has(e.get(k)) for k in ("incline_pct", "speed_mph", "distance_mi")):
+        return "cardio"
+    if mi and mi["log_type"] in CARDIO_LOG_TYPES:
+        return "cardio"
+    if mi and mi["log_type"] == "time" and mi["room_id"] == OUTDOOR_ROOM:
+        return "cardio"
+    if _has(e.get("reps")) or _has(e.get("weight_lb")):
+        return "strength"
+    if mi and mi["log_type"] in ("time", "reps"):
+        return "other" if e.get("machine_id") in NON_TRAINING else "strength"
+    if not mi and _has(e.get("duration_sec")):
+        return "cardio"  # timed entry on a machine that no longer exists (old walks)
+    return "other"
+
+
+def possible_duplicate(start: datetime, end: datetime, hand_cardio):
+    """The first hand-logged cardio entry (start, minutes, machine) overlapping the activity [start, end], or None."""
+    for est, edur, mach in hand_cardio:
+        eend = est + timedelta(minutes=edur)
+        if est - DUPLICATE_TOLERANCE < end and start < eend + DUPLICATE_TOLERANCE:
+            return est, mach
+    return None
 
 
 def sec_or_none(v: float):
@@ -313,7 +377,7 @@ def route_activity(aid, atype, start: datetime, mapping, gyms, log_entries, hist
 
 
 def plan_entries(cardio_rows, log_entries, garmin_meta, mapping, rhr, hrmax, since=None, only_ids=None, allow_dupes=False, gyms=None):
-    """Decide which activities to post. Returns (posted:[(aid, atype, entry, zones, duration)], skipped:[(aid, atype, reason)])."""
+    """Decide which activities to post (only_ids, from --activity-ids, also skips the duplicate check). Returns (posted:[(aid, atype, entry, zones, duration)], skipped:[(aid, atype, reason)])."""
     gyms = gyms or []
     by_activity: dict[str, list[dict]] = defaultdict(list)
     for r in cardio_rows:
@@ -333,13 +397,14 @@ def plan_entries(cardio_rows, log_entries, garmin_meta, mapping, rhr, hrmax, sin
         candidates.append((first, aid))
     candidates.sort()
 
-    existing_timed = []
+    machines = machine_info_map(gyms)
+    hand_cardio = []  # possible manual duplicates: hand-logged cardio with a time (docs/DECISIONS.md)
     for e in log_entries:
-        if e.get("duration_sec") in (None, "", 0) or garmin_id_of(e):
+        if garmin_id_of(e) or classify_entry(e, machines) != "cardio":
             continue
         start = entry_start(e)
         if start is not None:
-            existing_timed.append((start, float(e["duration_sec"]) / 60.0, e.get("machine", "")))
+            hand_cardio.append((start, (_num(e.get("duration_sec")) or 0) / 60.0, e.get("machine") or e.get("machine_id") or ""))
 
     activity_types = {aid: rows[0]["activity_type"] for aid, rows in by_activity.items()}
     history = type_history(log_entries, activity_types)
@@ -354,12 +419,10 @@ def plan_entries(cardio_rows, log_entries, garmin_meta, mapping, rhr, hrmax, sin
             continue
 
         zones, duration, max_minute_hr = compute_zones(mins, rhr, hrmax)
-        if not allow_dupes:
+        if not allow_dupes and not only_ids:  # naming an activity with --activity-ids posts it anyway
             start = datetime.strptime(mins[0]["minute"], "%Y-%m-%d %H:%M")
-            end = datetime.strptime(mins[-1]["minute"], "%Y-%m-%d %H:%M")
-            pad = timedelta(minutes=20)
-            overlap = next(((edt, mach) for edt, edur, mach in existing_timed
-                            if start - pad <= edt <= end + pad or edt <= start <= edt + timedelta(minutes=edur) + pad), None)
+            end = datetime.strptime(mins[-1]["minute"], "%Y-%m-%d %H:%M") + timedelta(minutes=1)
+            overlap = possible_duplicate(start, end, hand_cardio)
             if overlap:
                 skipped.append((aid, atype, f"possible manual duplicate — '{overlap[1]}' at {overlap[0]:%Y-%m-%d %I:%M %p}; re-run with --post-possible-duplicates or --activity-ids to override"))
                 continue

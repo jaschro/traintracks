@@ -64,7 +64,14 @@ overwrite them.
   { "indoor_cycling": { "machine_id": "m1712345678901", "machine": "Exercise Bike", "gym_id": "home-gym",
                         "gym": "Home Gym", "room_id": "main", "room": "Main", "word": "ride" } }
   ```
-  An activity that overlaps a session you logged by hand is skipped, so it isn't counted twice.
+  An activity that overlaps a **cardio** session you logged by hand (one on a
+  cardio machine, or with speed, distance, heart rate or incline) is skipped,
+  so it isn't counted twice. "Overlaps" means the two really share time, give
+  or take 3 minutes for a time you rounded when logging; a session logged just
+  before or after, and planks, meditation or stretching at any time, never hold
+  an activity back. To post a held-back activity anyway, run
+  `post_zone_records.py` with `--post-possible-duplicates` or
+  `--activity-ids <id>`, or delete or fix the hand-logged entry.
 
   Without a mapping, **every Garmin activity is posted** (except strength
   training, which you log as sets):
