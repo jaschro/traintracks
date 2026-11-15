@@ -134,6 +134,17 @@
       "direction": "below",
       "field": "resting_hr_bpm",
       "target": 46
+    },
+    {
+      "label": "Side Leg Lifts reps",
+      "kind": "sum",
+      "source": "log",
+      "field": "reps",
+      "machine_ids": [
+        "m1794718776135"
+      ],
+      "target": 120,
+      "id": "side-leg-lifts-reps-mwhd983h"
     }
   ]
 }
