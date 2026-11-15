@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-14T22:25:38Z",
+  "fetched_at": "2026-11-15T04:02:13Z",
   "today": "2026-11-14",
   "recent_activities": [
+    {
+      "activity_id": "25081393631",
+      "date": "2026-11-14",
+      "start_time": "18:18:46",
+      "type": "walking",
+      "name": "Jupiter Walking",
+      "duration_sec": 2223,
+      "distance_mi": 1.81,
+      "hr_avg_bpm": 68.0,
+      "hr_max_bpm": 80.0,
+      "active_kcal": 176.0,
+      "elevation_gain_ft": 3,
+      "speed_avg_mph": 2.93
+    },
     {
       "activity_id": "25080878376",
       "date": "2026-11-14",
@@ -284,13 +298,13 @@
     }
   ],
   "today_stats": {
-    "steps": 3943,
-    "floors": 1.0,
+    "steps": 9956,
+    "floors": 1.24934,
     "resting_hr_bpm": 46,
-    "active_kcal": 78.0,
-    "body_battery": 89,
-    "stress_avg": 20,
-    "week_steps": 101220
+    "active_kcal": 244.0,
+    "body_battery": 58,
+    "stress_avg": 22,
+    "week_steps": 107233
   },
   "training_readiness": {
     "score": 81,
@@ -299,7 +313,7 @@
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 13500,
+    "week_moderate_sec": 15660,
     "week_vigorous_sec": 2520
   },
   "hrv": {
