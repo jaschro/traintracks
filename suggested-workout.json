@@ -1,42 +1,94 @@
 {
-  "generated_at": "2026-10-25T15:16:59Z",
-  "coach_note": "Sun Oct 25 - Portofino upper body, back on the machines after 10 days of travel bodyweight work. You've banked a LOT of push-ups lately, so this leans pulling and shoulders. Legs got their day Oct 14 and the runs since - they rest. Cardio optional: you earned an easy one after Thursday's Z4/Z5 session.",
+  "generated_at": "2026-11-16T17:05:00Z",
+  "coach_note": "Mon Nov 16 - Admirals Cove pull + leg-isolation day. Saturday here was chest press and leg press, so today is the other half: rows, pulldowns, rear delts, then quads/hamstrings/hips, most of them untouched since August. Top sets sit one step under your Aug 16-17 bests since it has been 3 months on these machines. Leg lifts and plank at the end chip at the weekly goals (40/140 and 120/315 so far).",
   "exercises": [
     {
-      "machine_id": "pm02",
-      "machine": "Seated Row Machine",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Back to the Sep 18 ladder - first rows here in 3 weeks.",
+      "machine_id": "m1785617676094",
+      "gym_id": "gym_1785005216520",
+      "machine": "Low row",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Aug 16 was 75/85/95/105 x10. Stop at 95 today; 105 x8 only if 95 moves easily.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 60,
-          "reps": 15
-        },
-        {
-          "set": 2,
-          "weight_lb": 80,
+          "weight_lb": 75,
           "reps": 12
         },
         {
+          "set": 2,
+          "weight_lb": 85,
+          "reps": 10
+        },
+        {
           "set": 3,
-          "weight_lb": 100,
+          "weight_lb": 95,
           "reps": 10
         }
       ]
     },
     {
-      "machine_id": "pm08",
-      "machine": "Seated Shoulder Press",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Same loads as last time; 60x8 bonus set if 55 moves well.",
+      "machine_id": "m1785616487088",
+      "gym_id": "gym_1785005216520",
+      "machine": "Vertical Traction (like pullups)",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Aug 16 topped out at 105. Full stretch at the top, shoulders down before you pull.",
+      "sets": [
+        {
+          "set": 1,
+          "weight_lb": 75,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_lb": 85,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_lb": 95,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "machine_id": "m1785006624353",
+      "gym_id": "gym_1785005216520",
+      "machine": "Reverse Fly",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "This machine reads in kg. Your own rule from Aug 10: start at 20, max at 30.",
+      "sets": [
+        {
+          "set": 1,
+          "weight_lb": 20,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_lb": 25,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_lb": 30,
+          "reps": 8
+        }
+      ]
+    },
+    {
+      "machine_id": "m1785005305369",
+      "gym_id": "gym_1785005216520",
+      "machine": "Leg Extension",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Same ladder as Aug 17. 65 was 'challenging' in August - leave it for next time.",
       "sets": [
         {
           "set": 1,
           "weight_lb": 35,
-          "reps": 12
+          "reps": 10
         },
         {
           "set": 2,
@@ -51,98 +103,131 @@
       ]
     },
     {
-      "machine_id": "m1782480059048",
-      "machine": "Rear Deltoid",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Oct 4 was 35/55x15 - adding a 65 top set. Pause at the back.",
+      "machine_id": "m1785701695686",
+      "gym_id": "gym_1785005216520",
+      "machine": "Leg Curl",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Aug 17 went to 55, but you questioned your form there. Clean 45s today.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 35,
-          "reps": 15
+          "weight_lb": 25,
+          "reps": 10
         },
         {
           "set": 2,
-          "weight_lb": 55,
-          "reps": 12
+          "weight_lb": 35,
+          "reps": 10
         },
         {
           "set": 3,
+          "weight_lb": 45,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "machine_id": "m1785006086200",
+      "gym_id": "gym_1785005216520",
+      "machine": "Abductor",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Aug 14 ladder minus the 95 top set.",
+      "sets": [
+        {
+          "set": 1,
           "weight_lb": 65,
           "reps": 10
-        }
-      ]
-    },
-    {
-      "machine_id": "pm04",
-      "machine": "Pec Fly",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "The one press-pattern machine today, since push-ups have chest covered.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 60,
-          "reps": 12
         },
         {
           "set": 2,
-          "weight_lb": 80,
-          "reps": 12
-        },
-        {
-          "set": 3,
-          "weight_lb": 90,
-          "reps": 10
-        }
-      ]
-    },
-    {
-      "machine_id": "pw04",
-      "machine": "Seated Preacher Curl Bench",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Third set is new - last time was 2 sets.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 20,
-          "reps": 12
-        },
-        {
-          "set": 2,
-          "weight_lb": 30,
+          "weight_lb": 75,
           "reps": 10
         },
         {
           "set": 3,
-          "weight_lb": 30,
+          "weight_lb": 85,
           "reps": 10
         }
       ]
     },
     {
-      "machine_id": "overhead-tricep-extension",
-      "machine": "Overhead Tricep Extension",
-      "gym": "Common Machines",
-      "room": "Free Weights",
-      "note": "Matching Sep 18's ladder.",
+      "machine_id": "m1785006115413",
+      "gym_id": "gym_1785005216520",
+      "machine": "Adductor",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "60 'felt like a lot' on Aug 14 - cap at 55.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 30,
+          "weight_lb": 45,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_lb": 50,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_lb": 55,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "machine_id": "m1785007780604",
+      "gym_id": "gym_1785005216520",
+      "machine": "Decline Ab Bench Situps",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Same 3x15 as August.",
+      "sets": [
+        {
+          "set": 1,
           "reps": 15
         },
         {
           "set": 2,
-          "weight_lb": 35,
-          "reps": 12
+          "reps": 15
         },
         {
           "set": 3,
-          "weight_lb": 40,
-          "reps": 10
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "machine_id": "leg-lifts",
+      "gym_id": "generic",
+      "machine": "Leg Lifts",
+      "gym": "Common Machines",
+      "room": "Bodyweight — No Equipment",
+      "note": "Weekly goal: 40 of 140 so far.",
+      "sets": [
+        {
+          "set": 1,
+          "reps": 20
+        },
+        {
+          "set": 2,
+          "reps": 20
+        }
+      ]
+    },
+    {
+      "machine_id": "elbow-planks",
+      "gym_id": "generic",
+      "machine": "Elbow Planks",
+      "gym": "Common Machines",
+      "room": "Bodyweight — No Equipment",
+      "note": "Weekly plank goal: 120 of 315 s so far.",
+      "sets": [
+        {
+          "set": 1,
+          "duration_sec": 60
         }
       ]
     }
