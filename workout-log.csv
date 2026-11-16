@@ -1,6 +1,8 @@
 id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,reps,duration_sec,duration_min,distance_mi,speed_mph,level,incline_pct,hr_avg_bpm,garmin_id,zone1_min,zone2_min,zone3_min,zone4_min,zone5_min,notes
 emwjkpyteuyb01,2026-11-16,13:05:06,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,,1,,20,,,,,,,,,,,,,,
 emwjkpytf0wc02,2026-11-16,13:05:06,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,,2,,20,,,,,,,,,,,,,,
+emwjkqjs41gc04,2026-11-16,13:05:33,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,m1794718776135,Side Leg Lifts,,1,,20,,,,,,,,,,,,,,
+emwjkqjs42zh05,2026-11-16,13:05:33,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,m1794718776135,Side Leg Lifts,,2,,20,,,,,,,,,,,,,,
 emwi6vi2ra8801,2026-11-15,11:36:00,generic,Common Machines,outdoor-activities,Outdoor Activities,jog,Jog,,1,,,2332,38.87,2.72,,,,120,25089824870,10.52,28.35,,,,Jupiter Jog (Garmin 25089824870; 2.72 mi; +13 ft). Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1.
 emwi3n418nj201,2026-11-15,12:19:13,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,,1,,20,,,,,,,,,,,,,,
 emwi3nb17wor03,2026-11-15,12:19:22,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,squats,Squats,,1,,30,,,,,,,,,,,,,,
