@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-11-17T03:55:36Z",
-  "today": "2026-11-16",
+  "fetched_at": "2026-11-17T16:01:44Z",
+  "today": "2026-11-17",
   "recent_activities": [
     {
       "activity_id": "25092725307",
@@ -295,35 +295,21 @@
       "active_kcal": 257.0,
       "elevation_gain_ft": 89,
       "speed_avg_mph": 3.05
-    },
-    {
-      "activity_id": "24946488433",
-      "date": "2026-11-02",
-      "start_time": "20:30:12",
-      "type": "treadmill_running",
-      "name": "Treadmill Running",
-      "duration_sec": 2806,
-      "distance_mi": 1.73,
-      "hr_avg_bpm": 101.0,
-      "hr_max_bpm": 128.0,
-      "active_kcal": 299.0,
-      "elevation_gain_ft": null,
-      "speed_avg_mph": 2.21
     }
   ],
   "today_stats": {
-    "steps": 2600,
-    "floors": 2.51969,
-    "resting_hr_bpm": 46,
-    "active_kcal": 79.0,
-    "body_battery": 39,
-    "stress_avg": 31,
-    "week_steps": 93787
+    "steps": 887,
+    "floors": 0.0,
+    "resting_hr_bpm": 45,
+    "active_kcal": 8.0,
+    "body_battery": 92,
+    "stress_avg": 16,
+    "week_steps": 88691
   },
   "training_readiness": {
-    "score": 90,
-    "level": "HIGH",
-    "feedback": "WELL_RECOVERED"
+    "score": 98,
+    "level": "PRIME",
+    "feedback": "WELL_RESTED"
   },
   "vo2max": 42.0,
   "intensity": {
@@ -331,24 +317,24 @@
     "week_vigorous_sec": 0
   },
   "hrv": {
-    "weekly_avg_ms": 42,
-    "last_night_ms": 38,
+    "weekly_avg_ms": 43,
+    "last_night_ms": 44,
     "status": "BALANCED"
   },
   "sleep": {
-    "date": "2026-11-16",
-    "sleep_sec": 26760,
-    "score": 91,
-    "deep_sec": 4680,
-    "light_sec": 15420,
-    "rem_sec": 6660,
+    "date": "2026-11-17",
+    "sleep_sec": 26700,
+    "score": 95,
+    "deep_sec": 5820,
+    "light_sec": 13920,
+    "rem_sec": 6960,
     "awake_sec": 0,
-    "respiration_brpm": 14.0,
-    "spo2_pct": 96.0
+    "respiration_brpm": 13.0,
+    "spo2_pct": 95.0
   },
-  "spo2_avg_pct": 95.0,
+  "spo2_avg_pct": 94.0,
   "respiration": {
     "waking_brpm": 15.0,
-    "sleep_brpm": 14.0
+    "sleep_brpm": 13.0
   }
 }
