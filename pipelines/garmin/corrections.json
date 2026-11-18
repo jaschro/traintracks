@@ -36,5 +36,18 @@
       "2026-11-11 12:06",
       "2026-11-11 12:27"
     ]
+  },
+  "25121024675": {
+    "note": "2026-11-18 Portofino Peloton ride. Watch started ~16 min into the ride (recording begins 10:27 AM; ride began ~10:11 AM). Jason's estimate for the missed 16 min: ~80% Zone 2. Added as 768 s at 125 bpm plus 192 s of warm-up at 110 bpm.",
+    "add": [
+      {
+        "duration_sec": 768,
+        "hr_bpm": 125
+      },
+      {
+        "duration_sec": 192,
+        "hr_bpm": 110
+      }
+    ]
   }
 }
