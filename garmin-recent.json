@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-11-18T00:58:02Z",
-  "today": "2026-11-17",
+  "fetched_at": "2026-11-18T11:44:49Z",
+  "today": "2026-11-18",
   "recent_activities": [
     {
       "activity_id": "25092725307",
@@ -281,40 +281,26 @@
       "active_kcal": 199.0,
       "elevation_gain_ft": null,
       "speed_avg_mph": 1.98
-    },
-    {
-      "activity_id": "24958988894",
-      "date": "2026-11-03",
-      "start_time": "19:26:26",
-      "type": "walking",
-      "name": "\u00c1lvaro Obreg\u00f3n Walking",
-      "duration_sec": 2895,
-      "distance_mi": 2.45,
-      "hr_avg_bpm": 93.0,
-      "hr_max_bpm": 115.0,
-      "active_kcal": 257.0,
-      "elevation_gain_ft": 89,
-      "speed_avg_mph": 3.05
     }
   ],
   "today_stats": {
-    "steps": 4408,
-    "floors": 5.0,
+    "steps": 6658,
+    "floors": 8.20801,
     "resting_hr_bpm": 45,
-    "active_kcal": 99.0,
-    "body_battery": 69,
-    "stress_avg": 19,
-    "week_steps": 92212
+    "active_kcal": 141.0,
+    "body_battery": null,
+    "stress_avg": 21,
+    "week_steps": 73355
   },
   "training_readiness": {
-    "score": 98,
-    "level": "PRIME",
-    "feedback": "WELL_RESTED"
+    "score": 94,
+    "level": "HIGH",
+    "feedback": "LOW_RECOVERY_NEEDS"
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 0,
-    "week_vigorous_sec": 0
+    "week_moderate_sec": 60,
+    "week_vigorous_sec": 60
   },
   "hrv": {
     "weekly_avg_ms": 43,
@@ -332,9 +318,9 @@
     "respiration_brpm": 13.0,
     "spo2_pct": 95.0
   },
-  "spo2_avg_pct": 94.0,
+  "spo2_avg_pct": null,
   "respiration": {
-    "waking_brpm": 14.0,
-    "sleep_brpm": 13.0
+    "waking_brpm": null,
+    "sleep_brpm": null
   }
 }
