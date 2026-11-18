@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-18T20:33:09Z",
+  "fetched_at": "2026-11-18T22:25:28Z",
   "today": "2026-11-18",
   "recent_activities": [
+    {
+      "activity_id": "25125031519",
+      "date": "2026-11-18",
+      "start_time": "16:41:58",
+      "type": "treadmill_running",
+      "name": "Treadmill Running",
+      "duration_sec": 1816,
+      "distance_mi": 1.62,
+      "hr_avg_bpm": 91.0,
+      "hr_max_bpm": 100.0,
+      "active_kcal": 151.0,
+      "elevation_gain_ft": null,
+      "speed_avg_mph": 3.21
+    },
     {
       "activity_id": "25121024675",
       "date": "2026-11-18",
