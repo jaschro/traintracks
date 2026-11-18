@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-18T11:44:49Z",
+  "fetched_at": "2026-11-18T15:59:33Z",
   "today": "2026-11-18",
   "recent_activities": [
+    {
+      "activity_id": "25121024675",
+      "date": "2026-11-18",
+      "start_time": "10:27:09",
+      "type": "indoor_cycling",
+      "name": "Indoor Cycling",
+      "duration_sec": 1024,
+      "distance_mi": null,
+      "hr_avg_bpm": 124.0,
+      "hr_max_bpm": 142.0,
+      "active_kcal": 184.0,
+      "elevation_gain_ft": null,
+      "speed_avg_mph": null
+    },
     {
       "activity_id": "25092725307",
       "date": "2026-11-15",
@@ -284,18 +298,18 @@
     }
   ],
   "today_stats": {
-    "steps": 6658,
-    "floors": 8.20801,
-    "resting_hr_bpm": 45,
-    "active_kcal": 141.0,
-    "body_battery": null,
-    "stress_avg": 21,
-    "week_steps": 73355
+    "steps": 612,
+    "floors": 0.72671,
+    "resting_hr_bpm": 44,
+    "active_kcal": 5.0,
+    "body_battery": 99,
+    "stress_avg": 17,
+    "week_steps": 73967
   },
   "training_readiness": {
-    "score": 94,
+    "score": 92,
     "level": "HIGH",
-    "feedback": "LOW_RECOVERY_NEEDS"
+    "feedback": "ENERGIZED_BY_GOOD_SLEEP"
   },
   "vo2max": 42.0,
   "intensity": {
@@ -304,23 +318,23 @@
   },
   "hrv": {
     "weekly_avg_ms": 43,
-    "last_night_ms": 44,
+    "last_night_ms": 43,
     "status": "BALANCED"
   },
   "sleep": {
-    "date": "2026-11-17",
-    "sleep_sec": 26700,
-    "score": 95,
-    "deep_sec": 5820,
-    "light_sec": 13920,
-    "rem_sec": 6960,
+    "date": "2026-11-18",
+    "sleep_sec": 24060,
+    "score": 85,
+    "deep_sec": 5580,
+    "light_sec": 13560,
+    "rem_sec": 4920,
     "awake_sec": 0,
     "respiration_brpm": 13.0,
     "spo2_pct": 95.0
   },
-  "spo2_avg_pct": null,
+  "spo2_avg_pct": 95.0,
   "respiration": {
-    "waking_brpm": null,
-    "sleep_brpm": null
+    "waking_brpm": 12.0,
+    "sleep_brpm": 13.0
   }
 }
