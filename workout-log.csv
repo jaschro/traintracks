@@ -15,6 +15,10 @@ emwm974b7cc40h,2026-11-18,10:05:49,portofino,Portofino Gym,machines,Machines Roo
 emwm974b7vwm0i,2026-11-18,10:05:49,portofino,Portofino Gym,machines,Machines Room,pm14,Glute Isolator,,2,90,15,,,,,,,,,,,,,,
 emwm974b7q6i0j,2026-11-18,10:05:49,portofino,Portofino Gym,machines,Machines Room,pm14,Glute Isolator,,3,110,15,,,,,,,,,,,,,,
 emwmb4dj2dw701,2026-11-18,10:11:00,portofino,Portofino Gym,aerobic,Aerobic Room,pa04,Peloton,,1,,,1985,33.08,,,,,123,25121024675,6.43,24.65,2,,,"Portofino Peloton ride (Garmin 25121024675). Watch started ~16 min late: Garmin recorded 10:27-10:44 AM (17.1 min, avg HR 124); the first 16 min are Jason's estimate (~80% Zone 2), added via corrections.json as 12.8 min at 125 bpm + 3.2 min warm-up at 110 bpm. Karvonen zones (RHR 46 / max 168); warmup below Z1 counted in zone1."
+emwmcads9fqq0l,2026-11-18,11:32:20,portofino,Portofino Gym,weights,Weight Room,pw02,Lat Pulldown Machine,,1,55,15,,,,,,,,,,,,,,
+emwmcads9f720m,2026-11-18,11:32:20,portofino,Portofino Gym,weights,Weight Room,pw02,Lat Pulldown Machine,,2,70,15,,,,,,,,,,,,,,
+emwmcads92mb0n,2026-11-18,11:32:20,portofino,Portofino Gym,weights,Weight Room,pw02,Lat Pulldown Machine,,3,85,15,,,,,,,,,,,,,,
+emwmcajur1jq0p,2026-11-18,11:32:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,lunges,Lunges,,1,,10,,,,,,,,,,,,,,
 emwln21tyo5s01,2026-11-17,23:46:01,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,elbow-planks,Elbow Planks,,1,,,75,1.25,,,,,,,,,,,,
 emwln33z60pc07,2026-11-17,23:46:50,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,,1,,20,,,,,,,,,,,,,,
 emwlna5b4fge09,2026-11-17,23:52:19,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,lunges,Lunges,,1,,10,,,,,,,,,,,,,,
