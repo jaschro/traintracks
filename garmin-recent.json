@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-18T15:59:33Z",
+  "fetched_at": "2026-11-18T20:33:09Z",
   "today": "2026-11-18",
   "recent_activities": [
     {
@@ -307,9 +307,9 @@
     "week_steps": 73967
   },
   "training_readiness": {
-    "score": 92,
-    "level": "HIGH",
-    "feedback": "ENERGIZED_BY_GOOD_SLEEP"
+    "score": 95,
+    "level": "PRIME",
+    "feedback": "AT_YOUR_BEST"
   },
   "vo2max": 42.0,
   "intensity": {
