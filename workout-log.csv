@@ -1,4 +1,5 @@
 id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,reps,duration_sec,duration_min,distance_mi,speed_mph,level,incline_pct,hr_avg_bpm,garmin_id,zone1_min,zone2_min,zone3_min,zone4_min,zone5_min,notes
+emwln21tyo5s01,2026-11-17,23:46:01,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,elbow-planks,Elbow Planks,,1,,,75,1.25,,,,,,,,,,,,
 emwjkpyteuyb01,2026-11-16,13:05:06,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,,1,,20,,,,,,,,,,,,,,
 emwjkpytf0wc02,2026-11-16,13:05:06,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,,2,,20,,,,,,,,,,,,,,
 emwjkqjs41gc04,2026-11-16,13:05:33,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,m1794718776135,Side Leg Lifts,,1,,20,,,,,,,,,,,,,,
