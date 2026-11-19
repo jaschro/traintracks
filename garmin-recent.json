@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-11-19T03:59:40Z",
-  "today": "2026-11-18",
+  "fetched_at": "2026-11-19T11:42:18Z",
+  "today": "2026-11-19",
   "recent_activities": [
     {
       "activity_id": "25126786568",
@@ -309,40 +309,26 @@
       "active_kcal": 378.0,
       "elevation_gain_ft": 128,
       "speed_avg_mph": 2.42
-    },
-    {
-      "activity_id": "24964425470",
-      "date": "2026-11-04",
-      "start_time": "08:16:32",
-      "type": "treadmill_running",
-      "name": "Treadmill Running",
-      "duration_sec": 1898,
-      "distance_mi": 1.04,
-      "hr_avg_bpm": 101.0,
-      "hr_max_bpm": 147.0,
-      "active_kcal": 199.0,
-      "elevation_gain_ft": null,
-      "speed_avg_mph": 1.98
     }
   ],
   "today_stats": {
     "steps": 12797,
     "floors": 6.47474,
     "resting_hr_bpm": 44,
-    "active_kcal": 595.0,
-    "body_battery": 28,
-    "stress_avg": 32,
-    "week_steps": 86152
+    "active_kcal": 605.0,
+    "body_battery": null,
+    "stress_avg": 33,
+    "week_steps": 72557
   },
   "training_readiness": {
-    "score": 99,
-    "level": "PRIME",
-    "feedback": "READY_TO_GO"
+    "score": 84,
+    "level": "HIGH",
+    "feedback": "WELL_RECOVERED"
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 3120,
-    "week_vigorous_sec": 1800
+    "week_moderate_sec": 3300,
+    "week_vigorous_sec": 1860
   },
   "hrv": {
     "weekly_avg_ms": 43,
@@ -360,9 +346,9 @@
     "respiration_brpm": 13.0,
     "spo2_pct": 95.0
   },
-  "spo2_avg_pct": 95.0,
+  "spo2_avg_pct": null,
   "respiration": {
-    "waking_brpm": 15.0,
-    "sleep_brpm": 13.0
+    "waking_brpm": null,
+    "sleep_brpm": null
   }
 }
