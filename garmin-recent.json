@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-19T02:35:12Z",
+  "fetched_at": "2026-11-19T03:59:40Z",
   "today": "2026-11-18",
   "recent_activities": [
+    {
+      "activity_id": "25126786568",
+      "date": "2026-11-18",
+      "start_time": "22:34:38",
+      "type": "walking",
+      "name": "Miami Beach Walking",
+      "duration_sec": 1299,
+      "distance_mi": 0.99,
+      "hr_avg_bpm": 90.0,
+      "hr_max_bpm": 96.0,
+      "active_kcal": 102.0,
+      "elevation_gain_ft": 30,
+      "speed_avg_mph": 2.74
+    },
     {
       "activity_id": "25125031519",
       "date": "2026-11-18",
@@ -312,23 +326,23 @@
     }
   ],
   "today_stats": {
-    "steps": 7700,
-    "floors": 3.37927,
+    "steps": 12797,
+    "floors": 6.47474,
     "resting_hr_bpm": 44,
-    "active_kcal": 437.0,
-    "body_battery": 34,
-    "stress_avg": 31,
-    "week_steps": 81055
+    "active_kcal": 595.0,
+    "body_battery": 28,
+    "stress_avg": 32,
+    "week_steps": 86152
   },
   "training_readiness": {
-    "score": 95,
+    "score": 99,
     "level": "PRIME",
-    "feedback": "AT_YOUR_BEST"
+    "feedback": "READY_TO_GO"
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 1920,
-    "week_vigorous_sec": 1740
+    "week_moderate_sec": 3120,
+    "week_vigorous_sec": 1800
   },
   "hrv": {
     "weekly_avg_ms": 43,
