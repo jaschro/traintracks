@@ -7,7 +7,7 @@ import { parseCSV } from '../lib/csv.js';
 // Made-up data only: "Example Gym" (gym_id "eg"), machine "r02".
 let k = 0;
 const E = o => ({ id: `t${++k}`, gym_id: 'eg', machine_id: 'r02', date: '2026-11-05', set: 1, variant: [], weight_lb: 60, reps: 12, notes: '', ...o });
-const S = (o = {}) => ({ gym_id: 'eg', machine_id: 'r02', date: '2026-11-05', variant: [], ...o });
+const S = (o = {}) => ({ gym_id: 'eg', machine_id: 'r02', date: '2026-11-05', ...o });
 
 test('LOG_COLUMNS: notes last, no duplicates, matches docs/DATA-FORMAT.md', () => {
   assert.equal(LOG_COLUMNS.at(-1), 'notes');
@@ -30,10 +30,16 @@ test('inSession: legacy rows without gym_id match on machine alone; other gyms d
   assert.ok(!inSession(E({ gym_id: 'other' }), S()));
 });
 
-test('inSession: a different variant is a different session', () => {
-  assert.ok(!inSession(E({ variant: ['wide'] }), S()));
-  assert.ok(inSession(E({ variant: ['wide', 'incline'] }), S({ variant: ['incline', 'wide'] })));
+test('inSession: the variant is per set, not part of the session (0.4.0)', () => {
+  assert.ok(inSession(E({ variant: ['wide'] }), S()));
+  assert.ok(inSession(E({ variant: [] }), S()));
   assert.ok(inSession(E({ variant: undefined }), S()));
+});
+
+test('inSession: an old-style key with a variant (queued by an older app) keeps its old meaning', () => {
+  assert.ok(!inSession(E({ variant: ['wide'] }), S({ variant: [] })));
+  assert.ok(inSession(E({ variant: ['wide', 'incline'] }), S({ variant: ['incline', 'wide'] })));
+  assert.ok(inSession(E({ variant: undefined }), S({ variant: [] })));
 });
 
 test('mergeSession: saving REPLACES the session, never appends (3 sets stay 3)', () => {
@@ -65,7 +71,7 @@ test('mergeSession: a cleared value passed as null is cleared', () => {
 });
 
 test('mergeSession: new sets get ids, set numbers, session keys and a sorted variant', () => {
-  const out = mergeSession([], S({ variant: ['wide', 'incline'] }), [{ reps: 10 }, { reps: 8 }]);
+  const out = mergeSession([], S(), [{ reps: 10, variant: ['wide', 'incline'] }, { reps: 8, variant: 'wide; incline' }]);
   assert.equal(out.length, 2);
   assert.ok(out[0].id && out[1].id && out[0].id !== out[1].id);
   assert.deepEqual(out.map(e => e.set), [1, 2]);
@@ -88,19 +94,48 @@ test('mergeSession: moving onto a date that already has that session replaces it
   assert.equal(out[0].reps, 12);
 });
 
-test('mergeSession: two variants on the same day are separate sessions', () => {
-  let log = mergeSession([], S({ variant: ['wide'] }), [{ reps: 20 }]);
-  log = mergeSession(log, S({ variant: ['narrow'] }), [{ reps: 15 }, { reps: 15 }]);
-  assert.equal(log.length, 3);
-  assert.equal(sessionEntries(log, S({ variant: ['wide'] })).length, 1);
-  assert.equal(sessionEntries(log, S({ variant: ['narrow'] })).length, 2);
+test('mergeSession: one session holds sets of different variants (flat, incline, decline)', () => {
+  const sets = [{ reps: 20, variant: [] }, { reps: 15, variant: ['incline'] }, { reps: 10, variant: ['decline'] }];
+  let log = mergeSession([E({ machine_id: 'other' })], S(), sets);
+  assert.equal(log.length, 4);
+  const mine = sessionEntries(log, S());
+  assert.deepEqual(mine.map(e => [e.set, e.variant.join(';'), e.reps]), [[1, '', 20], [2, 'incline', 15], [3, 'decline', 10]]);
+  // saving again with one set changed replaces the whole day, keeping ids
+  const ids = mine.map(e => e.id);
+  log = mergeSession(log, S(), [{ reps: 20, variant: [] }, { reps: 16, variant: ['incline', 'wide'] }, { reps: 10, variant: ['decline'] }]);
+  const again = sessionEntries(log, S());
+  assert.deepEqual(again.map(e => e.id), ids);
+  assert.deepEqual(again[1].variant, ['incline', 'wide']);
+  assert.equal(log.length, 4);
 });
 
-test('mergeSession: changing the variant while editing moves the session', () => {
-  const log = [E({ variant: [] })];
-  const out = mergeSession(log, S(), [{ reps: 10 }], S({ variant: ['incline'] }));
-  assert.equal(out.length, 1);
-  assert.deepEqual(out[0].variant, ['incline']);
+test('mergeSession: a set without a variant field keeps the variant of the row it replaces', () => {
+  const out = mergeSession([E({ variant: ['wide'] })], S(), [{ reps: 3 }]);
+  assert.deepEqual(out[0].variant, ['wide']);
+});
+
+test('mergeSession: a day saved before 0.4.0 as two variant sessions becomes one session on the next save', () => {
+  // wide: sets 1-2, narrow: sets 1-2 (each numbered from 1, as before 0.4.0)
+  const log = [E({ id: 'w1', variant: ['wide'], set: 1 }), E({ id: 'w2', variant: ['wide'], set: 2 }),
+    E({ id: 'n1', variant: ['narrow'], set: 1 }), E({ id: 'n2', variant: ['narrow'], set: 2 })];
+  const shown = sessionEntries(log, S());
+  assert.deepEqual(shown.map(e => e.id), ['w1', 'w2', 'n1', 'n2']); // grouped by variant, in log order
+  const out = mergeSession(log, S(), shown.map(e => ({ reps: e.reps, variant: e.variant })));
+  assert.deepEqual(sessionEntries(out, S()).map(e => [e.id, e.set]), [['w1', 1], ['w2', 2], ['n1', 3], ['n2', 4]]);
+});
+
+test('mergeSession: an old-style op (key with a variant) still replaces only that variant', () => {
+  const log = [E({ id: 'w', variant: ['wide'] }), E({ id: 'n', variant: ['narrow'] })];
+  const out = mergeSession(log, S({ variant: ['wide'] }), [{ reps: 1 }]);
+  assert.equal(out.length, 2);
+  assert.deepEqual(out.find(e => e.id === 'w').variant, ['wide']);
+  assert.ok(out.some(e => e.id === 'n'));
+});
+
+test('mergeSession: moving a mixed-variant session to another date keeps each set\'s variant', () => {
+  const log = [E({ date: '2026-11-03', variant: [] }), E({ date: '2026-11-03', set: 2, variant: ['incline'] })];
+  const out = mergeSession(log, S({ date: '2026-11-03' }), sessionEntries(log, S({ date: '2026-11-03' })).map(e => ({ reps: e.reps, variant: e.variant })), S({ date: '2026-11-04' }));
+  assert.deepEqual(out.map(e => [e.date, e.variant.join(';')]), [['2026-11-04', ''], ['2026-11-04', 'incline']]);
 });
 
 test('mergeSession: placed within its date block; log stays newest first', () => {
@@ -133,17 +168,13 @@ test('sortLog: newest first, stable within a day', () => {
   assert.deepEqual(sortLog(log).map(e => e.machine_id), ['a', 'b', 'x']);
 });
 
-test('lastSession: latest session with the same variant, else the latest of any', () => {
+test('lastSession: every set of the latest day, each with its own variant', () => {
   const log = [
-    E({ date: '2026-11-06', variant: ['incline'], reps: 30 }),
-    E({ date: '2026-11-04', variant: [], reps: 20, set: 1 }), E({ date: '2026-11-04', variant: [], reps: 18, set: 2 }),
-    E({ date: '2026-11-01', variant: ['wide'], reps: 10 })
+    E({ date: '2026-11-06', variant: ['incline'], reps: 30, set: 2 }), E({ date: '2026-11-06', variant: [], reps: 25, set: 1 }),
+    E({ date: '2026-11-04', variant: [], reps: 20, set: 1 }), E({ date: '2026-11-04', variant: [], reps: 18, set: 2 })
   ];
-  assert.deepEqual(lastSession(log, 'r02', 'eg', []).map(e => e.reps), [20, 18]);
-  assert.deepEqual(lastSession(log, 'r02', 'eg', ['wide']).map(e => e.reps), [10]);
-  assert.deepEqual(lastSession(log, 'r02', 'eg', ['diamond']).map(e => e.reps), [30]);
-  assert.deepEqual(lastSession(log, 'r02', 'eg').map(e => e.reps), [30]);
-  assert.equal(lastSession(log, 'nope', 'eg', []), null);
+  assert.deepEqual(lastSession(log, 'r02', 'eg').map(e => [e.reps, e.variant.join(';')]), [[25, ''], [30, 'incline']]);
+  assert.equal(lastSession(log, 'nope', 'eg'), null);
 });
 
 test('sessionDates: distinct, newest first', () => {
@@ -191,11 +222,12 @@ test('logToJSON: pretty-printed with a trailing newline', () => {
   assert.ok(logToJSON([E()]).startsWith('[\n  {'));
 });
 
-test('machineSessions: newest first; two variants on one day are two sessions', () => {
+test('machineSessions: newest first; one session per day, sets keep their variants', () => {
   const log = [E({ date: '2026-11-04', variant: ['wide'], reps: 1 }), E({ date: '2026-11-04', variant: [], set: 1 }), E({ date: '2026-11-04', variant: [], set: 2 }),
     E({ date: '2026-11-06', reps: 9 }), E({ date: '2026-11-06', machine_id: 'other' })];
   const s = machineSessions(log, 'r02', 'eg');
-  assert.deepEqual(s.map(x => [x.date, x.variant.join(';'), x.sets.length]), [['2026-11-06', '', 1], ['2026-11-04', 'wide', 1], ['2026-11-04', '', 2]]);
+  assert.deepEqual(s.map(x => [x.date, x.sets.length]), [['2026-11-06', 1], ['2026-11-04', 3]]);
+  assert.deepEqual(s[1].sets.map(e => e.variant.join(';')), ['wide', '', '']); // pre-0.4.0 day: grouped by variant
 });
 
 const TO = { gym_id: 'other', gym: 'Other Gym', room_id: 'c', room: 'Cardio', machine_id: 'tm', machine: 'Treadmill' };

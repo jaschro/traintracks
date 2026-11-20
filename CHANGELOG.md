@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0 (20 Nov 2026)
+
+- **Variations belong to each set.** A push-up session can now be one set flat, one incline and one decline. Each set row has a **Variation** cell: tap it to pick one choice per group (angle, grip…) or type your own tag; the cell shows a short summary such as "wide · incline", and empty means plain. **Use for all sets** applies one choice to the whole session, and a new set copies the variation of the set above. This works on every machine with variations, bodyweight or weighted (lat pulldown grip, leg press feet). Other machines offer **+ Variation** under the sets.
+- **A session is now one machine on one day** (gym + machine + date), whatever the variations. Before, each variation was its own session, picked once for the whole session. Saving replaces that day's session; changing the date still moves it.
+- **Push-ups, sit-ups, squats and lunges** (Common Machines, Bodyweight — No Equipment) are now **reps only**: the form is Variation | Reps, with no weight column. Weighted sit-ups keep `weighted` as a tag; no weight is recorded. Barbell squats, dumbbell lunges and the other free-weight and machine exercises keep their weight column. If you changed one of these four machines yourself (Settings → Manage equipment), your version still wins.
+- **History** shows each set's variation next to it, and editing a session shows every set with its own variation.
+- **Today's route**: a planned exercise's `variant` pre-fills every set; a planned set can carry its own `variant` (see `docs/COACH.md`). A second stop on a machine already logged today adds its sets to that session. A planned default tag (e.g. "flat" push-ups) now counts a plain set as done.
+- Goals with a variation filter count the matching sets, as before.
+- **Your log is not changed and needs no migration**: every row already had its own `variant`, and the data format stays version 3. A day logged before this update with two variations of one machine (two sessions then) now shows as one session, its sets grouped by variation; they are renumbered 1, 2, 3… the next time you save that day. The CSV columns are unchanged. The Garmin pipeline and the Worker need no update.
+- A change still waiting to be sent from a device on the old version is sent with its old meaning, so nothing is lost if you update with a "Saving…" note showing.
+
 ## 0.3.2 (20 Nov 2026)
 
 - **Times can be typed as mm:ss on a phone.** The time field of Distance & time, Pace, Cardio and Minutes machines used a digits-only keypad with no ":" key, so "70:46" couldn't be typed. It now opens the normal keyboard (tap **123** for digits and ":"). The column is labelled **Time** with an `mm:ss` placeholder, and a hint under the sets lists what it takes: `70:46`, `1:10:46`, or plain minutes (`30`, which still means 30 minutes; decimals like `70.5` still work).

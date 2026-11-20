@@ -61,7 +61,7 @@
           "name": "Push Ups",
           "muscles_worked": "Chest (pectoralis major), triceps, anterior deltoids, core",
           "image": "push-ups.jpg",
-          "log_type": "weight",
+          "log_type": "reps",
           "variations": {
             "grip": [
               "narrow",
@@ -92,7 +92,7 @@
           "name": "Sit Ups",
           "muscles_worked": "Rectus abdominis, hip flexors",
           "image": "sit-ups.jpg",
-          "log_type": "weight",
+          "log_type": "reps",
           "variations": {
             "style": [
               "plain",
@@ -109,7 +109,7 @@
           "name": "Squats",
           "muscles_worked": "Quadriceps, glutes, hamstrings, core",
           "image": "squats.jpg",
-          "log_type": "weight",
+          "log_type": "reps",
           "variations": {
             "stance": [
               "narrow",
@@ -132,7 +132,7 @@
           "name": "Lunges",
           "muscles_worked": "Quadriceps, glutes, hamstrings, balance",
           "image": "lunges.jpg",
-          "log_type": "weight",
+          "log_type": "reps",
           "variations": {
             "direction": [
               "forward",
@@ -697,5 +697,5 @@
       ]
     }
   ],
-  "version": 3
+  "version": 4
 }

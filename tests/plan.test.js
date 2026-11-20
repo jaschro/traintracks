@@ -49,9 +49,26 @@ test('cleanPlanSet keeps known numeric fields only (the plan is untrusted)', () 
 test('fmtPlanSets / prefillFromPlan', () => {
   const sets = [{ set: 1, weight_lb: 60, reps: 15 }, { set: 2, weight_lb: 80, reps: 12 }];
   assert.equal(fmtPlanSets(sets), '60 lb × 15, 80 lb × 12');
-  assert.deepEqual(prefillFromPlan({ sets }), [{ weight_lb: 60, reps: 15 }, { weight_lb: 80, reps: 12 }]);
+  assert.deepEqual(prefillFromPlan({ sets }), [{ weight_lb: 60, reps: 15, variant: [] }, { weight_lb: 80, reps: 12, variant: [] }]);
   assert.equal(fmtPlanSets('x'), '');
   assert.deepEqual(prefillFromPlan({}), []);
+});
+
+test("prefillFromPlan: the exercise variant goes on every set; a set's own variant wins; defaults dropped", () => {
+  const ex = { variant: ['incline'], sets: [{ reps: 15 }, { reps: 12, variant: ['decline', 'wide'] }, { reps: 10, variant: [] }, { reps: 8, variant: ['flat'] }] };
+  assert.deepEqual(prefillFromPlan(ex, ['standard', 'flat']).map(s => s.variant), [['incline'], ['decline', 'wide'], [], []]);
+  assert.deepEqual(prefillFromPlan({ variant: 'Incline', sets: [{ reps: 1 }] })[0].variant, ['incline']);
+  assert.deepEqual(prefillFromPlan({ variant: [3, '<b>'], sets: [{ reps: 1, variant: { x: 1 } }] })[0].variant, ['<b>']); // untrusted: non-strings dropped, shown escaped
+  assert.equal(fmtPlanSets(ex.sets), '15 reps, 12 reps (decline, wide), 10 reps, 8 reps (flat)');
+});
+
+test('a planned variant counts as done when any set today has it; the default tag matches a plain set', () => {
+  const log = [{ date: 'd', machine_id: 'push-ups', variant: [] }, { date: 'd', machine_id: 'push-ups', variant: ['incline'] }];
+  assert.equal(exerciseDone({ machine_id: 'push-ups', variant: ['incline'] }, log, 'd'), true);
+  assert.equal(exerciseDone({ machine_id: 'push-ups', variant: ['decline'] }, log, 'd'), false);
+  assert.equal(exerciseDone({ machine_id: 'push-ups', variant: ['flat'] }, log, 'd', ['standard', 'flat']), true);
+  const g = [{ id: 'generic', rooms: [{ id: 'bw', machines: [{ id: 'push-ups', variations_default: ['standard', 'flat'] }] }] }];
+  assert.equal(planStatus({ exercises: [{ machine_id: 'push-ups', variant: ['flat'] }] }, log, 'd', g).done, 1);
 });
 
 test('validatePlan', () => {

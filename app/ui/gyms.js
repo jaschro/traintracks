@@ -3,10 +3,10 @@ import { S } from '../state.js';
 import { html, act, setHTML, setText, on, toast, $, confirmDialog, modal, closeModal } from './dom.js';
 import { screen, nav } from './nav.js';
 import { imageUrl, deleteSession, moveSessionTo } from '../data.js';
-import { visibleCount } from '../../lib/gyms.js';
+import { visibleCount, variationsOf } from '../../lib/gyms.js';
 import { lastSession, machineSessions, garminIdOf, zoneSeconds } from '../../lib/log.js';
 import { zonesFromBuckets, cleanFloors } from '../../lib/goals.js';
-import { normalizeVariant } from '../../lib/variant.js';
+import { variantSummary } from '../../lib/variant.js';
 import { fmtLast, fmtSet, fmtDateFull, fmtClock } from '../../lib/format.js';
 import { localDate } from '../../lib/dates.js';
 import { startLog } from './logform.js';
@@ -71,6 +71,8 @@ function zoneRow(sets) {
   return html`<div class="zr">${zs.map((v, i) => `Z${i + 1} ${v != null ? fmtClock(v) : '—'}`).join(' · ')}</div>`;
 }
 
+/** A set's tags in the machine's group order. */
+const variantOrder = v => variantSummary(v, variationsOf(S.machine)).split(' · ').filter(Boolean);
 const chips = v => (v && v.length ? html`<span class="vchips">${v.map(t => html`<span class="vchip">${t}</span>`)}</span>` : '');
 
 export function renderDetail() {
@@ -81,9 +83,9 @@ export function renderDetail() {
   const shown = sessions.slice(0, S.historyAll ? 500 : 6);
   const hist = shown.length ? shown.map(s => {
     const notes = (s.sets.find(x => x.notes) || {}).notes || '';
-    const v = s.variant.join(';');
-    return html`<div class="hi"><div class="hd"><span>${fmtDateFull(s.date)} ${chips(s.variant)}</span><div class="ha"><button class="ib" ${act('move-session', { date: s.date, v })} title="Move to another machine" aria-label="Move to another machine">↪️</button><button class="ib" ${act('edit-session', { date: s.date, v })} title="Edit" aria-label="Edit">✏️</button><button class="ib danger" ${act('del-session', { date: s.date, v })} title="Delete" aria-label="Delete">🗑️</button></div></div>
-      ${s.sets.map(x => html`<div class="sr"><span class="sn">Set ${x.set}</span><span class="sv">${fmtSet(x)}</span></div>`)}
+    // Sets of a day logged before 0.4.0 as two variant sessions are numbered by position here.
+    return html`<div class="hi"><div class="hd"><span>${fmtDateFull(s.date)}</span><div class="ha"><button class="ib" ${act('move-session', { date: s.date })} title="Move to another machine" aria-label="Move to another machine">↪️</button><button class="ib" ${act('edit-session', { date: s.date })} title="Edit" aria-label="Edit">✏️</button><button class="ib danger" ${act('del-session', { date: s.date })} title="Delete" aria-label="Delete">🗑️</button></div></div>
+      ${s.sets.map((x, i) => html`<div class="sr"><span class="sn">Set ${i + 1}</span><span class="sv">${chips(variantOrder(x.variant))}${fmtSet(x)}</span></div>`)}
       ${zoneRow(s.sets)}
       ${notes ? html`<div class="hn">“${notes}”</div>` : ''}</div>`;
   }) : html`<div class="empty" style="padding:28px 24px"><div class="icon">📋</div><p>No sessions logged yet.</p></div>`;
@@ -111,13 +113,13 @@ screen('detail', renderDetail);
 on('open-room', d => { const r = S.gym.rooms.find(x => x.id === d.id); if (r) { S.room = r; nav('machines'); } });
 on('open-machine', d => openMachine(d.id));
 on('start-log', () => startLog(null));
-on('edit-session', d => startLog(d.date, { variant: normalizeVariant(d.v) }));
+on('edit-session', d => startLog(d.date));
 on('history-more', () => { S.historyAll = true; renderDetail(); });
 on('del-session', async d => {
   const ok = await confirmDialog('Delete session?', `${S.machine.name} on ${fmtDateFull(d.date)} will be removed from your log.`, { ok: 'Delete', danger: true });
   if (!ok) return;
   try {
-    const s = { gym_id: S.gym.id, machine_id: S.machine.id, date: d.date, variant: normalizeVariant(d.v) };
+    const s = { gym_id: S.gym.id, machine_id: S.machine.id, date: d.date };
     deleteSession(s, `Delete ${S.machine.name} ${d.date}`);
     toast('Session deleted', 'ok');
     renderDetail();
@@ -127,7 +129,7 @@ on('del-session', async d => {
 // ---- move a session to another machine (e.g. a Garmin session posted to the wrong gym) ----
 let moving = null;
 on('move-session', d => {
-  moving = { gym_id: S.gym.id, machine_id: S.machine.id, date: d.date, variant: normalizeVariant(d.v) };
+  moving = { gym_id: S.gym.id, machine_id: S.machine.id, date: d.date };
   // Start on a machine with the same name in another gym (the usual fix), else the first one.
   const same = String(S.machine.name || '').trim().toLowerCase();
   let picked = false;

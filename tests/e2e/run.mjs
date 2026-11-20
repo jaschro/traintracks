@@ -153,10 +153,22 @@ const commitsBefore = fake.commitCount();
 const sizeBefore = readLog().length;
 const filesBefore = allFiles();
 let tag = null;
-const chip = await page.$('[data-act="log-var"]');
-if (chip) { tag = await chip.getAttribute('data-t'); await chip.click(); await page.waitForTimeout(150); }
+// keep one set, give it a variation in the per-set picker; the added set copies it
+for (const extra of (await page.$$('#stb tr')).slice(1)) await (await extra.$('[data-act="log-rm-row"]')).click();
+const vcell = await page.$('#stb [data-act="log-vpick"]');
+if (vcell) {
+  await vcell.click();
+  await page.waitForSelector('#mov.on');
+  const chip = await page.$('#mdbody [data-act="log-vp"]');
+  tag = await chip.getAttribute('data-t');
+  await chip.click();
+  await shot('variation-picker');
+  await page.click('#mdbody [data-act="log-vp-done"]');
+  check('picker shows the choice in the set row', (await text('#stb .vcell')).includes(tag));
+}
 const rows0 = (await page.$$('#stb tr')).length;
 await page.click('[data-act="log-add-row"]');
+if (tag) check('a new set copies the variation of the set above', (await page.$$eval('#stb .vcell', els => els.map(e => e.textContent))).every(t => t.includes(tag)));
 check('add set works', (await page.$$('#stb tr')).length === rows0 + 1);
 for (const inp of await page.$$('#stb input')) await inp.fill('7');
 await page.fill('#lnotes', 'e2e: smoke test, with a comma');
@@ -209,6 +221,46 @@ if (usingFixture) {
   const t3 = await waitToast();
   check('negative weight saved', /saved/.test(t3) && readLog().some(e => e.machine_id === 'assist' && e.weight_lb === -85), t3);
   await shot('assisted');
+
+  // 5a. Push-ups: no weight column; one session of flat, incline and decline sets
+  await openMachineByName('Common Machines', 'Push Ups');
+  await page.click('[data-act="start-log"]');
+  const head = await text('#swrap thead');
+  check('push-ups show Variation and Reps, no weight', head.includes('Variation') && head.includes('Reps') && !/weight/i.test(head), head);
+  for (const extra of (await page.$$('#stb tr')).slice(1)) await (await extra.$('[data-act="log-rm-row"]')).click();
+  const pick = async (row, t) => {
+    await page.click(`#stb tr >> nth=${row} >> [data-act="log-vpick"]`);
+    await page.waitForSelector('#mov.on');
+    await page.click(`#mdbody [data-act="log-vp"][data-t="${t}"]`);
+    await page.click('#mdbody [data-act="log-vp-done"]');
+  };
+  await pick(0, 'flat'); // the default: shown as plain
+  await page.click('[data-act="log-add-row"]'); await pick(1, 'incline');
+  await page.click('[data-act="log-add-row"]'); await pick(2, 'decline');
+  const puReps = ['20', '15', '10'];
+  for (const [i, inp] of (await page.$$('#stb input')).entries()) await inp.fill(puReps[i]);
+  check('set rows show their variations', (await page.$$eval('#stb .vcell', els => els.map(e => e.textContent))).join() === 'plain,incline,decline');
+  await shot('pushups-variations');
+  const pushBefore = fake.commitCount();
+  await page.click('[data-act="log-save"]');
+  const tpu = await waitToast();
+  const today = await page.evaluate(() => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; });
+  const pu = readLog().filter(e => e.machine_id === 'push-ups' && e.date === today).sort((a, b) => a.set - b.set);
+  check('push-ups saved as one session of three rows', /saved/.test(tpu) && pu.length === 3 && fake.commitCount() === pushBefore + 1, JSON.stringify(pu));
+  check('each row has its own variant and no weight', pu.map(e => (e.variant || []).join(';')).join() === ',incline,decline' && pu.map(e => e.reps).join() === '20,15,10' && pu.every(e => e.weight_lb == null) && pu.map(e => e.set).join() === '1,2,3', JSON.stringify(pu));
+  const hist = await text('#detailbody .hi');
+  check('history shows the variation per set', hist.includes('incline') && hist.includes('decline'), hist);
+  await page.click('[data-act="edit-session"]');
+  check('editing shows every set with its variation', (await page.$$eval('#stb .vcell', els => els.map(e => e.textContent))).join() === 'plain,incline,decline');
+  // change the middle set to incline + wide, save: still one session, one row changed
+  await page.click('#stb tr >> nth=1 >> [data-act="log-vpick"]');
+  await page.click('#mdbody [data-act="log-vp"][data-t="wide"]');
+  await page.click('#mdbody [data-act="log-vp-done"]');
+  check('the picker summary combines groups', (await text('#stb tr >> nth=1 >> .vcell')) === 'wide · incline');
+  await page.click('[data-act="log-save"]');
+  await waitToast();
+  const pu2 = readLog().filter(e => e.machine_id === 'push-ups' && e.date === today).sort((a, b) => a.set - b.set);
+  check('edit kept one session with the ids and per-set variants', pu2.length === 3 && pu2.map(e => e.id).join() === pu.map(e => e.id).join() && pu2[1].variant.join(';') === 'incline;wide' && pu2[0].variant.length === 0, JSON.stringify(pu2));
 
   // 5b. Move a session to another machine (the fixture's treadmill session, which has heart rate)
   await openMachineByName('Example Gym', 'Treadmill');
@@ -292,7 +344,7 @@ if (usingFixture) {
   await page.waitForTimeout(200);
   const vals = await page.$$eval('#stb input', els => els.map(e => e.value));
   check('plan prefills the sets', vals.join(',') === '60,12,65,10', vals.join(','));
-  check('plan pre-selects its variation', (await page.$('.vc.on:has-text("wide")')) != null);
+  check('plan pre-selects its variation on every set', (await page.$$eval('#stb .vcell', els => els.map(e => e.textContent))).join() === 'wide,wide');
   await page.click('[data-act="log-save"]');
   const tp = await waitToast();
   check('logged from the plan', /saved/.test(tp) && readLog().some(e => e.machine_id === 'r02' && (e.variant || []).includes('wide') && e.weight_lb === 65), tp);

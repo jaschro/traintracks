@@ -367,13 +367,13 @@ Rules:
 4. **Storage.**
    - **JSON:** `"variant": ["wide", "incline"]`, sorted for stable comparison.
    - **CSV:** one `variant` column with the tags joined by `; `, e.g. `incline; wide`. This works with filters and pivots in Sheets.
-5. **Sessions (§6.1).** A session is `gymId + machineId + date + variant`. Wide and narrow push-ups on the same day are two sessions, each numbering its own sets.
-6. **History and prefill (§5.2).** The machine screen shows all history, with the variant as a chip on each session and a filter. "Log Today" prefills from the last session with the same variant. If there is none, it uses the last session on the machine.
+5. **Sessions (§6.1).** *Changed in 0.4.0:* the variant belongs to each **set**. A session is `gymId + machineId + date`; one session can hold a flat, an incline and a decline set, each row with its own `variant`. (Until 0.3.2 the session was `gymId + machineId + date + variant`, so wide and narrow push-ups on one day were two sessions; such days now read as one session and are renumbered when next saved.)
+6. **History and prefill (§5.2).** The machine screen shows all history, with the variant as a chip on each set. "Log Today" prefills from the last session on the machine, each set with its own variant.
 7. **Goals (§8.2).**
    - A goal on `machineIds` counts **all** variants by default.
    - An optional `variants` filter restricts it to entries carrying all the listed tags, e.g. 100 decline push-ups.
    - An optional `excludeVariants` removes entries with any of the listed tags.
-8. **Plans (§4.5).** A planned exercise may carry `"variant": [...]`. "Log from plan" pre-selects it, and the plan counts as done only for that variant.
+8. **Plans (§4.5).** A planned exercise may carry `"variant": [...]`, applied to each of its sets; a planned set may carry its own `variant`. "Log from plan" pre-fills each set with it, and the stop counts as done once a set that day has that variant.
 9. **Generic gym and catalog.** The generic gym ships `variations` for the obvious bodyweight and free-weight exercises: push-ups, lunges, squats, planks, sit-ups, curls and presses. `variations` is part of `gym.json`, so catalog gyms can carry it too.
 10. **Migration.** Existing entries get an empty variant. The migration may *suggest* tags from notes (e.g. "wide grip") and show the owner the list, but it writes nothing without his confirmation.
 
@@ -414,7 +414,7 @@ Screens in the current app (`nav(...)` targets): `home`, `rooms`, `machines`, `d
 - **Edit mode:** if the machine already has entries for the chosen date, the form opens in edit mode and **saving replaces** that machine+date's entries — it never appends. (Today this is inline in `saveSess` → `commitLog`; there is no `mergeSession` function. The rebuild should extract it as a pure, tested `mergeSession`.) This fixed a bug where saving twice in a day duplicated sets (a friend's 3 sets became 15).
 - Known defect to fix: changing the date *while editing* replaces entries on the **new** date but leaves the originals on the old date (§15).
 - New entries carry `gymId`/`roomId`.
-- **Rebuild: a variant picker** (§4.9) appears above the set rows when the machine defines `variations`. It shows one row of chips per group, plus "+ tag". Changing the variant switches the form to that variant's session for the date, which can open edit mode. A free-text "+ tag" is available on every machine.
+- **Rebuild: a variant picker** (§4.9). *Since 0.4.0* each set row has a **Variation** cell when the machine defines `variations` (or a set has tags; other machines offer "+ Variation"). Tapping it opens a picker with one row of chips per group (one choice per group) plus "+ tag", and "Use for all sets". The cell shows a short summary ("wide · incline"); empty is plain. A new set copies the row above. Bodyweight machines with `logType` reps show Variation | Reps.
 
 ### 5.3 Weekly Report (`renderReports`)
 - Header with week range, ‹ › to step back through earlier weeks (`A.weekOffset`), "this week (in progress)" vs "last week (final)".
@@ -441,7 +441,7 @@ Screens in the current app (`nav(...)` targets): `home`, `rooms`, `machines`, `d
 ## 6. Logging semantics (the rules the data depends on)
 
 ### 6.1 Session identity
-A "session" is the set of entries with the same `machineId` and `date`. In the rebuild, it is the same `gymId + machineId + date + variant` (§4.9). Sets are numbered 1..n within it. `datetime` is the wall-clock time of the save (or of the Garmin activity start for posted rows).
+A "session" is the set of entries with the same `machineId` and `date`. In the rebuild, it is the same `gymId + machineId + date`; each set carries its own variant (§4.9, since 0.4.0; 0.2.0–0.3.2 also keyed on the variant). Sets are numbered 1..n within it. `datetime` is the wall-clock time of the save (or of the Garmin activity start for posted rows).
 
 ### 6.2 Merge rule (new pure function `mergeSession(log, machineId, date, newSets)`; inline in `saveSess` today)
 Remove all existing entries for that machine+date, insert the new sets in their place (preserving the date-block position), renumber sets. Used by every app save. The rebuild should also key on `gymId` where present, since the same `machineId` can exist in two gyms (user gyms use `m<timestamp>` so collisions are rare, but catalog gyms use short ids like `r02`).

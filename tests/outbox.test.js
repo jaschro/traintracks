@@ -10,8 +10,8 @@ const NOV = 'log/2026-11.json'; // every entry in these tests is in November 202
 import { mergeOp, removeOp, moveOp, applyOp, applyOps, batchMessage, createOutbox, createSyncer, retryDelay } from '../lib/outbox.js';
 
 const entry = o => ({ id: 'x1', gym_id: 'eg', machine_id: 'r02', date: '2026-11-04', set: 1, variant: [], reps: 10, ...o });
-const S1 = { gym_id: 'eg', machine_id: 'r02', date: '2026-11-05', variant: [] };
-const S2 = { gym_id: 'eg', machine_id: 'p01', date: '2026-11-05', variant: [] };
+const S1 = { gym_id: 'eg', machine_id: 'r02', date: '2026-11-05' };
+const S2 = { gym_id: 'eg', machine_id: 'p01', date: '2026-11-05' };
 
 /** A Storage-like object (localStorage stand-in). */
 function memStorage() {
@@ -54,6 +54,25 @@ test('mergeOp keeps the ids of the entries it replaces and gives new sets an id 
   assert.ok(op.sets[2].id && op.sets[2].id !== 'a');
   const out = applyOp(log, op);
   assert.deepEqual(sessionEntries(out, S1).map(e => e.id), op.sets.map(s => s.id));
+});
+
+test('a merge op keeps each set\'s variant, and replays to one session per day', () => {
+  const log = [entry({ id: 'a', date: S1.date, set: 1, variant: ['wide'] }), entry({ id: 'b', date: S1.date, set: 1, variant: [] })];
+  const op = mergeOp(log, S1, [{ reps: 20, variant: [] }, { reps: 15, variant: ['incline'] }, { reps: 10, variant: ['decline'] }], S1, 'Log');
+  assert.equal(op.from.variant, undefined);
+  const out = applyOps(log, [op, op]); // a resend is harmless
+  assert.deepEqual(sessionEntries(out, S1).map(e => [e.set, e.variant.join(';')]), [[1, ''], [2, 'incline'], [3, 'decline']]);
+  assert.equal(out.length, 3);
+});
+
+test('an op queued by an older app (key with a variant) replays with its old meaning', () => {
+  const log = [entry({ id: 'w', date: S1.date, variant: ['wide'] }), entry({ id: 'p', date: S1.date, variant: [] })];
+  const old = { id: 'op-old', kind: 'merge', from: { ...S1, variant: ['wide'] }, to: { ...S1, variant: ['wide'] }, sets: [{ id: 'w', reps: 30 }], message: 'Edit' };
+  const out = applyOp(log, old);
+  assert.equal(out.length, 2);
+  assert.deepEqual(out.find(e => e.id === 'w').variant, ['wide']);
+  assert.equal(out.find(e => e.id === 'w').reps, 30);
+  assert.ok(out.some(e => e.id === 'p'));
 });
 
 test('operations survive a JSON round trip (they are stored on the device)', () => {

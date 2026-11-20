@@ -7,6 +7,12 @@ the log is stored: one file per month under `log/` instead of one
 the format used by LogTrim and TrainTracks 0.1.0; the migration converts it (see
 "Migrating from version 1").
 
+**0.4.0 (20 Nov 2026): variations are per set; the format is unchanged.** Every
+row already had its own `variant`; what changed is how rows group into a
+session: a session is now `gym_id` + `machine_id` + `date`, without the
+variant (see "Rules" below). No field was added or changed and nothing stored
+is rewritten, so the format version stays 3.
+
 All paths are relative to the user's repo root. JSON is pretty-printed (2 spaces),
 CSV is UTF-8 with LF line endings.
 
@@ -91,8 +97,8 @@ them and is never edited by hand.
 | `gym_id`, `gym` | string | Gym id, and its display name at the time of logging. |
 | `room_id`, `room` | string | Room id and display name. `room_id` may be empty on old rows. |
 | `machine_id`, `machine` | string | Machine id (unique within its gym) and display name. |
-| `variant` | list of tags | e.g. `["incline","wide"]`, sorted. Empty = the plain exercise. |
-| `set` | integer | 1-based within the session. |
+| `variant` | list of tags | **This set's** variation, e.g. `["incline","wide"]`, sorted. Empty = the plain exercise. The machine's `variations_default` tags are never stored. Sets of one session may differ (one flat, one incline, one decline). |
+| `set` | integer | 1-based within the session (the day's sets on that machine, of every variant). |
 | `weight_lb` | number | Weight lifted. **Negative = assistance** on an assisted machine (e.g. an assisted pull-up's counterweight): −100 is easier than −85, so higher is still harder and "best" is still the maximum. |
 | `reps` | integer | Repetitions. |
 | `duration_sec` | integer | Duration, for every kind of timed exercise (planks, classes, cardio). |
@@ -108,9 +114,18 @@ them and is never edited by hand.
 | `migrated_from` | string | JSON only, optional. Where a row was before a migration correction moved it to another machine, e.g. `Pullups @ Old Park (m123)`. |
 
 Rules:
-- **Session** = same `gym_id` + `machine_id` + `date` + `variant`. Saving a session
-  replaces all its rows; editing a session's date moves it (to another month's
-  file if the month changes).
+- **Session** = same `gym_id` + `machine_id` + `date` (since 0.4.0; before, the
+  `variant` was part of it). Saving a session replaces all its rows, each with
+  its own `variant`; editing a session's date moves it (to another month's file
+  if the month changes).
+- **Days logged before 0.4.0** with two variants of one machine (say wide and
+  narrow push-ups) were two sessions, each with sets numbered from 1. They are
+  now read as one session: the app shows the rows grouped by variant, in file
+  order, numbered 1..n, and writes nothing until that day is next saved, which
+  renumbers its sets 1..n. Nothing needs migrating; readers that group by
+  `date` + `machine_id` already see one session.
+- A tool that replaces a session must replace all of that day's rows on the
+  machine and give each row its own `variant`.
 - Order: newest date first, sets in order within a day. The CSV uses the same order.
 
 Which fields each kind of machine uses:
@@ -118,7 +133,10 @@ Which fields each kind of machine uses:
 | Machine `log_type` | Form shows | Fields |
 |---|---|---|
 | `weight` | Weight & reps | `weight_lb`, `reps` |
-| `reps` | Reps (bodyweight) | `reps` |
+| `reps` | Reps (bodyweight; push-ups, sit-ups, squats and lunges in Common Machines since 0.4.0) | `reps` |
+
+Every log type also shows a **Variation** cell per set when the machine has
+`variations` (or a set has tags), stored in that row's `variant`.
 | `time` | Time (planks etc.) | `duration_sec` |
 | `mins` | Time (classes) | `duration_sec` (entered in minutes) |
 | `cardio` | Treadmill | `duration_sec`, `speed_mph`, `incline_pct`, `distance_mi`, `hr_avg_bpm` |

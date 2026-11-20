@@ -145,6 +145,19 @@ test('variants count toward the machine goal by default; filters narrow it', () 
   assert.deepEqual(o.results.map(r => r.value), [35, 20, 25]);
 });
 
+test('per-set variants (0.4.0): a filtered goal counts only the matching sets of a mixed session', async () => {
+  const { mergeSession } = await import('../lib/log.js');
+  const key = { gym_id: 'generic', machine_id: 'push-ups', date: '2026-09-28' };
+  const log = mergeSession([], key, [{ reps: 20, variant: [] }, { reps: 15, variant: ['incline'] }, { reps: 12, variant: ['decline'] }, { reps: 10, variant: ['decline', 'wide'] }]);
+  const gs = [
+    { id: 'all', kind: 'sum', source: 'log', field: 'reps', machine_ids: ['push-ups'], target: 1 },
+    { id: 'decline', kind: 'sum', source: 'log', field: 'reps', machine_ids: ['push-ups'], variants: ['decline'], target: 1 },
+    { id: 'notdecline', kind: 'sum', source: 'log', field: 'reps', machine_ids: ['push-ups'], exclude_variants: ['decline'], target: 1 }
+  ];
+  const o = R.computeGoals(gs, { log, gyms, week_start: 'sat', today: '2026-09-29' });
+  assert.deepEqual(o.results.map(r => r.value), [57, 22, 35]);
+});
+
 // ─── heart-rate buckets ───
 const BUCKET_CSV = [
   'date,start,activity_id,activity_type,duration_sec,hr_avg_bpm,hr_max_minute_bpm,corrected,hr_under70_sec,hr70_74_sec,hr100_104_sec,hr105_109_sec,hr115_119_sec,hr120_124_sec,hr125_129_sec,hr130_134_sec,hr185_up_sec',

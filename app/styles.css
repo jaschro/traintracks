@@ -310,3 +310,7 @@ textarea.fi{resize:none;height:84px;line-height:1.4}
 .changelog{white-space:pre-wrap;font:12.5px/1.5 ui-monospace,Menlo,monospace;background:var(--card2);border:1px solid var(--bdr);border-radius:10px;padding:10px 12px;max-height:40vh;overflow:auto;margin:0 0 12px}
 .files{margin:-4px 0 12px;font-size:13px;color:var(--dim)}
 .files ul{padding:8px 0 0 18px;line-height:1.6}
+.st td.vtd{width:34%;max-width:140px}
+.vcell{font:inherit;font-size:13px;width:100%;padding:9px 6px;border-radius:8px;background:var(--adim);color:var(--accent);border:1px solid rgba(255,176,32,.35);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-tap-highlight-color:transparent}
+.vcell.plain{background:var(--card2);color:var(--dim);border-color:var(--bdr)}
+.sr .vchips{margin-left:0;margin-right:6px}
