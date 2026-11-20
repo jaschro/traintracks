@@ -1,4 +1,7 @@
 id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,reps,duration_sec,duration_min,distance_mi,speed_mph,level,incline_pct,hr_avg_bpm,garmin_id,zone1_min,zone2_min,zone3_min,zone4_min,zone5_min,notes
+emwpd2gpnvwr02,2026-11-20,14:17:29,portofino,Portofino Gym,machines,Machines Room,pm03,Seated Chest Press Machine,,1,55,15,,,,,,,,,,,,,,
+emwpd2gpnup803,2026-11-20,14:17:29,portofino,Portofino Gym,machines,Machines Room,pm03,Seated Chest Press Machine,,2,70,15,,,,,,,,,,,,,,
+emwpd2gpnea704,2026-11-20,14:17:29,portofino,Portofino Gym,machines,Machines Room,pm03,Seated Chest Press Machine,,3,85,12,,,,,,,,,,,,,,
 emwo0jgoo4u301,2026-11-19,11:50:00,generic,Common Machines,outdoor-activities,Outdoor Activities,walk,Walk,,1,,,896,14.93,0.79,,,,82,25133068800,14.93,,,,,Miami Beach walk (Garmin 25133068800; 0.79 mi; +16 ft). All Zone 1 - max minute HR ~100 (Karvonen RHR 46 / max 168).
 emwo0jgoolgr02,2026-11-19,13:09:00,generic,Common Machines,outdoor-activities,Outdoor Activities,walk,Walk,,1,,,1922,32.03,1.28,,,,79,25133850042,31.97,,,,,Miami Beach walk (Garmin 25133850042; 1.28 mi; +36 ft). All Zone 1 - max minute HR ~90 (Karvonen RHR 46 / max 168).
 emwol2z61mb801,2026-11-19,20:49:00,specific-courses-runs-walks,Specific Courses (Runs/Walks),miami-mweh2u77,Miami,m1795143860408,JCC to Portofino,,1,,,4337,72.28,3.67,,,,84,25137200923,72.15,,,,,Miami Beach walk (Garmin 25137200923; 3.67 mi; +33 ft). All Zone 1 - max minute HR ~104 (Karvonen RHR 46 / max 168).
