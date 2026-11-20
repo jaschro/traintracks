@@ -125,6 +125,17 @@ saw only the code rediscovered a deliberate decision as a bug.
   `tt-last-sync-error:<user>/<repo>` and shown in Settings, and the status pill
   shows GitHub's own message ("GitHub 422: Update is not a fast forward"), so a
   failure can be diagnosed after the fact.
+- **Time inputs use the normal text keyboard** (0.3.2): `type="text" inputmode="text"`,
+  autocorrect and capitalisation off. Neither phone has a digits keypad with ":".
+  `inputmode="numeric"` (and `type="tel"`) give iOS a 0–9 pad and Android a dial
+  pad, neither with ":"; `inputmode="decimal"` adds only "." (and "," in some
+  locales), and "." already means decimal minutes, so it can't stand for ":".
+  `type="number"` drops "70:46" as invalid. The text keyboard is one tap ("123" /
+  "?123") from a layout with both digits and ":" on iOS Safari and Android Chrome.
+  A separate ":" button or min/sec boxes were rejected as more UI for the same
+  result. Parsing (`parseDuration`): "70:46" mm:ss, "1:10:46" h:mm:ss, a plain
+  number is minutes ("30", "70.77"); seconds and minutes after hours must be
+  00–59, so "70:99" is an error, not 71:39.
 - **Stored data is neutral.** Heart rate is stored as 5-bpm buckets per activity;
   zones and HR-range goals are applied when shown.
 - **Classification:** an entry with speed, distance, heart rate, incline, zones or a Garmin link is cardio, whatever the machine. (LogTrim used heart rate and incline only; version 2 split `level` into speed and distance.)

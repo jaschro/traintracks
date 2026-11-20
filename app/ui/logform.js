@@ -9,7 +9,7 @@ import { saveSession } from '../data.js';
 import { sessionEntries, lastSession } from '../../lib/log.js';
 import { normalizeVariant, cleanTag } from '../../lib/variant.js';
 import { variationsOf } from '../../lib/gyms.js';
-import { columnsFor, rowValues, parseRow, paceText } from '../../lib/entryform.js';
+import { columnsFor, rowValues, parseRow, paceText, timeHint } from '../../lib/entryform.js';
 import { localDate, localTime, isValidDate } from '../../lib/dates.js';
 
 /** Hooks other screens set: what to do after a save from the plan, and how to prefill from it. */
@@ -52,7 +52,7 @@ function rowHtml(n, values, t) {
   const cols = columnsFor(t);
   return html`<tr><td>${n}</td>${cols.map((c, i) => c.kind === 'pace'
     ? html`<td class="pace">${paceText(t, values) || '—'}</td>`
-    : html`<td><input type="${c.kind === 'minutes' ? 'text' : 'number'}" ${c.kind === 'minutes' ? html`inputmode="numeric"` : c.negative ? html`step="any"` : html`inputmode="decimal" step="any"`} data-col="${i}" placeholder="${c.ph}" value="${values[i]}" aria-label="${c.label}"></td>`)}<td><button class="xb" ${act('log-rm-row')} aria-label="Remove set">×</button></td></tr>`;
+    : html`<td><input type="${c.kind === 'minutes' ? 'text' : 'number'}" ${c.kind === 'minutes' ? html`inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="next"` : c.negative ? html`step="any"` : html`inputmode="decimal" step="any"`} data-col="${i}" placeholder="${c.ph}" value="${values[i]}" aria-label="${c.label}"></td>`)}<td><button class="xb" ${act('log-rm-row')} aria-label="Remove set">×</button></td></tr>`;
 }
 
 function tableHtml(rows, t) {
@@ -84,7 +84,7 @@ function renderLog() {
   setHTML('logbody', html`${banner}
     <div class="fs"><h3>Date</h3><input type="date" id="ldate" class="fi" value="${S.logDate}" max="${today}"></div>
     ${variantPicker()}
-    <div class="fs"><h3>Sets</h3><div id="swrap">${tableHtml(rows, t)}</div><button class="ab" ${act('log-add-row')}>＋ Add set</button></div>
+    <div class="fs"><h3>Sets</h3><div id="swrap">${tableHtml(rows, t)}</div>${timeHint(t) ? html`<p class="hint">${timeHint(t)}</p>` : ''}<button class="ab" ${act('log-add-row')}>＋ Add set</button></div>
     <div class="fs"><h3>Notes</h3><textarea id="lnotes" class="fi" placeholder="How did it feel?">${notes}</textarea></div>
     <button class="btn ok" id="svbtn" ${act('log-save')}>${editing ? 'Save changes' : 'Save session'}</button>
     ${editing ? html`<p class="hint" style="text-align:center">Saving replaces this session. Changing the date or variation moves it.</p>` : ''}`);

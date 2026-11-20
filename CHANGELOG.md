@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2 (20 Nov 2026)
+
+- **Times can be typed as mm:ss on a phone.** The time field of Distance & time, Pace, Cardio and Minutes machines used a digits-only keypad with no ":" key, so "70:46" couldn't be typed. It now opens the normal keyboard (tap **123** for digits and ":"). The column is labelled **Time** with an `mm:ss` placeholder, and a hint under the sets lists what it takes: `70:46`, `1:10:46`, or plain minutes (`30`, which still means 30 minutes; decimals like `70.5` still work).
+- **An impossible time is refused** with the usual "not a valid time" message instead of being saved as something else: "70:99" used to be stored as 71:39.
+- The data format is unchanged.
+
 ## 0.3.1 (15 Nov 2026)
 
 - **Garmin activities are no longer held back by unrelated entries.** An activity was skipped as a "possible manual duplicate" whenever *any* timed entry (planks, meditation, stretching) was logged within 20 minutes of it, and the skip repeated on every run, so it never posted. Now only a hand-logged **cardio** entry that really overlaps the activity in time (give or take 3 minutes) holds it back. A hand-logged treadmill run during a Garmin treadmill session is still skipped. Activities skipped this way before post on the next run after you update.

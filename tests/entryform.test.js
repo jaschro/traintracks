@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { FORM_COLUMNS, columnsFor, rowValues, parseRow, paceText } from '../lib/entryform.js';
+import { FORM_COLUMNS, columnsFor, rowValues, parseRow, paceText, timeHint } from '../lib/entryform.js';
 import { LOG_TYPE_FIELDS } from '../lib/log.js';
 
 test('every form field is a field of that log type', () => {
@@ -64,4 +64,41 @@ test('paceText', () => {
   assert.equal(paceText('pace', ['30', '3']), '20:00/mi');
   assert.equal(paceText('walk', ['', '30']), '—');
   assert.equal(paceText('weight', ['1', '2']), '');
+});
+
+test('every time column is labelled "Time" with an mm:ss placeholder', () => {
+  for (const t of ['walk', 'pace', 'cardio', 'mins']) {
+    const c = FORM_COLUMNS[t].find(c => c.kind === 'minutes');
+    assert.equal(c.label, 'Time', t);
+    assert.equal(c.ph, 'mm:ss', t);
+    assert.match(timeHint(t), /mm:ss/);
+  }
+  assert.equal(timeHint('weight'), '');
+  assert.equal(timeHint('time'), '');
+});
+
+test('walk: "70:46" → 4246 s; "1:10:46", "70.77" and whole minutes too', () => {
+  assert.deepEqual(parseRow('walk', ['3.1', '70:46']).fields, { distance_mi: 3.1, duration_sec: 4246 });
+  assert.equal(parseRow('walk', ['3.1', '1:10:46']).fields.duration_sec, 4246);
+  assert.equal(parseRow('walk', ['3.1', '70.77']).fields.duration_sec, 4246);
+  assert.equal(parseRow('walk', ['3.1', '30']).fields.duration_sec, 1800);
+  for (const t of ['pace', 'cardio', 'mins']) assert.equal(parseRow(t, ['70:46', '', '', '']).fields.duration_sec, 4246, t);
+});
+
+test('an impossible time is the typed-value error, not a different time', () => {
+  const r = parseRow('walk', ['3.1', '70:99']);
+  assert.equal(r.fields, null);
+  assert.match(r.error, /^Time: "70:99" is not a valid time \(mm:ss/);
+  assert.match(parseRow('cardio', ['1:75:00', '', '', '']).error, /valid time/);
+});
+
+test('editing shows a saved time back as mm:ss / h:mm:ss', () => {
+  assert.deepEqual(rowValues('walk', { distance_mi: 3.1, duration_sec: 4246 }), ['3.1', '1:10:46', '']);
+  assert.deepEqual(rowValues('pace', { duration_sec: 1965, speed_mph: 3 }), ['32:45', '3', '']);
+});
+
+test('pace from a typed mm:ss time', () => {
+  assert.equal(paceText('walk', ['3', '45:00', '']), paceText('walk', ['3', '45', '']));
+  assert.notEqual(paceText('walk', ['3.1', '70:46', '']), '');
+  assert.equal(paceText('walk', ['3.1', '70:99', '']), paceText('walk', ['3.1', '', '']));
 });

@@ -234,6 +234,31 @@ if (usingFixture) {
   await page.waitForTimeout(400);
   check('negative reps refused', (await text('#toast')).includes("can't be negative") && fake.commitCount() === before);
   await page.click('#s-log .back');
+
+  // 6b. Distance & time: "70:46" is typed as mm:ss on a keyboard that has ":"
+  await openMachineByName('Common Machines', 'Walk');
+  await page.click('[data-act="start-log"]');
+  for (const extra of (await page.$$('#stb tr')).slice(1)) await (await extra.$('[data-act="log-rm-row"]')).click();
+  const [miles, time] = await page.$$('#stb input');
+  check('time column says Time, placeholder mm:ss', (await text('#swrap thead')).includes('Time') && await time.getAttribute('placeholder') === 'mm:ss');
+  check('time input is not a digits-only keypad', await time.getAttribute('inputmode') === 'text' && await time.getAttribute('type') === 'text');
+  await miles.fill('3.1');
+  await time.fill('70:99');
+  const beforeBad = fake.commitCount();
+  await page.click('[data-act="log-save"]');
+  await page.waitForTimeout(400);
+  check('impossible time "70:99" refused', (await text('#toast')).includes('"70:99" is not a valid time') && fake.commitCount() === beforeBad);
+  await page.evaluate(() => { const t = document.getElementById('toast'); t.textContent = ''; t.className = ''; });
+  await time.fill('70:46');
+  check('pace updates live from mm:ss', /\d/.test(await text('#stb .pace')));
+  await page.fill('#lnotes', 'e2e: mm:ss walk');
+  await page.click('[data-act="log-save"]');
+  const t4 = await waitToast();
+  const walkSet = readLog().find(e => e.notes === 'e2e: mm:ss walk');
+  check('"70:46" saved as duration_sec 4246', /saved/.test(t4) && walkSet && walkSet.duration_sec === 4246 && walkSet.distance_mi === 3.1, JSON.stringify(walkSet));
+  await page.click('[data-act="edit-session"]');
+  check('editing shows the time back as h:mm:ss', await (await page.$$('#stb input'))[1].inputValue() === '1:10:46');
+  await page.click('#s-log .back');
 }
 
 // 7. Delete a session

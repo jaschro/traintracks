@@ -27,6 +27,19 @@ test('parseDuration: "1:30:00" → 5400 s', () => assert.equal(parseDuration('1:
 test('parseDuration: "" → null', () => assert.equal(parseDuration(''), null));
 test('parseDuration: null → null', () => assert.equal(parseDuration(null), null));
 test('parseDuration: 30 (number, minutes) → 1800 s', () => assert.equal(parseDuration(30), 1800));
+test('parseDuration: "70:46" (mm:ss past an hour) → 4246 s', () => assert.equal(parseDuration('70:46'), 4246));
+test('parseDuration: "1:10:46" → 4246 s', () => assert.equal(parseDuration('1:10:46'), 4246));
+test('parseDuration: decimal minutes "70.77" → 4246 s', () => assert.equal(parseDuration('70.77'), 4246));
+test('parseDuration: "125:00" (three-digit minutes) → 7500 s', () => assert.equal(parseDuration('125:00'), 7500));
+test('parseDuration: seconds or minutes out of range → null', () => {
+  assert.equal(parseDuration('70:99'), null);
+  assert.equal(parseDuration('70:60'), null);
+  assert.equal(parseDuration('1:75:00'), null);
+  assert.equal(parseDuration('1:10:60'), null);
+  assert.equal(parseDuration('70.46.1'), null);
+  assert.equal(parseDuration(':46'), null);
+});
+test('round-trip "70:46" → "1:10:46" → 4246', () => assert.equal(parseDuration(fmtDuration(parseDuration('70:46'))), 4246));
 test('parseDuration: rubbish → null', () => { assert.equal(parseDuration('abc'), null); assert.equal(parseDuration('5:6'), null); });
 
 test('fmtDuration: 1800 → "30"', () => assert.equal(fmtDuration(1800), '30'));
