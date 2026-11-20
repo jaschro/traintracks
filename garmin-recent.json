@@ -1,7 +1,35 @@
 {
-  "fetched_at": "2026-11-20T20:23:14Z",
+  "fetched_at": "2026-11-20T23:15:53Z",
   "today": "2026-11-20",
   "recent_activities": [
+    {
+      "activity_id": "25146083113",
+      "date": "2026-11-20",
+      "start_time": "17:51:57",
+      "type": "other",
+      "name": "Miami Beach Jog",
+      "duration_sec": 1070,
+      "distance_mi": 1.54,
+      "hr_avg_bpm": 134.0,
+      "hr_max_bpm": 166.0,
+      "active_kcal": 204.0,
+      "elevation_gain_ft": 36,
+      "speed_avg_mph": 5.17
+    },
+    {
+      "activity_id": "25145947960",
+      "date": "2026-11-20",
+      "start_time": "17:34:39",
+      "type": "walking",
+      "name": "Miami Beach Walking",
+      "duration_sec": 770,
+      "distance_mi": 0.64,
+      "hr_avg_bpm": 83.0,
+      "hr_max_bpm": 90.0,
+      "active_kcal": 65.0,
+      "elevation_gain_ft": 10,
+      "speed_avg_mph": 3.0
+    },
     {
       "activity_id": "25137200923",
       "date": "2026-11-19",
@@ -340,23 +368,23 @@
     }
   ],
   "today_stats": {
-    "steps": 641,
-    "floors": 0.0,
+    "steps": 8057,
+    "floors": 1.13419,
     "resting_hr_bpm": 47,
-    "active_kcal": 5.0,
-    "body_battery": 79,
-    "stress_avg": 22,
-    "week_steps": 78693
+    "active_kcal": 292.0,
+    "body_battery": 38,
+    "stress_avg": 30,
+    "week_steps": 86109
   },
   "training_readiness": {
-    "score": 87,
-    "level": "HIGH",
-    "feedback": "WELL_RECOVERED"
+    "score": 68,
+    "level": "MODERATE",
+    "feedback": "RECOVERY_IN_PROGRESS"
   },
-  "vo2max": 42.0,
+  "vo2max": 43.0,
   "intensity": {
-    "week_moderate_sec": 9360,
-    "week_vigorous_sec": 1860
+    "week_moderate_sec": 10320,
+    "week_vigorous_sec": 3000
   },
   "hrv": {
     "weekly_avg_ms": 42,
@@ -376,7 +404,7 @@
   },
   "spo2_avg_pct": 97.0,
   "respiration": {
-    "waking_brpm": 15.0,
+    "waking_brpm": 16.0,
     "sleep_brpm": 15.0
   }
 }
