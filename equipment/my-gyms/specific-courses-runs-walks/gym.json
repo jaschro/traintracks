@@ -70,6 +70,13 @@
           "muscles_worked": "",
           "image": null,
           "log_type": "walk"
+        },
+        {
+          "id": "m1795144097017",
+          "name": "Trader Joe's to Portofino",
+          "muscles_worked": "",
+          "image": null,
+          "log_type": "weight"
         }
       ]
     }
