@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.1 (20 Nov 2026)
+
+- **Move or delete one Garmin activity on its own.** Since a session is one machine on one day, three Garmin walks on the same day show as one Walk session, and **Move**/**Delete** acted on all three. In a machine's history each Garmin-linked set of such a session now shows its start time and has its own ↪️ (move to another machine, in any gym, including your own gyms and course machines) and 🗑️ (delete). The other sets that day are left as they are. The session's own buttons work as before.
+- The moved activity keeps everything (Garmin link, time, distance, heart rate, zones, notes); only its gym, room, machine and set number change. It is numbered after the target machine's sets that day; the sets left behind keep their numbers (shown by position) until that day is next saved. The Garmin sync does not post a moved activity again.
+- Hand-logged sets are still changed through **Edit**, which can remove a set.
+- Saved like other changes: in the background, one commit of only that month. The data format is unchanged (version 3); the Garmin pipeline and the Worker need no update.
+
 ## 0.4.0 (20 Nov 2026)
 
 - **Variations belong to each set.** A push-up session can now be one set flat, one incline and one decline. Each set row has a **Variation** cell: tap it to pick one choice per group (angle, grip…) or type your own tag; the cell shows a short summary such as "wide · incline", and empty means plain. **Use for all sets** applies one choice to the whole session, and a new set copies the variation of the set above. This works on every machine with variations, bodyweight or weighted (lat pulldown grip, leg press feet). Other machines offer **+ Variation** under the sets.

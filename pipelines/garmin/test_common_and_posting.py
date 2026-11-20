@@ -172,6 +172,20 @@ class Posting(unittest.TestCase):
         posted, _ = P.plan_entries(cardio, log, {}, mapping, 46, 168, allow_dupes=True)
         self.assertEqual(len(posted), 1)
 
+    def test_an_activity_moved_to_another_machine_is_not_posted_again(self):
+        # the app's per-activity Move (0.4.1) changes only gym/room/machine/set; garmin_id stays
+        cardio = [M("2026-11-05 20:49", 110, aid="24000000013"), M("2026-11-05 20:50", 110, aid="24000000013"),
+                  M("2026-11-05 11:50", 110, aid="24000000011")]
+        log = [{"id": "w3", "date": "2026-11-05", "time": "20:49:00", "gym_id": "eg", "room_id": "out", "machine_id": "course",
+                "machine": "Park Loop", "set": 1, "duration_sec": 120, "garmin_id": "24000000013"},
+               {"id": "w1", "date": "2026-11-05", "time": "11:50:00", "gym_id": "generic", "machine_id": "walk", "set": 1, "garmin_id": "24000000011"}]
+        posted, skipped = P.plan_entries(cardio, log, {}, {}, 46, 168, gyms=GYMS)
+        self.assertEqual((posted, skipped), ([], []))
+        # and a moved Garmin row is never taken for a hand-logged duplicate of another activity
+        cardio.append(M("2026-11-05 20:50", 110, aid="24000000014"))
+        posted, _ = P.plan_entries(cardio, log, {}, {}, 46, 168, gyms=GYMS)
+        self.assertEqual([p[0] for p in posted], ["24000000014"])
+
     def test_another_garmin_activity_is_not_a_manual_duplicate(self):
         cardio = [M("2026-11-03 07:00", 110, aid="24000000005"), M("2026-11-03 07:01", 110, aid="24000000005")]
         log = [{"date": "2026-11-03", "time": "06:50:00", "machine_id": "walk", "duration_sec": 900, "garmin_id": "24000000004"}]

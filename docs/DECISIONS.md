@@ -28,6 +28,32 @@ saw only the code rediscovered a deliberate decision as a bug.
   (rows grouped by variant, renumbered on the next save), and an operation
   still queued on a device by an older version keeps its old meaning (its key
   carries `variant`, so it replaces only that variant's rows).
+- **One activity can be moved or deleted on its own** (0.4.1, owner's request).
+  A session is one machine on one day, so three Garmin walks on one day are one
+  Walk session, and Move/Delete on the session moved or deleted all three. In
+  machine history each Garmin-linked set (`garmin_id`, or a "Garmin <id>" tag in
+  the notes) of a session with more than one set has its own ↪️ and 🗑️; the
+  session's own buttons are unchanged. They queue new operation kinds,
+  `move-entries` { ids, to } and `remove-entries` { ids } (`lib/outbox.js`,
+  `moveEntries`/`removeEntries` in `lib/log.js`), sent like the others: one
+  commit of the changed month (the date never changes, so never two), replayed
+  on the branch head, harmless to replay. New kinds rather than an optional id
+  list on `move`/`remove`: an older copy of the app ignores a kind it does not
+  know, but would read a `move` with ids as "move the whole session". **Set
+  numbers:** the rows left behind are not renumbered (the pipeline posts every
+  activity as `set: 1` anyway; history numbers by position; the next save
+  writes 1..n), so a move or delete changes exactly one line of the month file.
+  The moved row is numbered after the target's rows that day, as a session move
+  does. It keeps everything else (id, `garmin_id`, time, duration, distance, HR,
+  zones, notes), and the pipeline does not post it again: it skips any activity
+  whose `garmin_id` is anywhere in the log, whatever the machine. **Only
+  Garmin-linked sets** get the buttons: each is a separate activity with its own
+  time, whereas hand-logged sets of a session are parts of one exercise, changed
+  through Edit (which can remove a set); per-set buttons on every strength set
+  would be clutter. The operations themselves work on any entry id. A deleted
+  Garmin activity is posted again by the next pipeline run while it is inside
+  `since_days` (this was already true of deleting a whole session); the dialog
+  says so and suggests moving it instead.
 - **Bodyweight exercises record reps only** (0.4.0, owner's decision). Push-ups,
   sit-ups, squats and lunges in Common Machines' "Bodyweight — No Equipment"
   room are `log_type: "reps"`: the form is Variation | Reps, with no weight
@@ -112,8 +138,8 @@ saw only the code rediscovered a deliberate decision as a bug.
   owner replaced that on 12 Nov 2026 with one file per month, see "The log is
   one file per month" above.)
 - **Log changes are saved in the background** (0.2.3). A save shows at once, is
-  stored on the device as an operation (replace a session, delete one, move one;
-  not a copy of the log) in localStorage under `tt-outbox:<user>/<repo>`, and a
+  stored on the device as an operation (replace a session, delete one, move one,
+  or move or delete single entries; not a copy of the log) in localStorage under `tt-outbox:<user>/<repo>`, and a
   single background sender commits it right away. Operations queued while a
   send runs go out together in the next commit. They are replayed on the log at
   the branch head, so other writers' rows survive, and replaying one twice gives

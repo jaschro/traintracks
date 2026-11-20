@@ -7,7 +7,7 @@ import { sessionEntries } from '../lib/log.js';
 import { monthToText } from '../lib/months.js';
 
 const NOV = 'log/2026-11.json'; // every entry in these tests is in November 2026
-import { mergeOp, removeOp, moveOp, applyOp, applyOps, batchMessage, createOutbox, createSyncer, retryDelay } from '../lib/outbox.js';
+import { mergeOp, removeOp, moveOp, moveEntriesOp, removeEntriesOp, applyOp, applyOps, batchMessage, createOutbox, createSyncer, retryDelay } from '../lib/outbox.js';
 
 const entry = o => ({ id: 'x1', gym_id: 'eg', machine_id: 'r02', date: '2026-11-04', set: 1, variant: [], reps: 10, ...o });
 const S1 = { gym_id: 'eg', machine_id: 'r02', date: '2026-11-05' };
@@ -90,6 +90,25 @@ test('applying an operation twice gives the same log (a resend is harmless)', ()
   for (const op of ops) { const once = applyOp(log, op); assert.deepEqual(applyOp(once, op), once, op.kind); }
 });
 
+test('entry ops (0.4.1): move or delete one entry, survive a JSON round trip, replay the same twice', () => {
+  const log = [entry({ id: 'w1', machine_id: 'walk', date: '2026-11-05', garmin_id: '24000000001' }), entry({ id: 'w2', machine_id: 'walk', date: '2026-11-05', garmin_id: '24000000002' })];
+  const to = { gym_id: 'eg', gym: 'Example Gym', room_id: 'out', room: 'Outside', machine_id: 'course', machine: 'Park Loop' };
+  const mv = JSON.parse(JSON.stringify(moveEntriesOp(['w2'], to, 'Move one Walk')));
+  const rm = JSON.parse(JSON.stringify(removeEntriesOp(['w1'], 'Delete one Walk')));
+  assert.deepEqual([mv.kind, mv.ids, rm.kind, rm.ids], ['move-entries', ['w2'], 'remove-entries', ['w1']]);
+  const once = applyOp(log, mv);
+  assert.deepEqual(once.map(e => [e.id, e.machine_id]), [['w1', 'walk'], ['w2', 'course']]);
+  assert.deepEqual(applyOp(once, mv), once);
+  assert.deepEqual(applyOps(log, [mv, rm]).map(e => e.id), ['w2']);
+  assert.deepEqual(applyOps(log, [mv, rm, rm]), applyOps(log, [mv, rm]));
+});
+
+test('ops queued by an older app (merge, remove, move without ids) keep their meaning', () => {
+  const log = [entry({ id: 'a', date: '2026-11-05' }), entry({ id: 'b', date: '2026-11-05', set: 2 })];
+  const old = { id: 'op-old', kind: 'move', from: S1, to: { gym_id: 'eg', machine_id: 'p01' }, message: 'Move', at: '2026-11-01T00:00:00Z' };
+  assert.deepEqual(applyOp(log, old).map(e => e.machine_id), ['p01', 'p01'], 'a move without ids still moves the whole session');
+});
+
 test('batchMessage: one message, or a count and the list (kept short)', () => {
   const a = { message: 'Log Row 2026-11-05' }, b = { message: 'Log Press 2026-11-05' };
   assert.equal(batchMessage([a]), 'Log Row 2026-11-05');
@@ -166,6 +185,24 @@ test('sender: another writer\'s row survives (the change is replayed on the curr
   assert.ok(ids.includes('from-garmin') && ids.includes('x1'));
   assert.equal(ids.length, 3);
   assert.ok(sent[0].res.log.some(e => e.id === 'from-garmin'), 'onSent gets the log as committed');
+});
+
+test('sender: moving one entry on a branch that moved meanwhile replays it on the new head', async () => {
+  const walk = o => entry({ machine_id: 'walk', gym_id: 'generic', date: '2026-11-05', ...o });
+  const { gh, syncer } = setup([walk({ id: 'w1', garmin_id: '24000000001' }), walk({ id: 'w2', garmin_id: '24000000002' })]);
+  const to = { gym_id: 'eg', gym: 'Example Gym', room_id: 'out', room: 'Outside', machine_id: 'course', machine: 'Park Loop' };
+  const op = moveEntriesOp(['w2'], to, 'Move one Walk 2026-11-05 to Park Loop');
+  // The Garmin Action posts a third walk before the move is sent.
+  const log = readLog(gh);
+  log.unshift(walk({ id: 'w3', garmin_id: '24000000003' }));
+  gh.write({ [NOV]: monthToText(log) }, 'garmin post');
+  const before = gh.commitCount();
+  await syncer.add(op);
+  assert.equal(gh.commitCount(), before + 1);
+  assert.equal(gh.lastMessage(), 'Move one Walk 2026-11-05 to Park Loop');
+  const after = readLog(gh);
+  assert.deepEqual(after.map(e => [e.id, e.machine_id]).sort(), [['w1', 'walk'], ['w2', 'course'], ['w3', 'walk']]);
+  assert.equal(after.find(e => e.id === 'w2').garmin_id, '24000000002');
 });
 
 test('sender: a failure keeps the change, schedules a retry, and the retry sends it', async () => {

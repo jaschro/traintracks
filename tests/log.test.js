@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { LOG_COLUMNS, LOG_TYPE_FIELDS, newId, inSession, sessionEntries, sortLog, mergeSession,
-  removeSession, lastSession, sessionDates, machineSessions, moveSession, garminIdOf, logToCSV, logToJSON, zoneSeconds, minFromSec } from '../lib/log.js';
+  removeSession, lastSession, sessionDates, machineSessions, moveSession, moveEntries, removeEntries, garminIdOf, logToCSV, logToJSON, zoneSeconds, minFromSec } from '../lib/log.js';
 import { parseCSV } from '../lib/csv.js';
 
 // Made-up data only: "Example Gym" (gym_id "eg"), machine "r02".
@@ -254,6 +254,58 @@ test('moveSession: same machine or nothing to move → unchanged', () => {
   const log = [E({ id: 'a' })];
   assert.equal(moveSession(log, S(), { ...TO, gym_id: 'eg', machine_id: 'r02' }), log);
   assert.equal(moveSession(log, S({ date: '2020-01-01' }), TO), log);
+});
+
+// Three Garmin walks on one day, each its own activity and each posted as set 1.
+const WALK = { gym_id: 'generic', machine_id: 'walk', date: '2026-11-05' };
+const walks = () => [
+  E({ id: 'w3', ...WALK, time: '20:49:00', set: 1, weight_lb: undefined, reps: undefined, duration_sec: 1500, distance_mi: 1.2, hr_avg_bpm: 101, garmin_id: '24000000013', zone1_min: 20, notes: 'Evening walk (Garmin 24000000013)' }),
+  E({ id: 'w2', ...WALK, time: '13:09:00', set: 1, weight_lb: undefined, reps: undefined, duration_sec: 900, garmin_id: '24000000012' }),
+  E({ id: 'w1', ...WALK, time: '11:50:00', set: 1, weight_lb: undefined, reps: undefined, duration_sec: 600, garmin_id: '24000000011' }),
+  E({ id: 'other', date: '2026-11-04' })
+];
+const COURSE = { gym_id: 'eg', gym: 'Example Gym', room_id: 'out', room: 'Outside', machine_id: 'course', machine: 'Park Loop' };
+
+test('moveEntries: moves one of three same-day walks; the other two are not touched', () => {
+  const log = walks();
+  const out = moveEntries(log, ['w3'], COURSE);
+  const m = out.find(e => e.id === 'w3');
+  assert.deepEqual([m.gym_id, m.gym, m.room_id, m.room, m.machine_id, m.machine, m.set], ['eg', 'Example Gym', 'out', 'Outside', 'course', 'Park Loop', 1]);
+  const { gym_id, gym, room_id, room, machine_id, machine, set, ...restMoved } = m;
+  const { gym_id: a, room_id: b, machine_id: c, set: d, ...restBefore } = log[0];
+  assert.deepEqual(restMoved, restBefore, 'id, date, time, garmin_id, duration, distance, HR, zones and notes are kept');
+  assert.deepEqual(out.slice(1), log.slice(1), 'the other walks and entries are the same objects, set numbers included');
+  assert.deepEqual(out.map(e => e.id), log.map(e => e.id), 'rows stay in place');
+  assert.deepEqual(sessionEntries(out, WALK).map(e => e.id).sort(), ['w1', 'w2']);
+  assert.equal(log[0].machine_id, 'walk', 'input not modified');
+});
+
+test('moveEntries: onto a machine with a session that day, the entry is numbered after its sets', () => {
+  const log = [...walks(), E({ id: 'c1', gym_id: 'eg', machine_id: 'course', set: 1 }), E({ id: 'c2', gym_id: 'eg', machine_id: 'course', set: 2 })];
+  const out = moveEntries(log, ['w2'], COURSE);
+  assert.deepEqual(sessionEntries(out, { gym_id: 'eg', machine_id: 'course', date: '2026-11-05' }).map(e => [e.id, e.set]), [['c1', 1], ['c2', 2], ['w2', 3]]);
+});
+
+test('moveEntries: the date never changes, so the entry stays in its month', () => {
+  const log = [E({ id: 'oct', ...WALK, date: '2026-10-31', garmin_id: '24000000010' }), ...walks()];
+  const out = moveEntries(log, ['oct'], COURSE);
+  assert.equal(out[0].date, '2026-10-31');
+  assert.equal(out[0].machine_id, 'course');
+});
+
+test('moveEntries: replaying is harmless; unknown ids or the same machine change nothing', () => {
+  const once = moveEntries(walks(), ['w3'], COURSE);
+  assert.deepEqual(moveEntries(once, ['w3'], COURSE), once);
+  const log = walks();
+  assert.equal(moveEntries(log, ['gone'], COURSE), log);
+  assert.equal(moveEntries(log, ['w1'], { ...COURSE, gym_id: 'generic', machine_id: 'walk' }), log);
+});
+
+test('removeEntries: deletes one walk and leaves the others; replaying is harmless', () => {
+  const out = removeEntries(walks(), ['w2']);
+  assert.deepEqual(out.map(e => e.id), ['w3', 'w1', 'other']);
+  assert.deepEqual(removeEntries(out, ['w2']), out);
+  assert.deepEqual(sessionEntries(out, WALK).map(e => e.set), [1, 1], 'set numbers untouched');
 });
 
 test('CSV: duration_min is computed from duration_sec (2 decimals) and never stored', () => {

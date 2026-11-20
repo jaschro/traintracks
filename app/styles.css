@@ -103,7 +103,10 @@ a{color:var(--accent)}
 .ha{display:flex;gap:4px}
 .sr{display:flex;font-size:13px;color:var(--dim);padding:3px 0;gap:8px}
 .sn{min-width:44px}
-.sv{color:var(--text);font-weight:500}
+.sv{color:var(--text);font-weight:500;flex:1;min-width:0}
+.st{color:var(--dim);font-weight:500;margin-right:6px}
+.sa{display:flex;gap:2px;margin:-6px 0}
+.ib.sm{font-size:15px;padding:6px 7px}
 .hn{font-size:12.5px;color:var(--dim);font-style:italic;margin-top:6px;line-height:1.4}
 .zr{font-size:12px;color:var(--dim);margin-top:4px}
 

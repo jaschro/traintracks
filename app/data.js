@@ -20,7 +20,7 @@ import { GitHubRepo, isConflict } from '../lib/github.js';
 import { commitLog as commitLogFiles, newLogCache, primeLogCache } from '../lib/logstore.js';
 import { logLayout } from '../lib/months.js';
 import { FILES, CATALOG, TEMPLATE, STORAGE } from '../lib/config.js';
-import { createOutbox, createSyncer, mergeOp, removeOp, moveOp, applyOp, applyOps, batchMessage } from '../lib/outbox.js';
+import { createOutbox, createSyncer, mergeOp, removeOp, moveOp, moveEntriesOp, removeEntriesOp, applyOp, applyOps, batchMessage } from '../lib/outbox.js';
 import { sortLog } from '../lib/log.js';
 import { applyGenericOverrides, genericOverridesFrom, serialiseGym, gymPathFor, GENERIC_ID } from '../lib/gyms.js';
 import { parseWellnessCSV, parseBucketsCSV } from '../lib/goals.js';
@@ -301,6 +301,10 @@ export const saveSession = (from, sets, to, message) => queue(mergeOp(S.log, fro
 export const deleteSession = (s, message) => queue(removeOp(s, message));
 /** Move a session to another machine: to = { gym_id, gym, room_id, room, machine_id, machine }. */
 export const moveSessionTo = (from, to, message) => queue(moveOp(from, to, message));
+/** Move single entries (by id) to another machine, leaving the rest of their sessions. */
+export const moveEntriesTo = (ids, to, message) => queue(moveEntriesOp(ids, to, message));
+/** Delete single entries (by id), leaving the rest of their sessions. */
+export const deleteEntries = (ids, message) => queue(removeEntriesOp(ids, message));
 
 // ------------------------------------------------------------ single files ---
 

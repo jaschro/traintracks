@@ -484,6 +484,46 @@ if (usingFixture) {
   check('only the changed month is downloaded, as a raw blob', blobs.length === 1 && apiCalls.length === 3 && !apiCalls.some(c => c.includes('/contents/')), apiCalls.join(', '));
   await openMachineByName('Example Gym', 'Seated Row');
   check('the other device\'s set is shown', (await text('#detailbody')).includes('logged on another device'));
+
+  // 8e. Three Garmin walks on one day (each its own activity, each posted as set 1): move only the last one
+  const W = { gym_id: 'generic', gym: 'Common Machines', room_id: 'outdoor-activities', room: 'Outdoor Activities', machine_id: 'walk', machine: 'Walk', date: '2026-11-09', set: 1, variant: [] };
+  const nov2 = JSON.parse(fake.read('log/2026-11.json'));
+  nov2.unshift(
+    { ...W, id: 'gw3', time: '20:49:00', duration_sec: 1500, distance_mi: 1.2, hr_avg_bpm: 101, garmin_id: '24000000903', zone1_min: 20.5, notes: 'Evening walk (Garmin 24000000903)' },
+    { ...W, id: 'gw2', time: '13:09:00', duration_sec: 900, distance_mi: 0.7, garmin_id: '24000000902', notes: 'Walk (Garmin 24000000902)' },
+    { ...W, id: 'gw1', time: '11:50:00', duration_sec: 600, distance_mi: 0.5, garmin_id: '24000000901', notes: 'Walk (Garmin 24000000901)' });
+  fake.write({ 'log/2026-11.json': monthToText(nov2) }, 'garmin post');
+  await reopen();
+  await page.waitForFunction(() => document.body.dataset.load === 'fresh', null, { timeout: 20000 });
+  await openMachineByName('Common Machines', 'Walk');
+  const walkDay = '.hi:has-text("Nov 9, 2026")';
+  check('one Walk session with three sets, each with its own Move and Delete', (await page.$$(`${walkDay} .sr`)).length === 3 && (await page.$$(`${walkDay} [data-act="move-entry"]`)).length === 3 && (await page.$$(`${walkDay} [data-act="del-entry"]`)).length === 3,
+    await text('#detailbody'));
+  check('each Garmin set shows its start time', /11:50/.test(await text(walkDay)) && /20:49/.test(await text(walkDay)));
+  await shot('walk-sets');
+  const beforeMove = allFiles();
+  const gw3Before = readLog().find(e => e.id === 'gw3');
+  await page.click(`${walkDay} .sr:has-text("20:49") [data-act="move-entry"]`);
+  check('the move modal says only this activity moves', /Only this activity moves/.test(await text('#mdbody')) && /20:49/.test(await text('#mdbody')));
+  await page.selectOption('#mvto', 'example-gym|cardio|tm');
+  await page.click('[data-act="move-session-do"]');
+  await page.waitForFunction(() => /Moved|failed/.test(document.getElementById('toast').textContent), null, { timeout: 15000 });
+  await waitSynced();
+  const after = readLog();
+  const gw3 = after.find(e => e.id === 'gw3');
+  check('the 20:49 walk is on the other gym\'s machine', gw3.gym_id === 'example-gym' && gw3.gym === 'Example Gym' && gw3.room_id === 'cardio' && gw3.machine_id === 'tm' && gw3.machine === 'Treadmill' && gw3.set === 1, JSON.stringify(gw3));
+  const strip = e => { const { gym_id, gym, room_id, room, machine_id, machine, set, ...r } = e; return JSON.stringify(r); };
+  check('it keeps its id, Garmin link, time, distance, HR, zones and notes', strip(gw3) === strip(gw3Before));
+  check('the other two walks stay on Walk, untouched', ['gw1', 'gw2'].every(id => { const e = after.find(x => x.id === id); return e.machine_id === 'walk' && e.gym_id === 'generic' && e.set === 1; }));
+  check('the move is one commit of only that month', changedSince(beforeMove).join() === 'log/2026-11.json', changedSince(beforeMove).join());
+  check('Walk now shows two sets that day', (await page.$$(`${walkDay} .sr`)).length === 2);
+  // delete one of the two that are left
+  await page.click(`${walkDay} .sr:has-text("13:09") [data-act="del-entry"]`);
+  await page.click('[data-act="modal-ok"]');
+  await waitToast();
+  const left = readLog();
+  check('deleting one walk leaves the other', !left.some(e => e.id === 'gw2') && left.some(e => e.id === 'gw1' && e.machine_id === 'walk') && left.some(e => e.id === 'gw3'));
+  check('a one-set session has no per-set buttons', (await page.$$(`${walkDay} [data-act="move-entry"]`)).length === 0 && (await page.$$(`${walkDay} [data-act="move-session"]`)).length === 1);
 }
 
 await ctx.close();
