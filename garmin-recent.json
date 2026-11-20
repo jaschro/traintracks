@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-19T20:38:52Z",
-  "today": "2026-11-19",
+  "fetched_at": "2026-11-20T06:13:55Z",
+  "today": "2026-11-20",
   "recent_activities": [
+    {
+      "activity_id": "25137200923",
+      "date": "2026-11-19",
+      "start_time": "20:49:03",
+      "type": "walking",
+      "name": "Miami Beach Walking",
+      "duration_sec": 4246,
+      "distance_mi": 3.67,
+      "hr_avg_bpm": 84.0,
+      "hr_max_bpm": 109.0,
+      "active_kcal": 368.0,
+      "elevation_gain_ft": 33,
+      "speed_avg_mph": 3.11
+    },
     {
       "activity_id": "25133850042",
       "date": "2026-11-19",
@@ -323,39 +337,25 @@
       "active_kcal": 311.0,
       "elevation_gain_ft": null,
       "speed_avg_mph": null
-    },
-    {
-      "activity_id": "24981382877",
-      "date": "2026-11-05",
-      "start_time": "16:00:45",
-      "type": "walking",
-      "name": "\u00c1lvaro Obreg\u00f3n Walking",
-      "duration_sec": 5035,
-      "distance_mi": 3.39,
-      "hr_avg_bpm": 82.0,
-      "hr_max_bpm": 99.0,
-      "active_kcal": 378.0,
-      "elevation_gain_ft": 128,
-      "speed_avg_mph": 2.42
     }
   ],
   "today_stats": {
-    "steps": 7179,
-    "floors": 5.32874,
-    "resting_hr_bpm": 46,
-    "active_kcal": 174.0,
-    "body_battery": 68,
-    "stress_avg": 23,
-    "week_steps": 79736
+    "steps": null,
+    "floors": 0.0,
+    "resting_hr_bpm": 49,
+    "active_kcal": 0.0,
+    "body_battery": 36,
+    "stress_avg": 31,
+    "week_steps": 78052
   },
   "training_readiness": {
-    "score": 89,
-    "level": "HIGH",
-    "feedback": "WELL_RECOVERED"
+    "score": null,
+    "level": null,
+    "feedback": null
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 5460,
+    "week_moderate_sec": 9360,
     "week_vigorous_sec": 1860
   },
   "hrv": {
@@ -374,9 +374,9 @@
     "respiration_brpm": 14.0,
     "spo2_pct": 96.0
   },
-  "spo2_avg_pct": 95.0,
+  "spo2_avg_pct": 97.0,
   "respiration": {
-    "waking_brpm": 13.0,
-    "sleep_brpm": 14.0
+    "waking_brpm": 15.0,
+    "sleep_brpm": null
   }
 }
