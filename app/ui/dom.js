@@ -68,9 +68,10 @@ export function toast(msg, type) {
 export function showLoading(msg) { $('ldmsg').textContent = msg || 'Loading…'; $('ld').classList.add('on'); }
 export function hideLoading() { $('ld').classList.remove('on'); }
 
-export function modal(inner) {
+export function modal(inner, { focus = true } = {}) {
   $('mdbody').innerHTML = inner;
   $('mov').classList.add('on');
+  if (!focus) return;
   const first = qs('input,select,textarea', $('mdbody'));
   if (first && first.type !== 'file') setTimeout(() => first.focus(), 50);
 }

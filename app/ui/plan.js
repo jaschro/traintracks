@@ -18,7 +18,7 @@ function renderPlan() {
   const p = S.plan;
   if (!p) { setHTML('planbody', html`<div class="empty"><div class="icon">🛤️</div><p>No route today.<br>Ask your coach to plan one.</p></div>`); return; }
   const problems = validatePlan(p);
-  const st = planStatus(p, S.log, localDate());
+  const st = planStatus(p, S.log, localDate(), S.gyms);
   let nextMarked = false;
   const stops = exercises().map((e, i) => {
     if (!e || typeof e !== 'object') return '';
@@ -43,7 +43,7 @@ function renderPlan() {
 function planCard() {
   const p = S.plan;
   if (!p) return '';
-  const st = planStatus(p, S.log, localDate());
+  const st = planStatus(p, S.log, localDate(), S.gyms);
   return html`<div class="sh first">Today's route</div>
     <div class="pc" ${act('nav', { to: 'plan' })}>
       <div class="pch"><span class="pcn">${st.done === st.total && st.total ? 'All stops done 🏁' : 'Route ready 🚂'}</span><span class="pct">${fmtWhen(p.generated_at).replace(/,? \d+:\d+.*$/, '')}</span></div>
@@ -55,7 +55,7 @@ function planCard() {
 /** After a session logged from the plan is saved: refresh, and celebrate once per plan when all stops are done. */
 function afterPlanLog() {
   if (current() === 'plan') renderPlan();
-  const st = planStatus(S.plan, S.log, localDate());
+  const st = planStatus(S.plan, S.log, localDate(), S.gyms);
   if (!st.total || st.done < st.total) return;
   const key = S.plan.generated_at || localDate();
   try { if (localStorage.getItem(STORAGE.celebrated) === key) return; localStorage.setItem(STORAGE.celebrated, key); } catch { /* ignore */ }
@@ -63,9 +63,15 @@ function afterPlanLog() {
 }
 
 logHooks.afterPlanLog = afterPlanLog;
-logHooks.planSets = (gym, machine) => {
-  const e = exercises().find(x => x && x.machine_id === machine.id && (!x.gym_id || x.gym_id === gym.id));
-  return e ? { sets: prefillFromPlan(e), note: typeof e.note === 'string' ? e.note : '' } : null;
+/** The plan's sets for the log form: the stop that was tapped (else the first stop on that machine), each set with its variation. */
+logHooks.planSets = (gym, machine, index) => {
+  const all = exercises();
+  const fits = x => x && x.machine_id === machine.id && (!x.gym_id || x.gym_id === gym.id);
+  const i = index != null && fits(all[index]) ? index : all.findIndex(fits);
+  if (i < 0) return null;
+  const e = all[i];
+  const done = planStatus(S.plan, S.log, localDate(), S.gyms).doneIdx.has(i);
+  return { sets: prefillFromPlan(e, machine.variations_default), note: typeof e.note === 'string' ? e.note : '', done };
 };
 
 screen('plan', renderPlan);
@@ -76,9 +82,9 @@ on('plan-log', d => {
   const found = resolveExercise(S.gyms, e);
   if (!found) { toast('That machine is not in your equipment', 'err'); return; }
   S.gym = found.gym; S.room = found.room; S.machine = found.machine;
-  startLog(null, { fromPlan: true, variant: normalizeVariant(e.variant) });
+  startLog(null, { fromPlan: true, variant: normalizeVariant(e.variant), planIndex: Number(d.i) });
 });
-on('celebrate', () => celebrate(planStatus(S.plan, S.log, localDate()).total));
+on('celebrate', () => celebrate(planStatus(S.plan, S.log, localDate(), S.gyms).total));
 on('plan-dismiss', async () => {
   if (!await confirmDialog('Dismiss this route?', 'The plan file is removed from your repo. Your coach can write a new one any time.', { ok: 'Dismiss', danger: true })) return;
   showLoading('Dismissing…');

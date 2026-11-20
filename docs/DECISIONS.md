@@ -14,10 +14,30 @@ saw only the code rediscovered a deliberate decision as a bug.
   hiding the token.
 - **GitHub is the single source of truth.** The app, the coach and the Actions all
   write the same files; the app tolerates files changing underneath it.
-- **One row per set** in the log. A session is gym_id + machine_id + date + variant.
+- **One row per set** in the log. A session is gym_id + machine_id + date.
   Saving replaces the session (pre-fill plus append once turned 3 sets into 15).
+- **Variations belong to each set, not to the session** (0.4.0, owner's
+  decision, 20 Nov 2026). A push-up workout is one set flat, one incline, one
+  decline: one session with three rows, each with its own `variant`. Until 0.3.2
+  the variant was part of the session key, so those were three sessions picked
+  one at a time. One rule for every machine with variations (bodyweight and
+  weighted alike: lat pulldown grip, leg press feet). The form has a Variation
+  cell per set that opens a picker (one choice per group, free tags too); a new
+  set copies the one above. No data changed: every row already had `variant`.
+  Days saved before 0.4.0 with two variants on one machine read as one session
+  (rows grouped by variant, renumbered on the next save), and an operation
+  still queued on a device by an older version keeps its old meaning (its key
+  carries `variant`, so it replaces only that variant's rows).
+- **Bodyweight exercises record reps only** (0.4.0, owner's decision). Push-ups,
+  sit-ups, squats and lunges in Common Machines' "Bodyweight — No Equipment"
+  room are `log_type: "reps"`: the form is Variation | Reps, with no weight
+  column. Weighted sit-ups keep `weighted` as a tag; no weight is recorded.
+  Free-weight and selectorized versions (barbell squat, dumbbell lunges) keep
+  their weight column. A user's own copy of one of these machines in
+  `equipment/generic.local.json` still wins.
 - **Variations are tags, not machines.** Variants count toward the machine's goals
-  and history; they are a filter, never a split. Forms that are not
+  and history; they are a filter, never a split. A goal's `variants` /
+  `exclude_variants` filter counts the matching **sets**. Forms that are not
   interchangeable (the three planks) are separate machines.
 - **One convention everywhere** (`docs/DATA-FORMAT.md`): snake_case names, every number in one unit named by its suffix (`_sec`, `_mi`, `_lb`, `_bpm`...), in every data file. The old
   `duration`/`level` fields changed meaning by machine type.
@@ -125,6 +145,17 @@ saw only the code rediscovered a deliberate decision as a bug.
   `tt-last-sync-error:<user>/<repo>` and shown in Settings, and the status pill
   shows GitHub's own message ("GitHub 422: Update is not a fast forward"), so a
   failure can be diagnosed after the fact.
+- **Time inputs use the normal text keyboard** (0.3.2): `type="text" inputmode="text"`,
+  autocorrect and capitalisation off. Neither phone has a digits keypad with ":".
+  `inputmode="numeric"` (and `type="tel"`) give iOS a 0–9 pad and Android a dial
+  pad, neither with ":"; `inputmode="decimal"` adds only "." (and "," in some
+  locales), and "." already means decimal minutes, so it can't stand for ":".
+  `type="number"` drops "70:46" as invalid. The text keyboard is one tap ("123" /
+  "?123") from a layout with both digits and ":" on iOS Safari and Android Chrome.
+  A separate ":" button or min/sec boxes were rejected as more UI for the same
+  result. Parsing (`parseDuration`): "70:46" mm:ss, "1:10:46" h:mm:ss, a plain
+  number is minutes ("30", "70.77"); seconds and minutes after hours must be
+  00–59, so "70:99" is an error, not 71:39.
 - **Stored data is neutral.** Heart rate is stored as 5-bpm buckets per activity;
   zones and HR-range goals are applied when shown.
 - **Classification:** an entry with speed, distance, heart rate, incline, zones or a Garmin link is cardio, whatever the machine. (LogTrim used heart rate and incline only; version 2 split `level` into speed and distance.)

@@ -42,7 +42,8 @@ This repo (`traintracksapp/traintracks`) is the **template** users copy with
   in the background (`lib/outbox.js`).
 - Every GitHub API request is sent with `cache: 'no-cache'` (answers say
   `max-age=60`; a stale branch head makes saves fail with 422).
-- One row per set. Session = gym_id + machine_id + date + variant. Saving replaces
+- One row per set; each set has its own `variant` (0.4.0). Session = gym_id + machine_id + date
+  (the variant is NOT part of the key). Saving replaces
   the session; changing the date moves it. Unknown entry fields survive edits.
 - `workout-log.csv` is read by header name, never by position.
 

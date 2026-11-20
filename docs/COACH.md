@@ -79,8 +79,8 @@ columns can be added. `workout-log.csv` columns include:
 |---|---|
 | `date`, `time` | local date `YYYY-MM-DD`, time `HH:MM:SS` (may be blank on old rows) |
 | `gym_id`, `gym`, `room`, `machine_id`, `machine` | where and what |
-| `variant` | variation tags joined with `"; "`, e.g. `incline; wide` (blank = plain) |
-| `set` | set number within the session |
+| `variant` | this set's variation tags joined with `"; "`, e.g. `incline; wide` (blank = plain). Sets of one session can differ |
+| `set` | set number within the session (that machine's sets that day, every variation) |
 | `weight_lb`, `reps` | negative weight = assistance on an assisted machine (−100 is easier than −85) |
 | `duration_sec` | every duration, in seconds (planks, classes, cardio) |
 | `distance_mi`, `speed_mph`, `incline_pct`, `level`, `hr_avg_bpm` | cardio details |
@@ -110,7 +110,7 @@ has no id you can know: leave it out, or ask. Include `gym_id` when the same
       "sets": [ { "set": 1, "weight_lb": 60, "reps": 15 }, { "set": 2, "weight_lb": 80, "reps": 12 } ],
       "note": "Optional cue for this exercise." },
     { "machine_id": "push-ups", "gym_id": "generic", "machine": "Push Ups", "variant": ["incline"],
-      "sets": [ { "set": 1, "reps": 25 }, { "set": 2, "reps": 25 } ] },
+      "sets": [ { "set": 1, "reps": 25 }, { "set": 2, "reps": 20, "variant": ["decline"] }, { "set": 3, "reps": 30, "variant": [] } ] },
     { "machine_id": "elbow-planks", "gym_id": "generic", "machine": "Elbow Planks",
       "sets": [ { "set": 1, "duration_sec": 60 } ] },
     { "machine_id": "treadmill", "gym_id": "generic", "machine": "Treadmill",
@@ -120,7 +120,12 @@ has no id you can know: leave it out, or ask. Include `gym_id` when the same
 ```
 
 `variant` is optional: tags the person can pick for that machine (leave out the
-machine's default tags; they mean "plain").
+machine's default tags; they mean "plain"). Variations are per set: the
+exercise's `variant` applies to each of its sets, and a set may carry its own
+`variant` instead (`[]` = plain), as in the push-ups above: one incline, one
+decline, one plain set. The stop counts as done once any set that day has the
+exercise's variant. To plan two variations as separate stops, list the
+exercise twice; the second one adds its sets to the same session.
 
 Push it with code execution (GET the current sha first; it's needed to overwrite):
 

@@ -27,8 +27,9 @@ export const S = {
   // navigation and screen state
   stack: ['home'],
   gym: null, room: null, machine: null,
-  editSession: null,     // { gym_id, machine_id, date, variant } when editing
-  logVariant: [],        // the variant chosen in the log form
+  editSession: null,     // { gym_id, machine_id, date } when editing
+  logVariant: [],        // the variation a new, empty set starts with (from the plan)
+  logShowVar: false,     // show the Variation column on a machine without variation groups
   fromPlan: false,
   historyAll: false,
   weekOffset: 0,

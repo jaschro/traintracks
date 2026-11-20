@@ -80,8 +80,10 @@ grip: narrow, standard, wide
 angle: flat, incline, decline
 ```
 
-When you log, you can pick one tag per group (or type your own). Variations
-count toward the same exercise's history and goals.
+When you log, each set has a **Variation** cell: tap it to pick one tag per
+group (or type your own), so one session can be a flat set, an incline set and
+a decline set. A new set copies the one above. Variations count toward the same
+exercise's history and goals.
 
 "Common Machines" comes with the app (push-ups, walks, runs, classes…). You can
 hide what you don't use and add your own; your changes survive app updates.
