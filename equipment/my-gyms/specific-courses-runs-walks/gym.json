@@ -56,6 +56,13 @@
           "muscles_worked": "",
           "image": null,
           "log_type": "weight"
+        },
+        {
+          "id": "m1795143860408",
+          "name": "JCC to Portofino",
+          "muscles_worked": "",
+          "image": null,
+          "log_type": "mins"
         }
       ]
     }
