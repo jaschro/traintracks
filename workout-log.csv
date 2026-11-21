@@ -1,4 +1,7 @@
 id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,reps,duration_sec,duration_min,distance_mi,speed_mph,level,incline_pct,hr_avg_bpm,garmin_id,zone1_min,zone2_min,zone3_min,zone4_min,zone5_min,notes
+emwqvsvlwg8h01,2026-11-21,15:49:40,portofino,Portofino Gym,machines,Machines Room,pm02,Seated Row Machine,,1,55,15,,,,,,,,,,,,,,
+emwqvsvlwtnu02,2026-11-21,15:49:40,portofino,Portofino Gym,machines,Machines Room,pm02,Seated Row Machine,,2,70,15,,,,,,,,,,,,,,
+emwqvsvlwg0z03,2026-11-21,15:49:40,portofino,Portofino Gym,machines,Machines Room,pm02,Seated Row Machine,,3,90,15,,,,,,,,,,,,,,
 emwpd2gpnvwr02,2026-11-20,14:17:29,portofino,Portofino Gym,machines,Machines Room,pm03,Seated Chest Press Machine,,1,55,15,,,,,,,,,,,,,,
 emwpd2gpnup803,2026-11-20,14:17:29,portofino,Portofino Gym,machines,Machines Room,pm03,Seated Chest Press Machine,,2,70,15,,,,,,,,,,,,,,
 emwpd2gpnea704,2026-11-20,14:17:29,portofino,Portofino Gym,machines,Machines Room,pm03,Seated Chest Press Machine,,3,85,12,,,,,,,,,,,,,,
