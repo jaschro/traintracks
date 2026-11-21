@@ -1,4 +1,7 @@
 [
+{"weight_lb":55,"reps":15,"variant":[],"gym":"Portofino Gym","room_id":"machines","room":"Machines Room","machine":"Seated Row Machine","time":"15:49:40","notes":"","id":"emwqvsvlwg8h01","set":1,"date":"2026-11-21","machine_id":"pm02","gym_id":"portofino"},
+{"weight_lb":70,"reps":15,"variant":[],"gym":"Portofino Gym","room_id":"machines","room":"Machines Room","machine":"Seated Row Machine","time":"15:49:40","notes":"","id":"emwqvsvlwtnu02","set":2,"date":"2026-11-21","machine_id":"pm02","gym_id":"portofino"},
+{"weight_lb":90,"reps":15,"variant":[],"gym":"Portofino Gym","room_id":"machines","room":"Machines Room","machine":"Seated Row Machine","time":"15:49:40","notes":"","id":"emwqvsvlwg0z03","set":3,"date":"2026-11-21","machine_id":"pm02","gym_id":"portofino"},
 {"weight_lb":55,"reps":15,"variant":[],"gym":"Portofino Gym","room_id":"machines","room":"Machines Room","machine":"Seated Chest Press Machine","time":"14:17:29","notes":"","id":"emwpd2gpnvwr02","set":1,"date":"2026-11-20","machine_id":"pm03","gym_id":"portofino"},
 {"weight_lb":70,"reps":15,"variant":[],"gym":"Portofino Gym","room_id":"machines","room":"Machines Room","machine":"Seated Chest Press Machine","time":"14:17:29","notes":"","id":"emwpd2gpnup803","set":2,"date":"2026-11-20","machine_id":"pm03","gym_id":"portofino"},
 {"weight_lb":85,"reps":12,"variant":[],"gym":"Portofino Gym","room_id":"machines","room":"Machines Room","machine":"Seated Chest Press Machine","time":"14:17:29","notes":"","id":"emwpd2gpnea704","set":3,"date":"2026-11-20","machine_id":"pm03","gym_id":"portofino"},
