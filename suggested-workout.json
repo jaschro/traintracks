@@ -1,152 +1,32 @@
 {
-  "generated_at": "2026-11-20T17:45:44Z",
-  "coach_note": "Fri Nov 20 - Portofino. Wednesday here was back, shoulders, pec fly and glutes, so today is legs, chest press and arms. The week (Sat-Fri) is already closed on cardio days (4/4), strength days (3/3) and Zone 2 (53 of 45 min), so cardio is just a short warm-up. The one open goal is leg lifts at 100/140: the two sets at the end finish it. Sleep was 7.8 h (score 89), HRV balanced.",
+  "generated_at": "2026-11-21T18:34:48Z",
+  "coach_note": "Sat Nov 21 - Portofino, day 1 of a new week. Yesterday was legs, chest press and arms, then a run that peaked at 166 with about 5 minutes in Zones 4-5. Overnight HRV was 37 (weekly average 41), sleep 6.7 h, resting HR 47-50. So today is low-impact: a steady Zone 2 ride, then back and shoulders (last done Wednesday), hips, and a start on the weekly leg-lift and plank goals. No leg press, no chest, no running.",
   "exercises": [
     {
-      "machine_id": "pa06",
+      "machine_id": "pa04",
       "gym_id": "portofino",
-      "machine": "Elliptical Cross Trainer",
+      "machine": "Peloton",
       "gym": "Portofino Gym",
       "room": "Aerobic Room",
-      "note": "Easy warm-up, under 120 bpm. First time on it since Sep 20.",
+      "note": "Steady 120-129 bpm once warm; keep it under 130 after yesterday's run. 30 minutes covers most of the week's 45-minute Zone 2 goal.",
       "sets": [
         {
           "set": 1,
-          "duration_sec": 900
+          "duration_sec": 1800
         }
       ]
     },
     {
-      "machine_id": "pw06",
+      "machine_id": "pw02",
       "gym_id": "portofino",
-      "machine": "Seated Leg Press Machine",
+      "machine": "Lat Pulldown Machine",
       "gym": "Portofino Gym",
       "room": "Weight Room",
-      "note": "Last two visits were a single 55x30. Back to the Aug 8 ladder (70/85/100 x10) with more reps.",
+      "note": "Wednesday was 55/70/85 x15, all clean. Top set moves to 90.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 70,
-          "reps": 15
-        },
-        {
-          "set": 2,
-          "weight_lb": 85,
-          "reps": 15
-        },
-        {
-          "set": 3,
-          "weight_lb": 100,
-          "reps": 12
-        }
-      ]
-    },
-    {
-      "machine_id": "pw08",
-      "gym_id": "portofino",
-      "machine": "Plate-Loaded Seated Calf Raise",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Same ladder as Oct 14; planned Wednesday but skipped.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 50,
-          "reps": 15
-        },
-        {
-          "set": 2,
-          "weight_lb": 60,
-          "reps": 15
-        },
-        {
-          "set": 3,
-          "weight_lb": 70,
-          "reps": 15
-        }
-      ]
-    },
-    {
-      "machine_id": "pw04",
-      "gym_id": "portofino",
-      "machine": "Seated Preacher Curl Bench",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Last logged Oct 6 as 20x10, 30x10. The third set is new.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 20,
-          "reps": 12
-        },
-        {
-          "set": 2,
-          "weight_lb": 30,
-          "reps": 10
-        },
-        {
-          "set": 3,
-          "weight_lb": 30,
-          "reps": 10
-        }
-      ]
-    },
-    {
-      "machine_id": "pw01",
-      "gym_id": "portofino",
-      "machine": "Assisted Pullup & Dip Machine",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Sep 20 was -100x10, -85x7. One more rep at -85.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": -100,
-          "reps": 10
-        },
-        {
-          "set": 2,
-          "weight_lb": -85,
-          "reps": 8
-        }
-      ]
-    },
-    {
-      "machine_id": "pm06",
-      "gym_id": "portofino",
-      "machine": "Seated Leg Curl Machine",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Oct 14 was 40/50/60 x15, all clean. Small step up.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 40,
-          "reps": 15
-        },
-        {
-          "set": 2,
           "weight_lb": 55,
-          "reps": 15
-        },
-        {
-          "set": 3,
-          "weight_lb": 65,
-          "reps": 12
-        }
-      ]
-    },
-    {
-      "machine_id": "pm05",
-      "gym_id": "portofino",
-      "machine": "Seated Leg Extension Machine",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Not since Aug 5 (50/70/95 x15). Slightly lighter top set to re-calibrate.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 50,
           "reps": 15
         },
         {
@@ -162,12 +42,12 @@
       ]
     },
     {
-      "machine_id": "pm03",
+      "machine_id": "pm02",
       "gym_id": "portofino",
-      "machine": "Seated Chest Press Machine",
+      "machine": "Seated Row Machine",
       "gym": "Portofino Gym",
       "room": "Machines Room",
-      "note": "Oct 25 was 55x20, 70x15, 85x10. Go for 12 at 85.",
+      "note": "Wednesday was 55/70/80 x15. Back to 90, where you did 10 on Oct 25.",
       "sets": [
         {
           "set": 1,
@@ -181,33 +61,126 @@
         },
         {
           "set": 3,
-          "weight_lb": 85,
+          "weight_lb": 90,
           "reps": 12
         }
       ]
     },
     {
-      "machine_id": "pm13",
+      "machine_id": "pm08",
       "gym_id": "portofino",
-      "machine": "Seated Abdominal Crunch Machine",
+      "machine": "Seated Shoulder Press",
       "gym": "Portofino Gym",
       "room": "Machines Room",
-      "note": "Same as Sep 20.",
+      "note": "Wednesday was 35x15, 50x10, 65x7. Same weights, two more reps in the middle and one on top.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 70,
+          "weight_lb": 35,
           "reps": 15
         },
         {
           "set": 2,
-          "weight_lb": 80,
+          "weight_lb": 50,
+          "reps": 12
+        },
+        {
+          "set": 3,
+          "weight_lb": 65,
+          "reps": 8
+        }
+      ]
+    },
+    {
+      "machine_id": "m1782480059048",
+      "gym_id": "portofino",
+      "machine": "Rear Deltoid",
+      "gym": "Portofino Gym",
+      "room": "Machines Room",
+      "note": "Wednesday was 40/55/70 x15. Try 75 on top.",
+      "sets": [
+        {
+          "set": 1,
+          "weight_lb": 40,
+          "reps": 15
+        },
+        {
+          "set": 2,
+          "weight_lb": 55,
           "reps": 15
         },
         {
           "set": 3,
+          "weight_lb": 75,
+          "reps": 12
+        }
+      ]
+    },
+    {
+      "machine_id": "pm11",
+      "gym_id": "portofino",
+      "machine": "Hip Abduction Machine",
+      "gym": "Portofino Gym",
+      "room": "Machines Room",
+      "note": "Same as Oct 14 (105/135/150 x15). First time on this machine in five weeks.",
+      "sets": [
+        {
+          "set": 1,
+          "weight_lb": 105,
+          "reps": 15
+        },
+        {
+          "set": 2,
+          "weight_lb": 135,
+          "reps": 15
+        },
+        {
+          "set": 3,
+          "weight_lb": 150,
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "machine_id": "pm12",
+      "gym_id": "portofino",
+      "machine": "Hip Adduction Machine",
+      "gym": "Portofino Gym",
+      "room": "Machines Room",
+      "note": "Oct 14 was 95x15, 125x15, 155x12. Go for 15 on top.",
+      "sets": [
+        {
+          "set": 1,
           "weight_lb": 95,
           "reps": 15
+        },
+        {
+          "set": 2,
+          "weight_lb": 125,
+          "reps": 15
+        },
+        {
+          "set": 3,
+          "weight_lb": 155,
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "machine_id": "pm07",
+      "gym_id": "portofino",
+      "machine": "Back Extension Bench",
+      "gym": "Portofino Gym",
+      "room": "Machines Room",
+      "note": "Same 2x20 as Wednesday.",
+      "sets": [
+        {
+          "set": 1,
+          "reps": 20
+        },
+        {
+          "set": 2,
+          "reps": 20
         }
       ]
     },
@@ -217,7 +190,7 @@
       "machine": "Leg Lifts",
       "gym": "Common Machines",
       "room": "Bodyweight — No Equipment",
-      "note": "Closes the last open weekly goal: 100 of 140.",
+      "note": "40 of the week's 140.",
       "sets": [
         {
           "set": 1,
@@ -226,6 +199,20 @@
         {
           "set": 2,
           "reps": 20
+        }
+      ]
+    },
+    {
+      "machine_id": "elbow-planks",
+      "gym_id": "generic",
+      "machine": "Elbow Planks",
+      "gym": "Common Machines",
+      "room": "Bodyweight — No Equipment",
+      "note": "You held 70 seconds on Tuesday. 75 of the week's 315.",
+      "sets": [
+        {
+          "set": 1,
+          "duration_sec": 75
         }
       ]
     }
