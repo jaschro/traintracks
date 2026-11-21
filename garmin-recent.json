@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-11-20T23:15:53Z",
-  "today": "2026-11-20",
+  "fetched_at": "2026-11-21T11:03:51Z",
+  "today": "2026-11-21",
   "recent_activities": [
     {
       "activity_id": "25146083113",
@@ -351,44 +351,30 @@
       "active_kcal": 63.0,
       "elevation_gain_ft": null,
       "speed_avg_mph": 3.1
-    },
-    {
-      "activity_id": "24988451749",
-      "date": "2026-11-06",
-      "start_time": "10:01:36",
-      "type": "elliptical",
-      "name": "Elliptical",
-      "duration_sec": 1946,
-      "distance_mi": null,
-      "hr_avg_bpm": 126.0,
-      "hr_max_bpm": 148.0,
-      "active_kcal": 311.0,
-      "elevation_gain_ft": null,
-      "speed_avg_mph": null
     }
   ],
   "today_stats": {
-    "steps": 8057,
-    "floors": 1.13419,
-    "resting_hr_bpm": 47,
-    "active_kcal": 292.0,
-    "body_battery": 38,
-    "stress_avg": 30,
-    "week_steps": 86109
+    "steps": 207,
+    "floors": 0.0,
+    "resting_hr_bpm": 50,
+    "active_kcal": 2.0,
+    "body_battery": null,
+    "stress_avg": 60,
+    "week_steps": 77209
   },
   "training_readiness": {
-    "score": 68,
-    "level": "MODERATE",
-    "feedback": "RECOVERY_IN_PROGRESS"
+    "score": null,
+    "level": null,
+    "feedback": null
   },
   "vo2max": 43.0,
   "intensity": {
-    "week_moderate_sec": 10320,
-    "week_vigorous_sec": 3000
+    "week_moderate_sec": 10380,
+    "week_vigorous_sec": 3060
   },
   "hrv": {
-    "weekly_avg_ms": 42,
-    "last_night_ms": 37,
+    "weekly_avg_ms": 41,
+    "last_night_ms": null,
     "status": "BALANCED"
   },
   "sleep": {
@@ -402,9 +388,9 @@
     "respiration_brpm": 15.0,
     "spo2_pct": 97.0
   },
-  "spo2_avg_pct": 97.0,
+  "spo2_avg_pct": null,
   "respiration": {
-    "waking_brpm": 16.0,
-    "sleep_brpm": 15.0
+    "waking_brpm": 17.0,
+    "sleep_brpm": null
   }
 }
