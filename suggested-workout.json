@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-21T18:34:48Z",
-  "coach_note": "Sat Nov 21 - Portofino, day 1 of a new week. Yesterday was legs, chest press and arms, then a run that peaked at 166 with about 5 minutes in Zones 4-5. Overnight HRV was 37 (weekly average 41), sleep 6.7 h, resting HR 47-50. So today is low-impact: a steady Zone 2 ride, then back and shoulders (last done Wednesday), hips, and a start on the weekly leg-lift and plank goals. No leg press, no chest, no running.",
+  "generated_at": "2026-11-22T05:45:00Z",
+  "coach_note": "Sun Nov 22 - Portofino. Cardio is the main event: no cardio Saturday, so today restarts the week's Zone 2 goal (45 min at 120-129). Recovery is good - readiness 80, HRV 48 (above the 42 average), 7.6 h sleep, resting HR 46 - so a solid 50 minutes is fine, but keep it steady: Friday's run already spent the week's Zone 4-5 budget. Then a short strength block as the first AMRAP session: one set per exercise taken to the first rep that loses form, logged as the real number. Decline push-ups are the one to watch - your hardest variant and the one that progresses. Legs were Friday and back was Saturday, so no leg press and no pulldown today.",
   "exercises": [
     {
       "machine_id": "pa04",
@@ -8,36 +8,25 @@
       "machine": "Peloton",
       "gym": "Portofino Gym",
       "room": "Aerobic Room",
-      "note": "Steady 120-129 bpm once warm; keep it under 130 after yesterday's run. 30 minutes covers most of the week's 45-minute Zone 2 goal.",
+      "note": "Main set. 5 min easy, then hold 120-129 bpm for 30 min, 5 min easy. Covers most of the week's Zone 2 goal in one go.",
       "sets": [
         {
           "set": 1,
-          "duration_sec": 1800
+          "duration_sec": 2400
         }
       ]
     },
     {
-      "machine_id": "pw02",
+      "machine_id": "pa05",
       "gym_id": "portofino",
-      "machine": "Lat Pulldown Machine",
+      "machine": "Treadmill",
       "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Wednesday was 55/70/85 x15, all clean. Top set moves to 90.",
+      "room": "Aerobic Room",
+      "note": "Brisk walk at 3.5-3.8 mph, incline 2-3%, aiming 115-125 bpm. Walk only - keep it under 130 and save the running for Tuesday or Wednesday.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 55,
-          "reps": 15
-        },
-        {
-          "set": 2,
-          "weight_lb": 70,
-          "reps": 15
-        },
-        {
-          "set": 3,
-          "weight_lb": 90,
-          "reps": 12
+          "duration_sec": 900
         }
       ]
     },
@@ -47,140 +36,41 @@
       "machine": "Seated Row Machine",
       "gym": "Portofino Gym",
       "room": "Machines Room",
-      "note": "Wednesday was 55/70/80 x15. Back to 90, where you did 10 on Oct 25.",
+      "note": "One warm-up, then one top set at 90 taken past 15 if you can - the first machine 'don't stop on the number' set. Yesterday was 70 and 90 x15.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 55,
-          "reps": 15
+          "weight_lb": 60,
+          "reps": 12
         },
         {
           "set": 2,
-          "weight_lb": 70,
-          "reps": 15
-        },
-        {
-          "set": 3,
           "weight_lb": 90,
-          "reps": 12
-        }
-      ]
-    },
-    {
-      "machine_id": "pm08",
-      "gym_id": "portofino",
-      "machine": "Seated Shoulder Press",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Wednesday was 35x15, 50x10, 65x7. Same weights, two more reps in the middle and one on top.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 35,
-          "reps": 15
-        },
-        {
-          "set": 2,
-          "weight_lb": 50,
-          "reps": 12
-        },
-        {
-          "set": 3,
-          "weight_lb": 65,
-          "reps": 8
-        }
-      ]
-    },
-    {
-      "machine_id": "m1782480059048",
-      "gym_id": "portofino",
-      "machine": "Rear Deltoid",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Wednesday was 40/55/70 x15. Try 75 on top.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 40,
-          "reps": 15
-        },
-        {
-          "set": 2,
-          "weight_lb": 55,
-          "reps": 15
-        },
-        {
-          "set": 3,
-          "weight_lb": 75,
-          "reps": 12
-        }
-      ]
-    },
-    {
-      "machine_id": "pm11",
-      "gym_id": "portofino",
-      "machine": "Hip Abduction Machine",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Same as Oct 14 (105/135/150 x15). First time on this machine in five weeks.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 105,
-          "reps": 15
-        },
-        {
-          "set": 2,
-          "weight_lb": 135,
-          "reps": 15
-        },
-        {
-          "set": 3,
-          "weight_lb": 150,
           "reps": 15
         }
       ]
     },
     {
-      "machine_id": "pm12",
-      "gym_id": "portofino",
-      "machine": "Hip Adduction Machine",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Oct 14 was 95x15, 125x15, 155x12. Go for 15 on top.",
+      "machine_id": "push-ups",
+      "gym_id": "generic",
+      "machine": "Push Ups",
+      "gym": "Common Machines",
+      "room": "Bodyweight — No Equipment",
+      "note": "Set 1 decline (feet up) AMRAP - your hardest variant; last two sessions were 15 and 20. Full 2-min rest, then regular AMRAP (yesterday 30; expect 35+). Skip incline today - the cardio is the volume. Progression: when decline passes 25, raise the feet or lower for 3 seconds.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 95,
-          "reps": 15
+          "reps": 20,
+          "variant": [
+            "decline"
+          ]
         },
         {
           "set": 2,
-          "weight_lb": 125,
-          "reps": 15
-        },
-        {
-          "set": 3,
-          "weight_lb": 155,
-          "reps": 15
-        }
-      ]
-    },
-    {
-      "machine_id": "pm07",
-      "gym_id": "portofino",
-      "machine": "Back Extension Bench",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Same 2x20 as Wednesday.",
-      "sets": [
-        {
-          "set": 1,
-          "reps": 20
-        },
-        {
-          "set": 2,
-          "reps": 20
+          "reps": 35,
+          "variant": [
+            "regular"
+          ]
         }
       ]
     },
@@ -190,29 +80,62 @@
       "machine": "Leg Lifts",
       "gym": "Common Machines",
       "room": "Bodyweight — No Equipment",
-      "note": "40 of the week's 140.",
+      "note": "One AMRAP set, slow: 2 seconds up, 3 seconds down, heels never touch the floor between reps. Stop when the lower back starts to arch. Every set for two months has been 20, so this tells us what 20 was hiding.",
       "sets": [
         {
           "set": 1,
-          "reps": 20
-        },
-        {
-          "set": 2,
-          "reps": 20
+          "reps": 25,
+          "variant": [
+            "slow"
+          ]
         }
       ]
     },
     {
-      "machine_id": "elbow-planks",
+      "machine_id": "m1794718776135",
       "gym_id": "generic",
-      "machine": "Elbow Planks",
+      "machine": "Side Leg Lifts",
       "gym": "Common Machines",
       "room": "Bodyweight — No Equipment",
-      "note": "You held 70 seconds on Tuesday. 75 of the week's 315.",
+      "note": "One AMRAP set per side, slow tempo, 1-second hold at the top.",
       "sets": [
         {
           "set": 1,
-          "duration_sec": 75
+          "reps": 30,
+          "variant": [
+            "left"
+          ]
+        },
+        {
+          "set": 2,
+          "reps": 30,
+          "variant": [
+            "right"
+          ]
+        }
+      ]
+    },
+    {
+      "machine_id": "bridges",
+      "gym_id": "generic",
+      "machine": "Bridges",
+      "gym": "Common Machines",
+      "room": "Bodyweight — No Equipment",
+      "note": "Single-leg only, one AMRAP set per side with a 2-second squeeze at the top. Yesterday's 5 x 15 becomes 2 sets. Skip the two-leg version - it's too easy to be useful now.",
+      "sets": [
+        {
+          "set": 1,
+          "reps": 15,
+          "variant": [
+            "left"
+          ]
+        },
+        {
+          "set": 2,
+          "reps": 15,
+          "variant": [
+            "right"
+          ]
         }
       ]
     }
