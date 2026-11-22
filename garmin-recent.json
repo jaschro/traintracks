@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-11-22T01:21:01Z",
-  "today": "2026-11-21",
+  "fetched_at": "2026-11-22T11:26:43Z",
+  "today": "2026-11-22",
   "recent_activities": [
     {
       "activity_id": "25157078814",
@@ -337,49 +337,21 @@
       "active_kcal": 65.0,
       "elevation_gain_ft": null,
       "speed_avg_mph": 2.83
-    },
-    {
-      "activity_id": "24999512584",
-      "date": "2026-11-07",
-      "start_time": "10:31:16",
-      "type": "other",
-      "name": "Miami Beach Jog",
-      "duration_sec": 1706,
-      "distance_mi": 2.07,
-      "hr_avg_bpm": 129.0,
-      "hr_max_bpm": 168.0,
-      "active_kcal": 302.0,
-      "elevation_gain_ft": 62,
-      "speed_avg_mph": 4.36
-    },
-    {
-      "activity_id": "24999124400",
-      "date": "2026-11-07",
-      "start_time": "10:18:31",
-      "type": "walking",
-      "name": "Miami Beach Walking",
-      "duration_sec": 725,
-      "distance_mi": 0.62,
-      "hr_avg_bpm": 83.0,
-      "hr_max_bpm": 90.0,
-      "active_kcal": 63.0,
-      "elevation_gain_ft": null,
-      "speed_avg_mph": 3.1
     }
   ],
   "today_stats": {
-    "steps": 5148,
-    "floors": 4.0,
-    "resting_hr_bpm": 46,
-    "active_kcal": 153.0,
-    "body_battery": 43,
-    "stress_avg": 29,
-    "week_steps": 82150
+    "steps": 218,
+    "floors": 0.0,
+    "resting_hr_bpm": 50,
+    "active_kcal": 3.0,
+    "body_battery": 25,
+    "stress_avg": 40,
+    "week_steps": 75963
   },
   "training_readiness": {
-    "score": 80,
-    "level": "HIGH",
-    "feedback": "WELL_RECOVERED"
+    "score": 73,
+    "level": "MODERATE",
+    "feedback": "GOOD_SLEEP_HISTORY"
   },
   "vo2max": 42.0,
   "intensity": {
@@ -402,9 +374,9 @@
     "respiration_brpm": 14.0,
     "spo2_pct": 95.0
   },
-  "spo2_avg_pct": 93.0,
+  "spo2_avg_pct": 90.0,
   "respiration": {
-    "waking_brpm": 15.0,
-    "sleep_brpm": 14.0
+    "waking_brpm": 16.0,
+    "sleep_brpm": null
   }
 }
