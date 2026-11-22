@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-22T11:26:43Z",
+  "fetched_at": "2026-11-22T19:42:48Z",
   "today": "2026-11-22",
   "recent_activities": [
+    {
+      "activity_id": "25164240730",
+      "date": "2026-11-22",
+      "start_time": "09:08:41",
+      "type": "treadmill_running",
+      "name": "Treadmill Running",
+      "duration_sec": 4513,
+      "distance_mi": 3.74,
+      "hr_avg_bpm": 73.0,
+      "hr_max_bpm": 95.0,
+      "active_kcal": 219.0,
+      "elevation_gain_ft": null,
+      "speed_avg_mph": 2.99
+    },
     {
       "activity_id": "25157078814",
       "date": "2026-11-21",
@@ -340,18 +354,18 @@
     }
   ],
   "today_stats": {
-    "steps": 218,
-    "floors": 0.0,
-    "resting_hr_bpm": 50,
-    "active_kcal": 3.0,
-    "body_battery": 25,
-    "stress_avg": 40,
-    "week_steps": 75963
+    "steps": 9891,
+    "floors": 0.65748,
+    "resting_hr_bpm": 49,
+    "active_kcal": 140.0,
+    "body_battery": 51,
+    "stress_avg": 28,
+    "week_steps": 85636
   },
   "training_readiness": {
-    "score": 73,
-    "level": "MODERATE",
-    "feedback": "GOOD_SLEEP_HISTORY"
+    "score": 75,
+    "level": "HIGH",
+    "feedback": "WELL_RECOVERED"
   },
   "vo2max": 42.0,
   "intensity": {
@@ -360,23 +374,23 @@
   },
   "hrv": {
     "weekly_avg_ms": 42,
-    "last_night_ms": 48,
+    "last_night_ms": 40,
     "status": "BALANCED"
   },
   "sleep": {
-    "date": "2026-11-21",
-    "sleep_sec": 27420,
-    "score": 89,
-    "deep_sec": 7380,
-    "light_sec": 15780,
-    "rem_sec": 4260,
-    "awake_sec": 0,
+    "date": "2026-11-22",
+    "sleep_sec": 22920,
+    "score": 78,
+    "deep_sec": 5100,
+    "light_sec": 14520,
+    "rem_sec": 3300,
+    "awake_sec": 60,
     "respiration_brpm": 14.0,
-    "spo2_pct": 95.0
+    "spo2_pct": 92.0
   },
-  "spo2_avg_pct": 90.0,
+  "spo2_avg_pct": 92.0,
   "respiration": {
-    "waking_brpm": 16.0,
-    "sleep_brpm": null
+    "waking_brpm": 14.0,
+    "sleep_brpm": 14.0
   }
 }
