@@ -1,142 +1,177 @@
 {
-  "generated_at": "2026-11-23T04:00:00Z",
-  "coach_note": "Mon Nov 23 - Portofino. Yesterday's AMRAPs rewrote every baseline: decline push-ups 35 (was 15-20), regular 50 (was 30), row 90 x23, bridges 50 a side, leg lifts 30 slow. Cardio was long but easy - 75 min on the treadmill at avg HR 73 plus a 43-min walk, so the week still has 0 of its 45 Zone 2 minutes. Recovery is middling tonight: 6.4 h sleep, HRV 40, body battery 27, resting HR 49. So today: one real Zone 2 ride at 120-129 (not a stroll), then legs - last done Friday - with the top set of each machine taken past the number, and the week's first planks. No push-ups, no row: chest and back get until Wednesday.",
+  "generated_at": "2026-11-23T19:30:00Z",
+  "coach_note": "Tue Nov 24 - long walk, push-ups, and 5th Street. Yesterday's jog put 40 Zone 2 minutes in the bank and the planks closed the week's plank goal, so today's walk is pure Zone 1 - no need to chase a heart rate. Push-ups come back with all three variants, each doing a different job now: decline is the strength set (35 last time), flat is the volume set (50), and incline turns into a slow close-grip tricep set instead of a lighter chest set. Pulling work restarts gently - you did 7-8 strict pull-ups in August, so the strength is there; today is dead hangs and slow negatives, nothing to failure, with the first real pull-ups coming back in a week or two. No hamstring work, and sit-ups replace the crunch machine.",
   "exercises": [
     {
-      "machine_id": "pa04",
-      "gym_id": "portofino",
-      "machine": "Peloton",
-      "gym": "Portofino Gym",
-      "room": "Aerobic Room",
-      "note": "5 min easy, then 30 min holding 120-129 bpm - watch the number and add resistance until it sits there; yesterday never got above 84. 5 min easy. This is the week's Zone 2 in one go.",
+      "machine_id": "walk",
+      "gym_id": "generic",
+      "machine": "Walk",
+      "gym": "Common Machines",
+      "room": "Outdoor Activities",
+      "note": "90 minutes, conversational pace. Do this first so everything after is done warm - that matters most for the hanging and negatives.",
       "sets": [
         {
           "set": 1,
-          "duration_sec": 2400
+          "duration_sec": 5400
         }
       ]
     },
     {
-      "machine_id": "pw06",
-      "gym_id": "portofino",
-      "machine": "Seated Leg Press Machine",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Friday was 70 and 85 x45 - 45 reps means the weight is far too light. Warm up at 85 x15, then 115 AMRAP: stop at the first rep where the knees cave or you lose depth. Target 20+; if you get 30, go to 135 next time.",
+      "machine_id": "push-ups",
+      "gym_id": "generic",
+      "machine": "Push Ups",
+      "gym": "Common Machines",
+      "room": "Bodyweight — No Equipment",
+      "note": "Set 1 decline AMRAP with the feet higher than last time (bench or step, not the curb) - 35 at the old height means it's time. Rest 2 min. Set 2 flat AMRAP (50 last time; beating it isn't the point, logging it is). Set 3 incline, close grip (hands inside the shoulders), 3 seconds down, pause at the bottom - stop around 15 or when the elbows flare. Three different exercises now, not one at three heights.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 85,
+          "reps": 30,
+          "variant": [
+            "decline"
+          ]
+        },
+        {
+          "set": 2,
+          "reps": 50,
+          "variant": [
+            "regular"
+          ]
+        },
+        {
+          "set": 3,
           "reps": 15,
           "variant": [
-            "lo-hi-wide"
+            "incline"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "machine_id": "pull-ups",
+      "gym_id": "generic",
+      "machine": "Pull-ups",
+      "gym": "Common Machines",
+      "room": "Bodyweight — Light Equipment",
+      "note": "DEAD HANGS, logged here with the dead-hang variant and a time, not reps. Two hangs, shoulders packed (pull them down away from the ears, don't just dangle), 30-45 seconds each or until the grip starts to open. Rest 90 s between. This is grip, shoulder and lat loading with no pull at all.",
+      "sets": [
         {
-          "set": 2,
-          "weight_lb": 115,
-          "reps": 20,
+          "set": 1,
+          "duration_sec": 40,
           "variant": [
-            "lo-hi-wide"
+            "dead-hang"
+          ]
+        },
+        {
+          "set": 2,
+          "duration_sec": 40,
+          "variant": [
+            "dead-hang"
           ]
         }
       ]
     },
     {
-      "machine_id": "pm05",
-      "gym_id": "portofino",
-      "machine": "Seated Leg Extension Machine",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Friday 55/70/90 x20/15/12. One warm-up, then 90 AMRAP with a 1-second hold at the top.",
+      "machine_id": "negative-pullups",
+      "gym_id": "generic",
+      "machine": "Negative Pullups",
+      "gym": "Common Machines",
+      "room": "Bodyweight — Light Equipment",
+      "note": "One set of 4. Jump or step to the top, lower over a full 5 seconds, step off, reset. NOT to failure - if the 4th rep drops faster than 3 seconds, stop at 3. The slow lower is where the strength comes from and it's gentler on the back than pulling up, because nothing is yanked.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 60,
-          "reps": 12
-        },
-        {
-          "set": 2,
-          "weight_lb": 90,
-          "reps": 15
+          "reps": 4
         }
       ]
     },
     {
-      "machine_id": "pm06",
-      "gym_id": "portofino",
-      "machine": "Seated Leg Curl Machine",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Friday 40/55/65 x15/15/10. Warm-up, then 65 AMRAP - hamstrings cramp when pushed, so stop at the first twinge, not at the burn.",
+      "machine_id": "m1791726194462",
+      "gym_id": "5th-street-new",
+      "machine": "Row",
+      "gym": "5th Street (New)",
+      "room": "5th Street (New)",
+      "note": "Two sets at the setting you used on Nov 8 (20) - second set AMRAP. Squeeze the shoulder blades, no leaning back.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 45,
-          "reps": 12
-        },
-        {
-          "set": 2,
-          "weight_lb": 65,
-          "reps": 12
-        }
-      ]
-    },
-    {
-      "machine_id": "pw08",
-      "gym_id": "portofino",
-      "machine": "Plate-Loaded Seated Calf Raise",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Friday 50/60/70 x15. Warm-up at 50, then 70 AMRAP with a full stretch at the bottom and a 1-second squeeze at the top.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 50,
+          "weight_lb": 20,
           "reps": 15
         },
         {
           "set": 2,
-          "weight_lb": 70,
+          "weight_lb": 20,
           "reps": 20
         }
       ]
     },
     {
-      "machine_id": "pm13",
-      "gym_id": "portofino",
-      "machine": "Seated Abdominal Crunch Machine",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Friday's top set was 100 x20 with room to spare. Warm-up at 80, then 110 AMRAP.",
+      "machine_id": "m1791726427962",
+      "gym_id": "5th-street-new",
+      "machine": "Chest Press",
+      "gym": "5th Street (New)",
+      "room": "5th Street (New)",
+      "note": "Last time 40 x15 x2. One set at 40, then one AMRAP at 40 - if that passes 20, the next setting is fine.",
       "sets": [
         {
           "set": 1,
-          "weight_lb": 80,
-          "reps": 12
+          "weight_lb": 40,
+          "reps": 15
         },
         {
           "set": 2,
-          "weight_lb": 110,
+          "weight_lb": 40,
+          "reps": 20
+        }
+      ]
+    },
+    {
+      "machine_id": "m1791726337000",
+      "gym_id": "5th-street-new",
+      "machine": "Dips",
+      "gym": "5th Street (New)",
+      "room": "5th Street (New)",
+      "note": "One set, moderate, stop with a few left - shoulders at the bottom of a dip are the one place not to go to failure. Only go as deep as the upper arm being parallel to the ground.",
+      "sets": [
+        {
+          "set": 1,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "machine_id": "m1791726559972",
+      "gym_id": "5th-street-new",
+      "machine": "Situp Bench",
+      "gym": "5th Street (New)",
+      "room": "5th Street (New)",
+      "note": "Replaces the crunch machine from now on. One AMRAP set, hands across the chest (not behind the head), curl up rather than yank - then one set of 15.",
+      "sets": [
+        {
+          "set": 1,
+          "reps": 20
+        },
+        {
+          "set": 2,
           "reps": 15
         }
       ]
     },
     {
-      "machine_id": "elbow-planks",
-      "gym_id": "generic",
-      "machine": "Elbow Planks",
-      "gym": "Common Machines",
-      "room": "Bodyweight — No Equipment",
-      "note": "Week's plank goal is 315 s and nothing is logged yet. One AMRAP hold - stop when the hips sag - then one 45-second hold.",
+      "machine_id": "m1791726592348",
+      "gym_id": "5th-street-new",
+      "machine": "Reverse Situp",
+      "gym": "5th Street (New)",
+      "room": "5th Street (New)",
+      "note": "Fixed 2 x 20 as before - lower back, not an AMRAP exercise.",
       "sets": [
         {
           "set": 1,
-          "duration_sec": 90
+          "reps": 20
         },
         {
           "set": 2,
-          "duration_sec": 45
+          "reps": 20
         }
       ]
     }
