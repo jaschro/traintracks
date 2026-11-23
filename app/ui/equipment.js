@@ -214,7 +214,9 @@ $('photoin').addEventListener('change', e => {
     if (w > h && w > max) { h = Math.round(h * max / w); w = max; } else if (h > max) { w = Math.round(w * max / h); h = max; }
     const c = document.createElement('canvas');
     c.width = w; c.height = h;
-    c.getContext('2d').drawImage(img, 0, 0, w, h);
+    const cx = c.getContext('2d');
+    cx.fillStyle = '#fff'; cx.fillRect(0, 0, w, h); // JPEG has no transparency: a transparent PNG would turn black
+    cx.drawImage(img, 0, 0, w, h);
     URL.revokeObjectURL(url);
     let q = 0.82, data = c.toDataURL('image/jpeg', q);
     while (data.length > 150 * 1024 * 1.37 && q > 0.4) { q -= 0.1; data = c.toDataURL('image/jpeg', q); }

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.2 (23 Nov 2026)
+
+- **Machine photos are shown whole.** The machine grid, the machine page and the photo in **Edit machine** cropped every photo to a fixed shape (4:3 or 16:9), so a square or upright photo lost its top and bottom (a dead hang lost the bar and the feet). Photos are now fitted inside their box and never cut off; the space around them is filled with the card colour, in the light and the dark theme. Grid tiles keep one size.
+- The machine page shows the photo in its own shape, full width, up to about two thirds of the screen height, so a square or upright photo is no longer squeezed into a short strip.
+- The photo preview in **Edit machine** shows the whole photo, as it will be shown.
+- A PNG with a transparent background is now saved on white instead of black.
+- **Your photos need no re-upload**: the stored files were always whole; only the display changed. The data format is unchanged; the Garmin pipeline and the Worker need no update.
+
 ## 0.4.1 (20 Nov 2026)
 
 - **Move or delete one Garmin activity on its own.** Since a session is one machine on one day, three Garmin walks on the same day show as one Walk session, and **Move**/**Delete** acted on all three. In a machine's history each Garmin-linked set of such a session now shows its start time and has its own ↪️ (move to another machine, in any gym, including your own gyms and course machines) and 🗑️ (delete). The other sets that day are left as they are. The session's own buttons work as before.

@@ -559,6 +559,63 @@ if (usingFixture) {
 }
 fake.fetch = oldFetch;
 
+// 11. Machine photos are shown whole (landscape, portrait, square), in both themes;
+// a transparent PNG is uploaded on white, not black.
+if (usingFixture) {
+  for (const scheme of ['dark', 'light']) {
+    const o = await openPage(scheme);
+    const pg = o.page;
+    const pshot = async name => { await pg.waitForTimeout(300); await pg.screenshot({ path: path.join(SHOTS, `${String(++n).padStart(2, '0')}-${name}-${scheme}.png`), fullPage: true }); };
+    await pg.click('#homebody .row:has-text("Example Gym")');
+    await pg.click('#roomsbody .row:has-text("Weight Room")');
+    await pg.waitForFunction(() => [...document.querySelectorAll('.mi img')].length >= 2 && [...document.querySelectorAll('.mi img')].every(i => i.complete && i.naturalWidth), null, { timeout: 5000 });
+    await pshot('photos-grid');
+    const tiles = await pg.$$eval('.mc', els => els.map(e => e.querySelector('.mi').getBoundingClientRect().height));
+    check(`grid tiles are the same size (${scheme})`, tiles.length >= 2 && tiles.every(h => Math.abs(h - tiles[0]) < 1), tiles.join());
+    check(`grid photos shown whole (${scheme})`, (await pg.$$eval('.mi img', ims => ims.map(i => getComputedStyle(i).objectFit))).every(f => f === 'contain'));
+    for (const [name, file] of [['Seated Row', 'landscape'], ['Assisted Pull-up', 'portrait']]) {
+      await pg.click(`.mc:has-text("${name}")`);
+      await pg.waitForFunction(() => { const i = document.querySelector('.hero img'); return i && i.complete && i.naturalWidth; }, null, { timeout: 5000 });
+      await pshot(`photo-${file}`);
+      const ok = await pg.$eval('.hero img', im => {
+        const fit = getComputedStyle(im).objectFit, r = im.naturalWidth / im.naturalHeight, b = im.clientWidth / im.clientHeight;
+        return (fit === 'contain' || Math.abs(r - b) < 0.02) && im.clientHeight >= 200;
+      });
+      check(`detail ${file} photo shown whole and not tiny (${scheme})`, ok);
+      await pg.click('#s-detail .back');
+    }
+    await pg.click('#s-machines .back');
+    await pg.click('#roomsbody .row:has-text("Cardio")');
+    await pg.click('.mc:has-text("Treadmill")');
+    await pg.waitForFunction(() => { const i = document.querySelector('.hero img'); return i && i.complete && i.naturalWidth; }, null, { timeout: 5000 });
+    await pshot('photo-square');
+    check(`detail square photo is square and full width (${scheme})`, await pg.$eval('.hero img', im => Math.abs(im.clientWidth - im.clientHeight) < 2 && im.clientWidth >= 380));
+    // The editor: the current photo, then a transparent PNG
+    while (!(await pg.$('#s-home.on'))) await pg.click('.scr.on .back');
+    await pg.click('#s-home [data-act="nav"][data-to="settings"]');
+    await pg.click('#settingsbody [data-act="nav"][data-to="equipment"]');
+    await pg.click('#eqbody .row:has-text("Example Gym")');
+    await pg.click('#gymeqbody .row:has-text("Weight Room")');
+    await pg.click('[data-act="eq-m-edit"][data-id="assist"]');
+    await pg.waitForFunction(() => { const i = document.querySelector('#mpa img'); return i && i.complete && i.naturalWidth; }, null, { timeout: 5000 });
+    await pshot('photo-editor');
+    check(`editor preview shows the photo whole (${scheme})`, await pg.$eval('#mpa img', im => getComputedStyle(im).objectFit === 'contain'));
+    if (scheme === 'dark') {
+      await pg.setInputFiles('#photoin', path.join(ROOT, 'tests/fixtures/photo-transparent.png'));
+      await pg.waitForFunction(() => /Photo ready/.test(document.getElementById('mpa').textContent), null, { timeout: 5000 });
+      const corner = await pg.$eval('#mpa img', async im => {
+        await im.decode();
+        const c = document.createElement('canvas'); c.width = im.naturalWidth; c.height = im.naturalHeight;
+        const x = c.getContext('2d'); x.drawImage(im, 0, 0);
+        return [...x.getImageData(1, 1, 1, 1).data];
+      });
+      check('a transparent PNG becomes white, not black', corner[0] > 240 && corner[1] > 240 && corner[2] > 240, corner.join());
+      await pshot('photo-transparent-upload');
+    }
+    await o.ctx.close();
+  }
+}
+
 await browser.close();
 server.close();
 
