@@ -2,7 +2,7 @@
 import { S } from '../state.js';
 import { html, act, setHTML, setText, on, toast, $, confirmDialog, modal, closeModal } from './dom.js';
 import { screen, nav } from './nav.js';
-import { imageUrl, deleteSession, moveSessionTo } from '../data.js';
+import { imageUrl, deleteSession, moveSessionTo, moveEntriesTo, deleteEntries } from '../data.js';
 import { visibleCount, variationsOf } from '../../lib/gyms.js';
 import { lastSession, machineSessions, garminIdOf, zoneSeconds } from '../../lib/log.js';
 import { zonesFromBuckets, cleanFloors } from '../../lib/goals.js';
@@ -75,6 +75,15 @@ function zoneRow(sets) {
 const variantOrder = v => variantSummary(v, variationsOf(S.machine)).split(' · ').filter(Boolean);
 const chips = v => (v && v.length ? html`<span class="vchips">${v.map(t => html`<span class="vchip">${t}</span>`)}</span>` : '');
 
+/**
+ * A set with its own Move and Delete: a Garmin-linked entry (one activity) in a
+ * session of more than one set. Hand-logged sets are changed through the
+ * session's Edit form; a one-set session has the session's own buttons.
+ */
+const single = (sets, x) => sets.length > 1 && !!x.id && !!garminIdOf(x);
+const clock = t => String(t).slice(0, 5);
+const findEntry = id => (S.log || []).find(e => e && e.id === id);
+
 export function renderDetail() {
   const m = S.machine, gym = S.gym;
   if (!m || !gym) return;
@@ -85,7 +94,7 @@ export function renderDetail() {
     const notes = (s.sets.find(x => x.notes) || {}).notes || '';
     // Sets of a day logged before 0.4.0 as two variant sessions are numbered by position here.
     return html`<div class="hi"><div class="hd"><span>${fmtDateFull(s.date)}</span><div class="ha"><button class="ib" ${act('move-session', { date: s.date })} title="Move to another machine" aria-label="Move to another machine">↪️</button><button class="ib" ${act('edit-session', { date: s.date })} title="Edit" aria-label="Edit">✏️</button><button class="ib danger" ${act('del-session', { date: s.date })} title="Delete" aria-label="Delete">🗑️</button></div></div>
-      ${s.sets.map((x, i) => html`<div class="sr"><span class="sn">Set ${i + 1}</span><span class="sv">${chips(variantOrder(x.variant))}${fmtSet(x)}</span></div>`)}
+      ${s.sets.map((x, i) => html`<div class="sr"><span class="sn">Set ${i + 1}</span><span class="sv">${chips(variantOrder(x.variant))}${single(s.sets, x) && x.time ? html`<span class="st">${clock(x.time)}</span>` : ''}${fmtSet(x)}</span>${single(s.sets, x) ? html`<span class="sa"><button class="ib sm" ${act('move-entry', { id: x.id })} title="Move this activity" aria-label="Move this activity">↪️</button><button class="ib sm danger" ${act('del-entry', { id: x.id })} title="Delete this activity" aria-label="Delete this activity">🗑️</button></span>` : ''}</div>`)}
       ${zoneRow(s.sets)}
       ${notes ? html`<div class="hn">“${notes}”</div>` : ''}</div>`;
   }) : html`<div class="empty" style="padding:28px 24px"><div class="icon">📋</div><p>No sessions logged yet.</p></div>`;
@@ -126,10 +135,11 @@ on('del-session', async d => {
   } catch (e) { toast(`Delete failed: ${e.message}`, 'err'); }
 });
 
-// ---- move a session to another machine (e.g. a Garmin session posted to the wrong gym) ----
+// ---- move a session, or one activity of it, to another machine (e.g. a Garmin walk posted to the wrong gym) ----
+// moving = { kind: 'session', from } or { kind: 'entry', id, date }
 let moving = null;
-on('move-session', d => {
-  moving = { gym_id: S.gym.id, machine_id: S.machine.id, date: d.date };
+function openMove(what, desc) {
+  moving = what;
   // Start on a machine with the same name in another gym (the usual fix), else the first one.
   const same = String(S.machine.name || '').trim().toLowerCase();
   let picked = false;
@@ -143,9 +153,20 @@ on('move-session', d => {
     }
     return opts.length ? html`<optgroup label="${g.name}">${opts}</optgroup>` : '';
   });
-  modal(html`<h2>Move to another machine</h2><p class="mdp">${S.machine.name}, ${fmtDateFull(d.date)}. Everything in the session moves with it, including its Garmin link.</p>
+  modal(html`<h2>Move to another machine</h2><p class="mdp">${desc}</p>
     <div class="mr"><label for="mvto">Move to</label><select id="mvto">${groups}</select></div>
     <div class="mbs"><button class="mc2" ${act('modal-close')}>Cancel</button><button class="mo" ${act('move-session-do')}>Move</button></div>`);
+}
+on('move-session', d => {
+  openMove({ kind: 'session', from: { gym_id: S.gym.id, machine_id: S.machine.id, date: d.date } },
+    `${S.machine.name}, ${fmtDateFull(d.date)}. Everything in the session moves with it, including its Garmin link.`);
+});
+on('move-entry', d => {
+  const e = findEntry(d.id);
+  if (!e) return;
+  const at = e.time ? ` at ${clock(e.time)}` : '';
+  openMove({ kind: 'entry', id: e.id, date: e.date },
+    `${S.machine.name}, ${fmtDateFull(e.date)}${at}. Only this activity moves, with its Garmin link, heart rate and notes; the other sets that day stay here.`);
 });
 on('move-session-do', async () => {
   const [gid, rid, mid] = String(($('mvto') || {}).value || '').split('|');
@@ -154,10 +175,23 @@ on('move-session-do', async () => {
   closeModal();
   const to = { gym_id: g.id, gym: g.name, room_id: r.id, room: r.name, machine_id: m.id, machine: m.name };
   try {
-    const from = moving;
-    moveSessionTo(from, to, `Move ${S.machine.name} ${from.date} to ${m.name}`);
+    const w = moving;
+    if (w.kind === 'entry') moveEntriesTo([w.id], to, `Move one ${S.machine.name} ${w.date} to ${m.name}`);
+    else moveSessionTo(w.from, to, `Move ${S.machine.name} ${w.from.date} to ${m.name}`);
     toast(`Moved to ${m.name} (${g.name})`, 'ok');
     renderDetail();
   } catch (e) { toast(`Move failed: ${e.message}`, 'err'); }
   finally { moving = null; }
+});
+on('del-entry', async d => {
+  const e = findEntry(d.id);
+  if (!e) return;
+  const at = e.time ? ` at ${clock(e.time)}` : '';
+  const ok = await confirmDialog('Delete this activity?', `${S.machine.name} on ${fmtDateFull(e.date)}${at} will be removed from your log. The other sets that day stay. A Garmin activity from the last few weeks is posted again by the next Garmin run; to keep it, move it instead.`, { ok: 'Delete', danger: true });
+  if (!ok) return;
+  try {
+    deleteEntries([e.id], `Delete one ${S.machine.name} ${e.date}`);
+    toast('Activity deleted', 'ok');
+    renderDetail();
+  } catch (err) { toast(`Delete failed: ${err.message}`, 'err'); }
 });

@@ -85,6 +85,9 @@ overwrite them.
 
   The row's note says how it was placed. If it's wrong, open the machine's
   history and tap **↪️ Move**: everything moves, including the Garmin link.
+  When several activities landed in one session (three walks on one day are one
+  Walk session), each has its own ↪️ and 🗑️ on its line in the history: they
+  move or delete just that activity (0.4.1). A moved activity is not posted again.
 - **`corrections.json`**: hand fixes for bad watch data, keyed by activity id:
   ```json
   { "24000000001": {

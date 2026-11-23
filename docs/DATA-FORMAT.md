@@ -126,6 +126,14 @@ Rules:
   `date` + `machine_id` already see one session.
 - A tool that replaces a session must replace all of that day's rows on the
   machine and give each row its own `variant`.
+- **Set numbers need not be 1..n.** The Garmin pipeline posts every activity
+  as `set: 1`, so three walks on one day are three rows with `set: 1`; moving
+  or deleting one entry (0.4.1) leaves the other rows of its session as they
+  are, which can leave a gap. Readers order a session's rows by `set`, then file
+  order, and number them by position; the next save of the session in the app
+  writes 1..n. A row moved on its own to another machine gets the number after
+  that machine's rows that day (1 if it has none); only its `gym_id`, `gym`,
+  `room_id`, `room`, `machine_id`, `machine` and `set` change.
 - Order: newest date first, sets in order within a day. The CSV uses the same order.
 
 Which fields each kind of machine uses:

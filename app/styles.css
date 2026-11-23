@@ -75,16 +75,18 @@ a{color:var(--accent)}
 .mg{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 16px}
 .mc{background:var(--card);border-radius:var(--radius);overflow:hidden;cursor:pointer;border:1px solid var(--bdr);-webkit-tap-highlight-color:transparent;text-align:left;padding:0;color:inherit}
 .mc:active{opacity:.75}
-.mi{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--dim)}
-.mi img{width:100%;height:100%;object-fit:cover;display:block}
+.mi{width:100%;aspect-ratio:4/3;background:var(--card2);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--dim)}
+/* Photos are shown whole (contain), letterboxed on --card2: never cropped. */
+.mi img{width:100%;height:100%;object-fit:contain;display:block}
 .mn{padding:10px}
 .mn h3{font-size:13.5px;font-weight:650;line-height:1.3;margin-bottom:4px}
 .ml{font-size:11.5px;color:var(--accent);line-height:1.3}
 .mn0{font-size:11.5px;color:var(--dim)}
 
 /* ---- machine detail ---- */
-.hero{width:100%;aspect-ratio:16/9;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:60px;color:var(--dim);flex-shrink:0;overflow:hidden}
-.hero img{width:100%;height:100%;object-fit:cover}
+.hero{width:100%;min-height:clamp(140px,56vw,240px);background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:60px;color:var(--dim);flex-shrink:0;overflow:hidden}
+/* The detail photo keeps its own shape, up to a max height (portrait and square ones are letterboxed). */
+.hero img{display:block;width:100%;height:auto;max-height:min(62vh,560px);object-fit:contain}
 .dm{padding:16px;border-bottom:1px solid var(--bdr)}
 .dm h2{font-size:22px;font-weight:800;letter-spacing:-.01em}
 .dm .mu{font-size:14px;color:var(--dim);margin-top:6px}
@@ -103,7 +105,10 @@ a{color:var(--accent)}
 .ha{display:flex;gap:4px}
 .sr{display:flex;font-size:13px;color:var(--dim);padding:3px 0;gap:8px}
 .sn{min-width:44px}
-.sv{color:var(--text);font-weight:500}
+.sv{color:var(--text);font-weight:500;flex:1;min-width:0}
+.st{color:var(--dim);font-weight:500;margin-right:6px}
+.sa{display:flex;gap:2px;margin:-6px 0}
+.ib.sm{font-size:15px;padding:6px 7px}
 .hn{font-size:12.5px;color:var(--dim);font-style:italic;margin-top:6px;line-height:1.4}
 .zr{font-size:12px;color:var(--dim);margin-top:4px}
 
@@ -166,7 +171,7 @@ textarea.fi{resize:none;height:84px;line-height:1.4}
 .mbs .md2{background:rgba(255,90,95,.14);color:var(--bad);border:1px solid rgba(255,90,95,.3)}
 .mlist{max-height:55vh;overflow-y:auto;margin:0 -16px}
 .pa{width:100%;aspect-ratio:4/3;background:var(--card2);border:2px dashed var(--bdr);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;gap:6px}
-.pa img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.pa img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0}
 .ph{font-size:13px;color:var(--dim);position:relative;z-index:1;background:rgba(0,0,0,.45);padding:3px 8px;border-radius:6px}
 
 /* ---- toast / loading ---- */
