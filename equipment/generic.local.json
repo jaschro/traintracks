@@ -16,6 +16,20 @@
       "muscles_worked": "Abductors",
       "image": null,
       "log_type": "reps"
+    },
+    {
+      "room_id": "bodyweight-no-equipment",
+      "id": "m1795462058519",
+      "name": "Dead Hang",
+      "muscles_worked": "",
+      "image": null,
+      "log_type": "time",
+      "variations": {
+        "grip": [
+          "narrow",
+          "wide"
+        ]
+      }
     }
   ],
   "rooms": []
