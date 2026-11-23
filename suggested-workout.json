@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-22T05:45:00Z",
-  "coach_note": "Sun Nov 22 - Portofino. Cardio is the main event: no cardio Saturday, so today restarts the week's Zone 2 goal (45 min at 120-129). Recovery is good - readiness 80, HRV 48 (above the 42 average), 7.6 h sleep, resting HR 46 - so a solid 50 minutes is fine, but keep it steady: Friday's run already spent the week's Zone 4-5 budget. Then a short strength block as the first AMRAP session: one set per exercise taken to the first rep that loses form, logged as the real number. Decline push-ups are the one to watch - your hardest variant and the one that progresses. Legs were Friday and back was Saturday, so no leg press and no pulldown today.",
+  "generated_at": "2026-11-23T04:00:00Z",
+  "coach_note": "Mon Nov 23 - Portofino. Yesterday's AMRAPs rewrote every baseline: decline push-ups 35 (was 15-20), regular 50 (was 30), row 90 x23, bridges 50 a side, leg lifts 30 slow. Cardio was long but easy - 75 min on the treadmill at avg HR 73 plus a 43-min walk, so the week still has 0 of its 45 Zone 2 minutes. Recovery is middling tonight: 6.4 h sleep, HRV 40, body battery 27, resting HR 49. So today: one real Zone 2 ride at 120-129 (not a stroll), then legs - last done Friday - with the top set of each machine taken past the number, and the week's first planks. No push-ups, no row: chest and back get until Wednesday.",
   "exercises": [
     {
       "machine_id": "pa04",
@@ -8,7 +8,7 @@
       "machine": "Peloton",
       "gym": "Portofino Gym",
       "room": "Aerobic Room",
-      "note": "Main set. 5 min easy, then hold 120-129 bpm for 30 min, 5 min easy. Covers most of the week's Zone 2 goal in one go.",
+      "note": "5 min easy, then 30 min holding 120-129 bpm - watch the number and add resistance until it sits there; yesterday never got above 84. 5 min easy. This is the week's Zone 2 in one go.",
       "sets": [
         {
           "set": 1,
@@ -17,26 +17,38 @@
       ]
     },
     {
-      "machine_id": "pa05",
+      "machine_id": "pw06",
       "gym_id": "portofino",
-      "machine": "Treadmill",
+      "machine": "Seated Leg Press Machine",
       "gym": "Portofino Gym",
-      "room": "Aerobic Room",
-      "note": "Brisk walk at 3.5-3.8 mph, incline 2-3%, aiming 115-125 bpm. Walk only - keep it under 130 and save the running for Tuesday or Wednesday.",
+      "room": "Weight Room",
+      "note": "Friday was 70 and 85 x45 - 45 reps means the weight is far too light. Warm up at 85 x15, then 115 AMRAP: stop at the first rep where the knees cave or you lose depth. Target 20+; if you get 30, go to 135 next time.",
       "sets": [
         {
           "set": 1,
-          "duration_sec": 900
+          "weight_lb": 85,
+          "reps": 15,
+          "variant": [
+            "lo-hi-wide"
+          ]
+        },
+        {
+          "set": 2,
+          "weight_lb": 115,
+          "reps": 20,
+          "variant": [
+            "lo-hi-wide"
+          ]
         }
       ]
     },
     {
-      "machine_id": "pm02",
+      "machine_id": "pm05",
       "gym_id": "portofino",
-      "machine": "Seated Row Machine",
+      "machine": "Seated Leg Extension Machine",
       "gym": "Portofino Gym",
       "room": "Machines Room",
-      "note": "One warm-up, then one top set at 90 taken past 15 if you can - the first machine 'don't stop on the number' set. Yesterday was 70 and 90 x15.",
+      "note": "Friday 55/70/90 x20/15/12. One warm-up, then 90 AMRAP with a 1-second hold at the top.",
       "sets": [
         {
           "set": 1,
@@ -51,91 +63,80 @@
       ]
     },
     {
-      "machine_id": "push-ups",
-      "gym_id": "generic",
-      "machine": "Push Ups",
-      "gym": "Common Machines",
-      "room": "Bodyweight — No Equipment",
-      "note": "Set 1 decline (feet up) AMRAP - your hardest variant; last two sessions were 15 and 20. Full 2-min rest, then regular AMRAP (yesterday 30; expect 35+). Skip incline today - the cardio is the volume. Progression: when decline passes 25, raise the feet or lower for 3 seconds.",
+      "machine_id": "pm06",
+      "gym_id": "portofino",
+      "machine": "Seated Leg Curl Machine",
+      "gym": "Portofino Gym",
+      "room": "Machines Room",
+      "note": "Friday 40/55/65 x15/15/10. Warm-up, then 65 AMRAP - hamstrings cramp when pushed, so stop at the first twinge, not at the burn.",
       "sets": [
         {
           "set": 1,
-          "reps": 20,
-          "variant": [
-            "decline"
-          ]
+          "weight_lb": 45,
+          "reps": 12
         },
         {
           "set": 2,
-          "reps": 35,
-          "variant": [
-            "regular"
-          ]
+          "weight_lb": 65,
+          "reps": 12
         }
       ]
     },
     {
-      "machine_id": "leg-lifts",
-      "gym_id": "generic",
-      "machine": "Leg Lifts",
-      "gym": "Common Machines",
-      "room": "Bodyweight — No Equipment",
-      "note": "One AMRAP set, slow: 2 seconds up, 3 seconds down, heels never touch the floor between reps. Stop when the lower back starts to arch. Every set for two months has been 20, so this tells us what 20 was hiding.",
+      "machine_id": "pw08",
+      "gym_id": "portofino",
+      "machine": "Plate-Loaded Seated Calf Raise",
+      "gym": "Portofino Gym",
+      "room": "Weight Room",
+      "note": "Friday 50/60/70 x15. Warm-up at 50, then 70 AMRAP with a full stretch at the bottom and a 1-second squeeze at the top.",
       "sets": [
         {
           "set": 1,
-          "reps": 25,
-          "variant": [
-            "slow"
-          ]
+          "weight_lb": 50,
+          "reps": 15
+        },
+        {
+          "set": 2,
+          "weight_lb": 70,
+          "reps": 20
         }
       ]
     },
     {
-      "machine_id": "m1794718776135",
-      "gym_id": "generic",
-      "machine": "Side Leg Lifts",
-      "gym": "Common Machines",
-      "room": "Bodyweight — No Equipment",
-      "note": "One AMRAP set per side, slow tempo, 1-second hold at the top.",
+      "machine_id": "pm13",
+      "gym_id": "portofino",
+      "machine": "Seated Abdominal Crunch Machine",
+      "gym": "Portofino Gym",
+      "room": "Machines Room",
+      "note": "Friday's top set was 100 x20 with room to spare. Warm-up at 80, then 110 AMRAP.",
       "sets": [
         {
           "set": 1,
-          "reps": 30,
-          "variant": [
-            "left"
-          ]
+          "weight_lb": 80,
+          "reps": 12
         },
         {
           "set": 2,
-          "reps": 30,
-          "variant": [
-            "right"
-          ]
+          "weight_lb": 110,
+          "reps": 15
         }
       ]
     },
     {
-      "machine_id": "bridges",
+      "machine_id": "elbow-planks",
       "gym_id": "generic",
-      "machine": "Bridges",
+      "machine": "Elbow Planks",
       "gym": "Common Machines",
       "room": "Bodyweight — No Equipment",
-      "note": "Single-leg only, one AMRAP set per side with a 2-second squeeze at the top. Yesterday's 5 x 15 becomes 2 sets. Skip the two-leg version - it's too easy to be useful now.",
+      "note": "Week's plank goal is 315 s and nothing is logged yet. One AMRAP hold - stop when the hips sag - then one 45-second hold.",
       "sets": [
         {
           "set": 1,
-          "reps": 15,
-          "variant": [
-            "left"
-          ]
+          "duration_sec": 90
         },
         {
           "set": 2,
-          "reps": 15,
-          "variant": [
-            "right"
-          ]
+          "duration_sec": 45
         }
       ]
     }
