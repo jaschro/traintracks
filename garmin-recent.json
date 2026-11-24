@@ -1,7 +1,35 @@
 {
-  "fetched_at": "2026-11-24T13:44:56Z",
+  "fetched_at": "2026-11-24T23:04:10Z",
   "today": "2026-11-24",
   "recent_activities": [
+    {
+      "activity_id": "25188895477",
+      "date": "2026-11-24",
+      "start_time": "15:11:55",
+      "type": "cycling",
+      "name": "Miami Beach Cycling",
+      "duration_sec": 2805,
+      "distance_mi": 7.21,
+      "hr_avg_bpm": 98.0,
+      "hr_max_bpm": 118.0,
+      "active_kcal": 285.0,
+      "elevation_gain_ft": 69,
+      "speed_avg_mph": 9.26
+    },
+    {
+      "activity_id": "25186470404",
+      "date": "2026-11-24",
+      "start_time": "11:36:31",
+      "type": "cycling",
+      "name": "Miami Beach Cycling",
+      "duration_sec": 3835,
+      "distance_mi": 10.22,
+      "hr_avg_bpm": 96.0,
+      "hr_max_bpm": 124.0,
+      "active_kcal": 354.0,
+      "elevation_gain_ft": 128,
+      "speed_avg_mph": 9.59
+    },
     {
       "activity_id": "25173598284",
       "date": "2026-11-23",
@@ -326,43 +354,43 @@
     }
   ],
   "today_stats": {
-    "steps": 127,
+    "steps": 7130,
     "floors": 0.0,
-    "resting_hr_bpm": 50,
-    "active_kcal": 1.0,
-    "body_battery": 41,
-    "stress_avg": 21,
-    "week_steps": 98763
+    "resting_hr_bpm": 47,
+    "active_kcal": 648.0,
+    "body_battery": 47,
+    "stress_avg": 22,
+    "week_steps": 105766
   },
   "training_readiness": {
-    "score": 75,
+    "score": 81,
     "level": "HIGH",
-    "feedback": "ENERGIZING_NAP"
+    "feedback": "WELL_RECOVERED"
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 600,
-    "week_vigorous_sec": 3420
+    "week_moderate_sec": 5400,
+    "week_vigorous_sec": 4080
   },
   "hrv": {
-    "weekly_avg_ms": 41,
-    "last_night_ms": 33,
+    "weekly_avg_ms": 42,
+    "last_night_ms": 60,
     "status": "BALANCED"
   },
   "sleep": {
-    "date": "2026-11-23",
-    "sleep_sec": 24960,
-    "score": 80,
-    "deep_sec": 3600,
-    "light_sec": 16920,
-    "rem_sec": 4440,
-    "awake_sec": 1320,
+    "date": "2026-11-24",
+    "sleep_sec": 26160,
+    "score": 87,
+    "deep_sec": 4500,
+    "light_sec": 17820,
+    "rem_sec": 3840,
+    "awake_sec": 60,
     "respiration_brpm": 14.0,
-    "spo2_pct": 96.0
+    "spo2_pct": 94.0
   },
-  "spo2_avg_pct": 92.0,
+  "spo2_avg_pct": 94.0,
   "respiration": {
     "waking_brpm": 14.0,
-    "sleep_brpm": null
+    "sleep_brpm": 14.0
   }
 }
