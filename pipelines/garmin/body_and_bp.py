@@ -113,7 +113,8 @@ def write_csv(path: str, fields: list[str], rows: list[dict]) -> None:
 def main() -> int:
     ensure_garminconnect()
     g = garmin_client()
-    start, end = date.fromisoformat(HISTORY_START), local_today()
+    # Garmin's dateRange endpoint leaves out the end date itself, so ask through tomorrow.
+    start, end = date.fromisoformat(HISTORY_START), local_today() + timedelta(days=1)
     body, bp, failed = [], [], False
     for a, b in chunks(start, end):
         bc = call(g.get_body_composition, a, b, default=None)
