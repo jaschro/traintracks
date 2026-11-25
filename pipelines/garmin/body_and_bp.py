@@ -116,6 +116,31 @@ def main() -> int:
     # Garmin's dateRange endpoint leaves out the end date itself, so ask through tomorrow.
     start, end = date.fromisoformat(HISTORY_START), local_today() + timedelta(days=1)
     body, bp, failed = [], [], False
+    # --- temporary diagnostics (throwaway branch) ---
+    import json as _j
+    _t = local_today()
+    def _show(label, payload):
+        try:
+            if isinstance(payload, dict):
+                print("DIAG", label, "keys:", sorted(payload.keys()))
+                for w in (payload.get("dateWeightList") or []):
+                    print("DIAG", label, "dwl:", {k: w.get(k) for k in ("date", "calendarDate", "timestampGMT", "weight", "sourceType", "samplePk")})
+                for d in (payload.get("dailyWeightSummaries") or []):
+                    print("DIAG", label, "day:", d.get("summaryDate"), "n=", d.get("numOfWeightEntries"))
+                    for w in (d.get("allWeightMetrics") or []):
+                        print("DIAG", label, "  awm:", {k: w.get(k) for k in ("date", "calendarDate", "timestampGMT", "weight", "sourceType", "samplePk")})
+            else:
+                print("DIAG", label, "type:", type(payload).__name__, str(payload)[:300])
+        except Exception as e:  # noqa: BLE001
+            print("DIAG", label, "error:", e)
+    _a, _b, _c = (_t - timedelta(days=5)).isoformat(), _t.isoformat(), (_t + timedelta(days=1)).isoformat()
+    print("DIAG local_today:", _b)
+    _show("dateRange 5d..today", call(g.get_body_composition, _a, _b, default="FAILED"))
+    _show("dateRange today only", call(g.get_body_composition, _b, _b, default="FAILED"))
+    _show("dateRange full-year chunk", {"dateWeightList": ((call(g.get_body_composition, "2025-12-31", _c, default={}) or {}).get("dateWeightList") or [])[-6:]})
+    _show("range 5d..today", call(g.get_weigh_ins, _a, _b, default="FAILED"))
+    _show("dayview today", call(g.get_daily_weigh_ins, _b, default="FAILED"))
+    # --- end diagnostics ---
     for a, b in chunks(start, end):
         bc = call(g.get_body_composition, a, b, default=None)
         bpp = call(g.get_blood_pressure, a, b, default=None)
