@@ -33,7 +33,24 @@ BP = {"measurementSummaries": [
 ]}
 
 
+# get_weigh_ins(): one summary per day, every reading of the day under allWeightMetrics.
+DAILY = {"dailyWeightSummaries": [
+    {"summaryDate": "2026-11-07", "numOfWeightEntries": 3, "allWeightMetrics": [
+        {"samplePk": 2003, "date": wall_ms(2026, 11, 7, 12, 0), "weight": 80500, "sourceType": "USER_SETTING"},
+        {"samplePk": 2002, "date": wall_ms(2026, 11, 7, 9, 30), "weight": 80000, "sourceType": "INDEX_SCALE"},
+        {"samplePk": 2001, "date": wall_ms(2026, 11, 7, 0, 15), "weight": 81000, "sourceType": "INDEX_SCALE"}]},
+    {"summaryDate": "2026-11-05", "numOfWeightEntries": 1,
+     "latestWeight": {"samplePk": 1990, "date": wall_ms(2026, 11, 5, 8, 0), "weight": 80200, "sourceType": "INDEX_SCALE"}},
+]}
+
+
 class Body(unittest.TestCase):
+    def test_every_weigh_in_of_a_day(self):
+        rows = B.body_rows(DAILY)
+        # both scale readings of the 7th are kept although the day's latest entry is the profile weight
+        self.assertEqual([r["garmin_id"] for r in rows], ["1990", "2001", "2002"])
+        self.assertEqual([(r["date"], r["time"]) for r in rows[1:]], [("2026-11-07", "00:15:00"), ("2026-11-07", "09:30:00")])
+
     def test_rows(self):
         rows = B.body_rows(SCALE)
         self.assertEqual([r["garmin_id"] for r in rows], ["1001", "1002"])           # oldest first; profile weight dropped
