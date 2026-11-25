@@ -67,12 +67,15 @@ def fetch(g) -> dict:
 
     print("hrv…")
     hrv_raw = call(g.get_hrv_data, today_s, default=None, quiet=True)
+    hrv_date = today_s
     if not hrv_raw or not (hrv_raw.get("hrvSummary") or {}):
         hrv_raw = call(g.get_hrv_data, yday_s, default=None, quiet=True)
+        hrv_date = yday_s
     hrv = None
     if hrv_raw:
         s = hrv_raw.get("hrvSummary") or {}
-        hrv = {"weekly_avg_ms": s.get("weeklyAvg"), "last_night_ms": s.get("lastNight") or s.get("lastNightAvg"), "status": s.get("status")}
+        # "date": the night it belongs to; the app adds it to today's wellness only when it is today.
+        hrv = {"date": hrv_date, "weekly_avg_ms": s.get("weeklyAvg"), "last_night_ms": s.get("lastNight") or s.get("lastNightAvg"), "status": s.get("status")}
 
     print("sleep…")
     sleep_raw = call(g.get_sleep_data, today_s, default=None, quiet=True)

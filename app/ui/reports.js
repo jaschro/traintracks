@@ -6,14 +6,18 @@ import { homeSection } from './home.js';
 import { computeGoals, defaultGoals, fmtGoalNum } from '../../lib/goals.js';
 import { fmtRange } from '../../lib/format.js';
 import { localDate } from '../../lib/dates.js';
+import { withTodayWellness } from '../../lib/wellness.js';
+
+/** daily-wellness.csv plus last night's sleep and HRV from garmin-recent.json. */
+const wellnessRows = () => withTodayWellness(S.wellness, S.garminRecent);
 
 export function weekCtx(offset) {
   const gc = goalsCfg() || defaultGoals();
-  return computeGoals(gc.goals, { log: S.log, wellness: S.wellness, buckets: S.buckets, gyms: S.gyms, week_start: gc.week_start || 'mon', today: localDate(), offset: offset || 0 });
+  return computeGoals(gc.goals, { log: S.log, wellness: wellnessRows(), buckets: S.buckets, gyms: S.gyms, week_start: gc.week_start || 'mon', today: localDate(), offset: offset || 0 });
 }
 
 /** Wellness goals show only when the repo has wellness data. */
-export const visibleResults = o => o.results.filter(r => r.source !== 'wellness' || S.wellness.length);
+export const visibleResults = o => o.results.filter(r => r.source !== 'wellness' || wellnessRows().length);
 
 function goalCard(r, o) {
   const isAvg = r.kind === 'avg', d = r.display;
@@ -48,7 +52,7 @@ function renderReports(p) {
   setHTML('repbody', html`<div class="wkbar"><button class="nb" ${act('week-shift', { n: -1 })} aria-label="Earlier week">&#8249;</button><div class="wkttl"><b>${title}</b><span>${fmtRange(o.start, o.end)}${o.isCurrent ? ` · day ${o.daysElapsed} of 7` : ' · final'}</span></div><button class="nb" ${act('week-shift', { n: 1 })} aria-label="Later week" style="visibility:${S.weekOffset === 0 ? 'hidden' : 'visible'}">&#8250;</button></div>
     <div class="wksum"><span><b>${hit}</b> hit</span>${o.isCurrent ? html`<span><b>${good - hit}</b> on pace</span><span><b>${rs.length - good}</b> behind</span>` : html`<span><b>${rs.length - hit}</b> missed</span>`}</div>
     ${groups.map(([name, pred]) => { const list = rs.filter(pred); return list.length ? html`<div class="sh">${name}</div>${list.map(r => goalCard(r, o))}` : ''; })}
-    ${!S.wellness.length && goalsCfg().goals.some(g => g.source === 'wellness') ? html`<p class="hint">Steps, sleep, HRV and resting-heart-rate goals need <code>daily-wellness.csv</code> in your repo (the Garmin pipeline writes it).</p>` : ''}`);
+    ${!wellnessRows().length && goalsCfg().goals.some(g => g.source === 'wellness') ? html`<p class="hint">Steps, sleep, HRV and resting-heart-rate goals need <code>daily-wellness.csv</code> in your repo (the Garmin pipeline writes it).</p>` : ''}`);
 }
 
 function weekStrip() {

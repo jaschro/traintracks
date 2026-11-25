@@ -17,6 +17,7 @@ export const S = {
   plan: null,
   goals: null,
   wellness: [],
+  garminRecent: null,    // garmin-recent.json: today's sleep and HRV join the wellness rows in the report
   buckets: {},
   version: null,         // the repo's VERSION file
   sha: { profile: null, plan: null, goals: null, genericLocal: null, gym: {} },
