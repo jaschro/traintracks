@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-11-24T23:04:10Z",
-  "today": "2026-11-24",
+  "fetched_at": "2026-11-25T08:36:49Z",
+  "today": "2026-11-25",
   "recent_activities": [
     {
       "activity_id": "25188895477",
@@ -323,58 +323,30 @@
       "active_kcal": 209.0,
       "elevation_gain_ft": 56,
       "speed_avg_mph": 4.88
-    },
-    {
-      "activity_id": "25035909799",
-      "date": "2026-11-10",
-      "start_time": "15:24:50",
-      "type": "other",
-      "name": "Miami Beach Jog",
-      "duration_sec": 856,
-      "distance_mi": 0.94,
-      "hr_avg_bpm": 122.0,
-      "hr_max_bpm": 136.0,
-      "active_kcal": 145.0,
-      "elevation_gain_ft": 13,
-      "speed_avg_mph": 3.93
-    },
-    {
-      "activity_id": "25034461776",
-      "date": "2026-11-10",
-      "start_time": "10:52:04",
-      "type": "walking",
-      "name": "Miami Beach Walking",
-      "duration_sec": 3569,
-      "distance_mi": 2.71,
-      "hr_avg_bpm": 86.0,
-      "hr_max_bpm": 127.0,
-      "active_kcal": 285.0,
-      "elevation_gain_ft": 66,
-      "speed_avg_mph": 2.73
     }
   ],
   "today_stats": {
-    "steps": 7130,
+    "steps": 162,
     "floors": 0.0,
-    "resting_hr_bpm": 47,
-    "active_kcal": 648.0,
-    "body_battery": 47,
-    "stress_avg": 22,
-    "week_steps": 105766
+    "resting_hr_bpm": 51,
+    "active_kcal": 1.0,
+    "body_battery": null,
+    "stress_avg": 36,
+    "week_steps": 104627
   },
   "training_readiness": {
-    "score": 81,
-    "level": "HIGH",
-    "feedback": "WELL_RECOVERED"
+    "score": null,
+    "level": null,
+    "feedback": null
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 5400,
+    "week_moderate_sec": 5460,
     "week_vigorous_sec": 4080
   },
   "hrv": {
     "weekly_avg_ms": 42,
-    "last_night_ms": 60,
+    "last_night_ms": null,
     "status": "BALANCED"
   },
   "sleep": {
@@ -388,9 +360,9 @@
     "respiration_brpm": 14.0,
     "spo2_pct": 94.0
   },
-  "spo2_avg_pct": 94.0,
+  "spo2_avg_pct": null,
   "respiration": {
-    "waking_brpm": 14.0,
-    "sleep_brpm": 14.0
+    "waking_brpm": 17.0,
+    "sleep_brpm": null
   }
 }
