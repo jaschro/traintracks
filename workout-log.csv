@@ -1,4 +1,5 @@
 id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,reps,duration_sec,duration_min,distance_mi,speed_mph,level,incline_pct,hr_avg_bpm,garmin_id,zone1_min,zone2_min,zone3_min,zone4_min,zone5_min,notes
+emwwpuce076z01,2026-11-25,15:45:00,portofino,Portofino Gym,aerobic,Aerobic Room,pa04,Peloton,,1,,,1929,32.15,,,,,124,25199742270,9.15,13,9,1,,Indoor ride (Garmin 25199742270). Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1. Gym guessed from your other sessions that day; move it in the app if that's wrong.
 emwwmv7gf52f01,2026-11-25,16:26:10,portofino,Portofino Gym,weights,Weight Room,pw02,Lat Pulldown Machine,,1,60,20,,,,,,,,,,,,,,
 emwwmv7gf36z02,2026-11-25,16:26:10,portofino,Portofino Gym,weights,Weight Room,pw02,Lat Pulldown Machine,,2,95,15,,,,,,,,,,,,,,
 emwwn76g4jrp04,2026-11-25,16:35:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,slow,1,,20,,,,,,,,,,,,,,
