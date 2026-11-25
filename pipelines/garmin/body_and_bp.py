@@ -42,10 +42,24 @@ def lb(grams) -> str:
     return num(float(grams) / GRAMS_PER_LB, 1) if grams not in (None, "") else ""
 
 
+def weigh_in_entries(payload: dict) -> list[dict]:
+    """Every weigh-in in a get_weigh_ins() answer (dailyWeightSummaries → allWeightMetrics).
+
+    The older get_body_composition() answer (dateWeightList) is read too, but it
+    holds only ONE entry per day, the latest: a day with several weigh-ins lost
+    all but the last, and lost every one when the last entry was USER_SETTING.
+    """
+    p = payload or {}
+    out = list(p.get("dateWeightList") or [])
+    for day in p.get("dailyWeightSummaries") or []:
+        out += day.get("allWeightMetrics") or ([day["latestWeight"]] if day.get("latestWeight") else [])
+    return out
+
+
 def body_rows(payload: dict) -> list[dict]:
-    """get_body_composition() → rows, oldest first."""
+    """get_weigh_ins() → rows, oldest first."""
     rows = []
-    for w in (payload or {}).get("dateWeightList") or []:
+    for w in weigh_in_entries(payload):
         if (w.get("sourceType") or "") not in KEEP_SCALE_SOURCES:
             continue
         local = w.get("date")
@@ -113,36 +127,10 @@ def write_csv(path: str, fields: list[str], rows: list[dict]) -> None:
 def main() -> int:
     ensure_garminconnect()
     g = garmin_client()
-    # Garmin's dateRange endpoint leaves out the end date itself, so ask through tomorrow.
-    start, end = date.fromisoformat(HISTORY_START), local_today() + timedelta(days=1)
+    start, end = date.fromisoformat(HISTORY_START), local_today()
     body, bp, failed = [], [], False
-    # --- temporary diagnostics (throwaway branch) ---
-    import json as _j
-    _t = local_today()
-    def _show(label, payload):
-        try:
-            if isinstance(payload, dict):
-                print("DIAG", label, "keys:", sorted(payload.keys()))
-                for w in (payload.get("dateWeightList") or []):
-                    print("DIAG", label, "dwl:", {k: w.get(k) for k in ("date", "calendarDate", "timestampGMT", "weight", "sourceType", "samplePk")})
-                for d in (payload.get("dailyWeightSummaries") or []):
-                    print("DIAG", label, "day:", d.get("summaryDate"), "n=", d.get("numOfWeightEntries"))
-                    for w in (d.get("allWeightMetrics") or []):
-                        print("DIAG", label, "  awm:", {k: w.get(k) for k in ("date", "calendarDate", "timestampGMT", "weight", "sourceType", "samplePk")})
-            else:
-                print("DIAG", label, "type:", type(payload).__name__, str(payload)[:300])
-        except Exception as e:  # noqa: BLE001
-            print("DIAG", label, "error:", e)
-    _a, _b, _c = (_t - timedelta(days=5)).isoformat(), _t.isoformat(), (_t + timedelta(days=1)).isoformat()
-    print("DIAG local_today:", _b)
-    _show("dateRange 5d..today", call(g.get_body_composition, _a, _b, default="FAILED"))
-    _show("dateRange today only", call(g.get_body_composition, _b, _b, default="FAILED"))
-    _show("dateRange full-year chunk", {"dateWeightList": ((call(g.get_body_composition, "2025-12-31", _c, default={}) or {}).get("dateWeightList") or [])[-6:]})
-    _show("range 5d..today", call(g.get_weigh_ins, _a, _b, default="FAILED"))
-    _show("dayview today", call(g.get_daily_weigh_ins, _b, default="FAILED"))
-    # --- end diagnostics ---
     for a, b in chunks(start, end):
-        bc = call(g.get_body_composition, a, b, default=None)
+        bc = call(g.get_weigh_ins, a, b, default=None)
         bpp = call(g.get_blood_pressure, a, b, default=None)
         failed = failed or bc is None or bpp is None
         body += body_rows(bc or {})
