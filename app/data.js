@@ -170,6 +170,9 @@ function applyFiles(files, { head, tree, withLog = true, legacyToo = false } = {
   S.sha.goals = sha(FILES.goals);
   S.wellness = csv(FILES.wellness, parseWellnessCSV, []);
   S.buckets = csv(FILES.buckets, parseBucketsCSV, {});
+  // Last night's sleep and HRV (lib/wellness.js): untrusted JSON, optional; unreadable = no snapshot.
+  const recent = jsonOf(files, FILES.garminRecent, null, true);
+  S.garminRecent = recent && typeof recent === 'object' && !Array.isArray(recent) ? recent : null;
   S.version = files[FILES.version] ? files[FILES.version].text.trim() : null;
   if (withLog) {
     S.oldFormat = isOldFormat(log);

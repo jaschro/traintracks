@@ -240,6 +240,20 @@ saw only the code rediscovered a deliberate decision as a bug.
 
 - **Posting: every Garmin activity is posted** (owner's decision, 7 Nov 2026), except strength training and sessions overlapping one logged by hand. Indoor sessions go to the gym you logged anything else at that day, else where your last session of that kind went, else Common Machines; unknown kinds go to Other Cardio. The note says how it was placed, and **Move** in the app fixes a wrong guess. On the owner's history this matched their own choice 16 times out of 23; the misses were travel days, first sessions with no history, and their own `mapping.json`. 0.1.0 skipped all indoor types without a mapping, and treated another nearby *Garmin* activity as a manual duplicate.
 - **Possible manual duplicates** (0.3.1). An activity is held back only when a hand-logged **cardio** entry (the classification above, `classify_entry` in `post_zone_records.py`, kept in step with `lib/classify.js`) **overlaps it in time**: the entry's `[time, time + duration_sec]` against the activity's `[first minute, last minute + 1 min]`, with a **3-minute tolerance**. Three minutes covers a time rounded to the nearest 5 minutes (at most 2.5 min off) and clocks a minute apart; a watch started late needs nothing extra, since the hand-logged session then starts earlier and still overlaps. Anything wider holds back a run logged right after a treadmill session. Before 0.3.1 *any* timed entry within 20 minutes of the activity held it back, so a 60-second Meditation logged 4 minutes after a jog stopped the jog from ever posting (the skip repeats each run). Planks, meditation, stretching and other duration-only entries never block a post. `--post-possible-duplicates`, or naming the activity with `--activity-ids`, posts it anyway.
+- **Today's sleep and HRV come from `garmin-recent.json`** (0.4.3). Garmin files
+  a night under the date you wake up, so last night belongs to today, but
+  `daily-wellness.csv` holds only finished days (from yesterday back), and the
+  weekly averages left last night out until the next day's run (7.0 h "below
+  target" that was really 7.2 h). The snapshot the pipeline already writes for
+  the coach has the numbers, so the report adds a row for its `today` built
+  from `sleep` (only when `sleep.date` is today; it falls back to yesterday
+  before the watch syncs) and `hrv` (only when `hrv.date` is today; files from
+  before `hrv.date` count it only alongside today's sleep, because HRV falls
+  back to yesterday the same way). **Only numbers final at wake-up**: steps,
+  calories, resting HR, body battery and the other daytime numbers are left
+  out, since the day is not over and a part-day would drag sums and averages
+  down. A CSV row for the date always wins; only finite numbers are taken
+  (`lib/wellness.js`). Nothing is written: the CSV stays the record.
 - **Averages are judged at the precision they are shown**: an average sleep of 7.09 h shows as 7.1 h, so against a 7.1 h target it is a hit (as in LogTrim).
 - **Scale and blood pressure** are rebuilt in full each run from `GARMIN_HISTORY_START`; if any request fails, the files are left unchanged rather than losing readings.
 

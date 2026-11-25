@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.3 (25 Nov 2026)
+
+- **Last night's sleep and HRV count in this week's report.** Garmin files a night's sleep under the day you wake up, but `daily-wellness.csv` gets a day only once it is over, so "Average sleep" and "Average HRV" left last night out until the next day (an average shown as 7.0 h "below target" was really 7.2 h). The report now adds today's sleep and HRV from `garmin-recent.json`, which the Garmin sync already writes: they show under today's date in the per-day list and in the day count. Steps, resting heart rate and other daytime numbers still wait for the finished day. If `daily-wellness.csv` already has the day, its row is used.
+- The Garmin sync now records which night its HRV is from (`hrv.date` in `garmin-recent.json`), so yesterday's HRV is never counted as today's. Until the next sync after updating, today's HRV is used only when today's sleep is there too.
+- The data format is unchanged; nothing is written by the report. The Worker needs no update; the Garmin pipeline gets the small `sync_recent.py` change with this update.
+
 ## 0.4.2 (23 Nov 2026)
 
 - **Machine photos are shown whole.** The machine grid, the machine page and the photo in **Edit machine** cropped every photo to a fixed shape (4:3 or 16:9), so a square or upright photo lost its top and bottom (a dead hang lost the bar and the feet). Photos are now fitted inside their box and never cut off; the space around them is filled with the card colour, in the light and the dark theme. Grid tiles keep one size.

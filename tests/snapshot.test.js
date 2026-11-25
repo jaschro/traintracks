@@ -14,6 +14,8 @@ test('isAppFile: the files the app reads on load, and nothing else', () => {
   assert.ok(!isAppFile('log/notes.txt'));
   assert.ok(isAppFile('equipment/my-gyms/a/gym.json'));
   assert.ok(!isAppFile('workout-log.csv'), 'the CSV is an export; the app never reads it');
+  assert.ok(isAppFile('daily-wellness.csv'));
+  assert.ok(isAppFile('garmin-recent.json'), 'last night\'s sleep and HRV for the report');
   assert.ok(!isAppFile('equipment/my-gyms/a/images/x.jpg'));
   assert.ok(!isAppFile('equipment/my-gyms/a/b/gym.json'));
   assert.ok(!isAppFile('app/main.js'));

@@ -18,6 +18,7 @@ import { createFakeGitHub } from '../fake-github.js';
 import { parseCSV } from '../../lib/csv.js';
 import { LOG_COLUMNS, logToJSON } from '../../lib/log.js';
 import { isMonthFile, joinMonths, monthToText, csvFromMonthFiles } from '../../lib/months.js';
+import { localDate, weekBounds, addDays, fmtShortDate } from '../../lib/dates.js';
 
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_PATH || 'playwright');
 const ROOT = path.resolve(new URL('../..', import.meta.url).pathname);
@@ -614,6 +615,42 @@ if (usingFixture) {
     }
     await o.ctx.close();
   }
+}
+
+// 12. Last night's sleep and HRV (garmin-recent.json) join daily-wellness.csv in the report
+if (usingFixture) {
+  const today = localDate(), wk = weekBounds(today, 'mon');
+  const days = [];
+  for (let d = wk.start; d < today; d = addDays(d, 1)) days.push(d);
+  const wGoals = { week_start: 'mon', goals: [
+    { id: 'sleep', label: 'Average sleep', kind: 'avg', source: 'wellness', field: 'sleep_sec', target: 25560, display: 'h' },
+    { id: 'steps', label: 'Total steps', kind: 'sum', source: 'wellness', field: 'steps', target: 70000 }] };
+  // A row from last week too, so the wellness cards show even on a Monday.
+  const wellnessCSV = 'date,steps,sleep_sec,hrv_ms\n' + [addDays(wk.start, -1), ...days].map(d => `${d},9000,25200,40`).join('\n') + '\n';
+  const recentJSON = r => JSON.stringify({ today, today_stats: { steps: 1234 }, sleep: { date: today, sleep_sec: 28980, score: 80 }, hrv: { date: today, last_night_ms: 45, status: 'BALANCED' }, ...r });
+  const sleepCard = async (pg) => {
+    await pg.click('#s-home [data-act="nav"][data-to="reports"]');
+    await pg.click('.rc:has-text("Average sleep") .rch');
+    return { sub: (await pg.textContent('.rc:has-text("Average sleep") .rcs')) || '', rows: await pg.$$eval('.rc:has-text("Average sleep") .rdr .d', els => els.map(e => e.textContent)),
+      steps: await pg.$$eval('.rc:has-text("Total steps") .rdr .d', els => els.map(e => e.textContent)) };
+  };
+  const base = { ...seed, 'goals.json': JSON.stringify(wGoals), 'daily-wellness.csv': wellnessCSV };
+  const withRecent = createFakeGitHub({ ...base, 'garmin-recent.json': recentJSON() });
+  fake.fetch = withRecent.fetch;
+  let o = await openPage();
+  let c = await sleepCard(o.page);
+  await o.page.screenshot({ path: path.join(SHOTS, `${String(++n).padStart(2, '0')}-report-last-night.png`), fullPage: true });
+  check('report lists last night\'s sleep under today', c.rows.length === days.length + 1 && c.rows[c.rows.length - 1] === fmtShortDate(today), c.rows.join());
+  check('report counts today in the sleep days', c.sub.includes(`${days.length + 1} day`), c.sub);
+  check('today\'s steps are not taken from the snapshot', c.steps.length === days.length, c.steps.join());
+  await o.ctx.close();
+  // An unreadable garmin-recent.json is ignored: the report works from the CSV alone.
+  fake.fetch = createFakeGitHub({ ...base, 'garmin-recent.json': '{ not json' }).fetch;
+  o = await openPage();
+  c = await sleepCard(o.page);
+  check('a malformed garmin-recent.json is ignored', c.rows.length === days.length, c.rows.join());
+  await o.ctx.close();
+  fake.fetch = oldFetch;
 }
 
 await browser.close();
