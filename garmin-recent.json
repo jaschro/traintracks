@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-25T17:41:27Z",
+  "fetched_at": "2026-11-25T22:49:18Z",
   "today": "2026-11-25",
   "recent_activities": [
+    {
+      "activity_id": "25199742270",
+      "date": "2026-11-25",
+      "start_time": "15:45:05",
+      "type": "indoor_cycling",
+      "name": "Indoor Cycling",
+      "duration_sec": 1928,
+      "distance_mi": null,
+      "hr_avg_bpm": 124.0,
+      "hr_max_bpm": 148.0,
+      "active_kcal": 349.0,
+      "elevation_gain_ft": null,
+      "speed_avg_mph": null
+    },
     {
       "activity_id": "25188895477",
       "date": "2026-11-24",
@@ -326,23 +340,23 @@
     }
   ],
   "today_stats": {
-    "steps": 767,
+    "steps": 1598,
     "floors": 0.0,
     "resting_hr_bpm": 47,
-    "active_kcal": 5.0,
-    "body_battery": 80,
-    "stress_avg": 19,
-    "week_steps": 105232
+    "active_kcal": 321.0,
+    "body_battery": 59,
+    "stress_avg": 20,
+    "week_steps": 106063
   },
   "training_readiness": {
-    "score": 84,
-    "level": "HIGH",
-    "feedback": "WELL_RECOVERED"
+    "score": 66,
+    "level": "MODERATE",
+    "feedback": "RECOVERY_IN_PROGRESS"
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 5460,
-    "week_vigorous_sec": 4080
+    "week_moderate_sec": 5700,
+    "week_vigorous_sec": 5880
   },
   "hrv": {
     "weekly_avg_ms": 43,
