@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-25T22:49:18Z",
+  "fetched_at": "2026-11-26T03:34:46Z",
   "today": "2026-11-25",
   "recent_activities": [
     {
@@ -359,6 +359,7 @@
     "week_vigorous_sec": 5880
   },
   "hrv": {
+    "date": "2026-11-25",
     "weekly_avg_ms": 43,
     "last_night_ms": 45,
     "status": "BALANCED"
