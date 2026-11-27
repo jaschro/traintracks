@@ -122,6 +122,13 @@
           "muscles_worked": "",
           "image": "m1795804423757.jpg",
           "log_type": "weight"
+        },
+        {
+          "id": "m1795804446583",
+          "name": "Assisted Pullups",
+          "muscles_worked": "",
+          "image": "m1795804446583.jpg",
+          "log_type": "weight"
         }
       ]
     },
