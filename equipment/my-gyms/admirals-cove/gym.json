@@ -93,7 +93,8 @@
           "name": "Hip Thrust",
           "muscles_worked": "Gluteus maximus, hamstrings, core",
           "image": "m1785618137870.jpg",
-          "log_type": "weight"
+          "log_type": "weight",
+          "hidden": true
         },
         {
           "id": "m1785618228257",
