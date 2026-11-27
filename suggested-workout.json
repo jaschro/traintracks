@@ -1,59 +1,111 @@
 {
-  "generated_at": "2026-11-25T20:30:00Z",
-  "coach_note": "Wed Nov 25 - Portofino, upper-body day. Recovery is the best it's been all month: 8.1 h sleep, HRV 45 (avg 43), readiness 84, body battery 80, and yesterday was 111 easy minutes on the bike. Chest and back were last worked Sunday, so they're ready. Push-ups return with all three variants doing three different jobs; the row and pulldown are warm-up + one top set taken past the number; then the pulling progression continues with a dead hang and slow negatives on the assisted machine, nothing to failure. Decline bench replaces the crunch machine. 20 easy minutes on the Peloton at the end closes the week's last 4 Zone 2 minutes, and the leg lifts and squats finish their weekly counts. No hamstring work.",
+  "generated_at": "2026-11-27T17:15:00Z",
+  "coach_note": "Fri Nov 27 - Admirals Cove, legs and hips plus a steady Zone 2 walk. Recovery is only middling after Thanksgiving: HRV 40, resting HR 51 (up from 46-47), body battery 33 this morning. Sleep was fine at 7.6 h. So this is a solid-but-not-heroic day: top sets taken past the number on the machines that are safe to push, hamstrings kept light, and the cardio at a steady Zone 2 rather than anything hard. Legs were last loaded Monday at Portofino (leg press 115 x20, extension 90 x18); the Admirals machines read heavier - 160 x20 on this leg press on Nov 14 - so the numbers below are this gym's, not Portofino's. Note the Pec Fly / Reverse Fly machine here is in kg; nothing else is. This is the last day of the training week and every goal is already met, so nothing here is chasing a count.",
   "exercises": [
     {
-      "machine_id": "pa04",
-      "gym_id": "portofino",
-      "machine": "Peloton",
-      "gym": "Portofino Gym",
-      "room": "Aerobic Room",
-      "note": "Warm-up: 10 min easy, just enough to be warm before the hanging. Zone 2 comes at the end.",
+      "machine_id": "m1785619713315",
+      "gym_id": "gym_1785005216520",
+      "machine": "Slat Belt Treadmill (electric)",
+      "gym": "Admirals Cove",
+      "room": "Aerobic Area",
+      "note": "Main cardio, done first. 5 min flat easy, then 30 min at 3.6-3.8 mph on a 5-7% grade - that's the incline-walk recipe from the lactate test that puts you at 121-131 without running. 5 min flat to finish. Keep it under 132; today is not the day for Zone 3.",
       "sets": [
         {
           "set": 1,
-          "duration_sec": 600
+          "duration_sec": 2400
         }
       ]
     },
     {
-      "machine_id": "push-ups",
-      "gym_id": "generic",
-      "machine": "Push Ups",
-      "gym": "Common Machines",
-      "room": "Bodyweight — No Equipment",
-      "note": "Set 1 decline AMRAP with the feet on a bench (higher than Sunday's 35). Rest 2 min. Set 2 flat AMRAP (50 Sunday). Set 3 incline close-grip, 3 s down, pause at the bottom - a tricep set; stop around 15 or when the elbows flare.",
+      "machine_id": "m1785005256712",
+      "gym_id": "gym_1785005216520",
+      "machine": "Leg Press",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Nov 14 was 80/120/160 x30/30/20. Two warm-ups, then 180 AMRAP - stop when the knees drift in or the lower back lifts off the pad. 15 clean reps is the target; 20 means 200 next time.",
       "sets": [
         {
           "set": 1,
-          "reps": 30,
-          "variant": [
-            "decline"
-          ]
+          "weight_lb": 100,
+          "reps": 15
         },
         {
           "set": 2,
-          "reps": 50,
-          "variant": [
-            "regular"
-          ]
+          "weight_lb": 140,
+          "reps": 12
         },
         {
           "set": 3,
-          "reps": 15,
-          "variant": [
-            "incline"
-          ]
+          "weight_lb": 180,
+          "reps": 15
         }
       ]
     },
     {
-      "machine_id": "pm02",
-      "gym_id": "portofino",
-      "machine": "Seated Row Machine",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Sunday's top set was 90 x23 - that earns 100. Warm-up, then 100 AMRAP; stop when the shoulders start shrugging up.",
+      "machine_id": "m1785005305369",
+      "gym_id": "gym_1785005216520",
+      "machine": "Leg Extension",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Nov 16 was 45/55 x15 with room. Warm-up, then 70 AMRAP with a 1-second hold at the top.",
+      "sets": [
+        {
+          "set": 1,
+          "weight_lb": 45,
+          "reps": 12
+        },
+        {
+          "set": 2,
+          "weight_lb": 70,
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "machine_id": "m1785701695686",
+      "gym_id": "gym_1785005216520",
+      "machine": "Leg Curl",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Hamstrings stay easy: 2 x 12 at 35, slow on the way back, stop with 4-5 reps in hand. Not an AMRAP.",
+      "sets": [
+        {
+          "set": 1,
+          "weight_lb": 35,
+          "reps": 12
+        },
+        {
+          "set": 2,
+          "weight_lb": 35,
+          "reps": 12
+        }
+      ]
+    },
+    {
+      "machine_id": "m1785618137870",
+      "gym_id": "gym_1785005216520",
+      "machine": "Hip Thrust",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "New machine for the log. Start light to learn it: 2 sets of 12, a 2-second squeeze at the top, ribs down. Note the weight you land on.",
+      "sets": [
+        {
+          "set": 1,
+          "reps": 12
+        },
+        {
+          "set": 2,
+          "reps": 12
+        }
+      ]
+    },
+    {
+      "machine_id": "m1785006086200",
+      "gym_id": "gym_1785005216520",
+      "machine": "Abductor",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Nov 16 was 65/75/85 x10. Warm-up at 65, then 95 AMRAP.",
       "sets": [
         {
           "set": 1,
@@ -62,94 +114,18 @@
         },
         {
           "set": 2,
-          "weight_lb": 100,
-          "reps": 15
-        }
-      ]
-    },
-    {
-      "machine_id": "pw02",
-      "gym_id": "portofino",
-      "machine": "Lat Pulldown Machine",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Last 85 x15 with room. Warm-up, then 95 AMRAP, bar to the collarbone, no leaning back past 15 degrees.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 60,
-          "reps": 12
-        },
-        {
-          "set": 2,
           "weight_lb": 95,
-          "reps": 12
-        }
-      ]
-    },
-    {
-      "machine_id": "m1795462545620",
-      "gym_id": "generic",
-      "machine": "Dead Hang",
-      "gym": "Common Machines",
-      "room": "Bodyweight — Light Equipment",
-      "note": "Two hangs, shoulders packed. Yesterday's first one was 25 s - aim for 35 today, stop when the grip opens. 90 s between.",
-      "sets": [
-        {
-          "set": 1,
-          "duration_sec": 35
-        },
-        {
-          "set": 2,
-          "duration_sec": 35
-        }
-      ]
-    },
-    {
-      "machine_id": "pw01",
-      "gym_id": "portofino",
-      "machine": "Assisted Pullup & Dip Machine",
-      "gym": "Portofino Gym",
-      "room": "Weight Room",
-      "note": "Negatives, not pull-ups: set the assist to -100, pull or step to the top, lower over a full 5 seconds. One set of 4. If the 4th drops faster than 3 s, stop at 3. Vertical grip.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": -100,
-          "reps": 4,
-          "variant": [
-            "vertical"
-          ]
-        }
-      ]
-    },
-    {
-      "machine_id": "pm04",
-      "gym_id": "portofino",
-      "machine": "Pec Fly",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Nov 18 top set 80 x15. One warm-up at 50, then 85 AMRAP with a 1 s squeeze.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 50,
-          "reps": 12
-        },
-        {
-          "set": 2,
-          "weight_lb": 85,
           "reps": 15
         }
       ]
     },
     {
-      "machine_id": "m1782480059048",
-      "gym_id": "portofino",
-      "machine": "Rear Deltoid",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Saturday 55/75 x15. Warm-up at 50, then 80 AMRAP - small movement, no swinging.",
+      "machine_id": "m1785006115413",
+      "gym_id": "gym_1785005216520",
+      "machine": "Adductor",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Nov 16 was 45/55/65 x15. Warm-up at 50, then 80 AMRAP.",
       "sets": [
         {
           "set": 1,
@@ -164,32 +140,12 @@
       ]
     },
     {
-      "machine_id": "pm08",
-      "gym_id": "portofino",
-      "machine": "Seated Shoulder Press",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Saturday 65 x10 - this one is already near failure, so stay at 65 and just log the honest number.",
-      "sets": [
-        {
-          "set": 1,
-          "weight_lb": 45,
-          "reps": 12
-        },
-        {
-          "set": 2,
-          "weight_lb": 65,
-          "reps": 10
-        }
-      ]
-    },
-    {
-      "machine_id": "pm01",
-      "gym_id": "portofino",
-      "machine": "Adjustable Decline Abdominal Bench",
-      "gym": "Portofino Gym",
-      "room": "Machines Room",
-      "note": "Replaces the crunch machine. One AMRAP set, hands across the chest, curl up - then one set of 15.",
+      "machine_id": "m1785007780604",
+      "gym_id": "gym_1785005216520",
+      "machine": "Decline Ab Bench Situps",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "One AMRAP set, hands across the chest, then one set of 15.",
       "sets": [
         {
           "set": 1,
@@ -202,50 +158,34 @@
       ]
     },
     {
-      "machine_id": "leg-lifts",
-      "gym_id": "generic",
-      "machine": "Leg Lifts",
-      "gym": "Common Machines",
-      "room": "Bodyweight — No Equipment",
-      "note": "Week is at 110 of 140. One slow AMRAP (30 Sunday) closes it.",
+      "machine_id": "m1785177917318",
+      "gym_id": "gym_1785005216520",
+      "machine": "Reverse Sit Ups",
+      "gym": "Admirals Cove",
+      "room": "Machines",
+      "note": "Fixed 2 x 20 - lower back, not an AMRAP.",
       "sets": [
         {
           "set": 1,
-          "reps": 30,
-          "variant": [
-            "slow"
-          ]
-        }
-      ]
-    },
-    {
-      "machine_id": "squats",
-      "gym_id": "generic",
-      "machine": "Squats",
-      "gym": "Common Machines",
-      "room": "Bodyweight — No Equipment",
-      "note": "Week is at 120 of 140. One slow-tempo set of 20 and it's done.",
-      "sets": [
-        {
-          "set": 1,
-          "reps": 20,
-          "variant": [
-            "slow"
-          ]
-        }
-      ]
-    },
-    {
-      "machine_id": "pa04",
-      "gym_id": "portofino",
-      "machine": "Peloton",
-      "gym": "Portofino Gym",
-      "room": "Aerobic Room",
-      "note": "Finisher: 20 min with 15 of them held at 120-129 bpm. Week needs 4 more Zone 2 minutes; this gives margin.",
-      "sets": [
+          "reps": 20
+        },
         {
           "set": 2,
-          "duration_sec": 1200
+          "reps": 20
+        }
+      ]
+    },
+    {
+      "machine_id": "m1785619284163",
+      "gym_id": "gym_1785005216520",
+      "machine": "Ski Ergometer",
+      "gym": "Admirals Cove",
+      "room": "Aerobic Area",
+      "note": "Optional finisher, 8 minutes easy - lats and shoulders from a different angle than the hangs, and nothing in it to hurt a hamstring. Skip if the body battery says so.",
+      "sets": [
+        {
+          "set": 1,
+          "duration_sec": 480
         }
       ]
     }
