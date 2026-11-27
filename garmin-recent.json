@@ -1,7 +1,21 @@
 {
-  "fetched_at": "2026-11-27T12:23:12Z",
+  "fetched_at": "2026-11-27T23:28:03Z",
   "today": "2026-11-27",
   "recent_activities": [
+    {
+      "activity_id": "25218742263",
+      "date": "2026-11-27",
+      "start_time": "14:10:24",
+      "type": "walking",
+      "name": "Jupiter Walking",
+      "duration_sec": 1573,
+      "distance_mi": 1.31,
+      "hr_avg_bpm": 84.0,
+      "hr_max_bpm": 96.0,
+      "active_kcal": 135.0,
+      "elevation_gain_ft": 7,
+      "speed_avg_mph": 3.0
+    },
     {
       "activity_id": "25207258842",
       "date": "2026-11-26",
@@ -298,44 +312,44 @@
     }
   ],
   "today_stats": {
-    "steps": 11,
-    "floors": 0.0,
-    "resting_hr_bpm": 51,
-    "active_kcal": 0.0,
-    "body_battery": 33,
+    "steps": 7851,
+    "floors": 3.00886,
+    "resting_hr_bpm": 45,
+    "active_kcal": 227.0,
+    "body_battery": 64,
     "stress_avg": 20,
-    "week_steps": 93664
+    "week_steps": 101504
   },
   "training_readiness": {
-    "score": null,
-    "level": null,
-    "feedback": null
+    "score": 84,
+    "level": "HIGH",
+    "feedback": "WELL_RECOVERED"
   },
   "vo2max": 42.0,
   "intensity": {
-    "week_moderate_sec": 5940,
+    "week_moderate_sec": 7680,
     "week_vigorous_sec": 6720
   },
   "hrv": {
-    "date": "2026-11-26",
-    "weekly_avg_ms": 42,
-    "last_night_ms": 40,
+    "date": "2026-11-27",
+    "weekly_avg_ms": 44,
+    "last_night_ms": 49,
     "status": "BALANCED"
   },
   "sleep": {
-    "date": "2026-11-26",
-    "sleep_sec": 27300,
-    "score": 87,
-    "deep_sec": 6600,
-    "light_sec": 14460,
-    "rem_sec": 6240,
-    "awake_sec": 60,
-    "respiration_brpm": 14.0,
-    "spo2_pct": 94.0
+    "date": "2026-11-27",
+    "sleep_sec": 33720,
+    "score": 81,
+    "deep_sec": 5100,
+    "light_sec": 22020,
+    "rem_sec": 6600,
+    "awake_sec": 2880,
+    "respiration_brpm": 13.0,
+    "spo2_pct": 95.0
   },
-  "spo2_avg_pct": null,
+  "spo2_avg_pct": 94.0,
   "respiration": {
-    "waking_brpm": 16.0,
-    "sleep_brpm": null
+    "waking_brpm": 15.0,
+    "sleep_brpm": 13.0
   }
 }
