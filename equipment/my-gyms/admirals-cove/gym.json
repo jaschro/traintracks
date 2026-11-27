@@ -1,8 +1,4 @@
 {
-  "id": "gym_1785005216520",
-  "name": "Admirals Cove",
-  "icon": "🏋️",
-  "is_generic": false,
   "rooms": [
     {
       "id": "room_1785005216520",
@@ -119,6 +115,13 @@
           "muscles_worked": "Hamstrings",
           "image": null,
           "log_type": "weight"
+        },
+        {
+          "id": "m1795804423757",
+          "name": "Assisted Dips",
+          "muscles_worked": "",
+          "image": "m1795804423757.jpg",
+          "log_type": "weight"
         }
       ]
     },
@@ -205,5 +208,9 @@
         }
       ]
     }
-  ]
+  ],
+  "id": "gym_1785005216520",
+  "name": "Admirals Cove",
+  "icon": "🏋️",
+  "is_generic": false
 }
