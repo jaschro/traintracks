@@ -7,9 +7,6 @@ emwz91bv53g60c,2026-11-27,12:20:12,generic,Common Machines,bodyweight-no-equipme
 emwz97whkc5g0e,2026-11-27,12:27:26,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,elbow-planks,Elbow Planks,,1,,,60,1,,,,,,,,,,,,
 emwz9bbnr30a0g,2026-11-27,12:30:05,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,side-planks,Side Planks,,1,,,50,0.83,,,,,,,,,,,,
 emwz9bbnrzsp0h,2026-11-27,12:30:05,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,side-planks,Side Planks,,2,,,50,0.83,,,,,,,,,,,,
-emwz90869q7b08,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,decline,1,,30,,,,,,,,,,,,,,
-emwz908695bo09,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,regular,2,,35,,,,,,,,,,,,,,
-emwz90869qpn0a,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,incline,3,,1,,,,,,,,,,,,,,
 emwz9w0e4opc0k,2026-11-27,12:46:11,gym_1785005216520,Admirals Cove,aerobic-area-1785619250364,Aerobic Area,m1785619284163,Ski Ergometer,,1,,,480,8,,,,,,,,,,,,I did 8 minutes but I have no idea of speed or heart rate
 emwza4ay2jbs0m,2026-11-27,12:52:37,gym_1785005216520,Admirals Cove,room_1785005216520,Machines,m1785007780604,Decline Ab Bench Situps,,1,,25,,,,,,,,,,,,,,
 emwza4ay2i140n,2026-11-27,12:52:37,gym_1785005216520,Admirals Cove,room_1785005216520,Machines,m1785007780604,Decline Ab Bench Situps,,2,,20,,,,,,,,,,,,,,
@@ -31,6 +28,9 @@ emwzbq8k6lt00m,2026-11-27,13:37:40,gym_1785005216520,Admirals Cove,room_17850052
 emwzbx6gdfbn0o,2026-11-27,13:43:04,gym_1785005216520,Admirals Cove,room_1785005216520,Machines,m1785005256712,Leg Press,center,1,100,15,,,,,,,,,,,,,,
 emwzbx6gd0270p,2026-11-27,13:43:04,gym_1785005216520,Admirals Cove,room_1785005216520,Machines,m1785005256712,Leg Press,wide,2,100,15,,,,,,,,,,,,,,
 emwzbx6gdlk20q,2026-11-27,13:43:04,gym_1785005216520,Admirals Cove,room_1785005216520,Machines,m1785005256712,Leg Press,low,3,100,15,,,,,,,,,,,,,,
+emwz90869q7b08,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,decline,1,,30,,,,,,,,,,,,,,
+emwz908695bo09,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,regular,2,,35,,,,,,,,,,,,,,
+emwz90869qpn0a,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,incline,3,,30,,,,,,,,,,,,,,
 emwxsn8zep7w01,2026-11-26,11:09:00,generic,Common Machines,outdoor-activities,Outdoor Activities,jog,Jog,,1,,,862,14.37,1.23,,,,131,25207258842,2,3,7.23,2,,Miami Beach Jog (Garmin 25207258842; 1.23 mi; +52 ft). Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1.
 emwwpuce076z01,2026-11-25,15:45:00,portofino,Portofino Gym,aerobic,Aerobic Room,pa04,Peloton,,1,,,1929,32.15,,,,,124,25199742270,9.15,13,9,1,,Indoor ride (Garmin 25199742270). Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1. Gym guessed from your other sessions that day; move it in the app if that's wrong.
 emwwmv7gf52f01,2026-11-25,16:26:10,portofino,Portofino Gym,weights,Weight Room,pw02,Lat Pulldown Machine,,1,60,20,,,,,,,,,,,,,,
