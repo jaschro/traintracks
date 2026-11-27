@@ -2,14 +2,14 @@ id,date,time,gym_id,gym,room_id,room,machine_id,machine,variant,set,weight_lb,re
 emwz8wx0qj5j01,2026-11-27,12:18:53,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,m1794718776135,Side Leg Lifts,left,1,,40,,,,,,,,,,,,,,
 emwz8wx0q23f02,2026-11-27,12:18:53,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,m1794718776135,Side Leg Lifts,right,2,,40,,,,,,,,,,,,,,
 emwz8yh6sat504,2026-11-27,12:20:06,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,squats,Squats,slow,1,,25,,,,,,,,,,,,,,
-emwz90869q7b08,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,decline,1,,30,,,,,,,,,,,,,,
-emwz908695bo09,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,regular,2,,1,,,,,,,,,,,,,,
-emwz90869qpn0a,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,incline,3,,1,,,,,,,,,,,,,,
 emwz8ylprf3306,2026-11-27,12:20:12,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,slow,1,,20,,,,,,,,,,,,,,
 emwz91bv53g60c,2026-11-27,12:20:12,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,leg-lifts,Leg Lifts,slow,2,,20,,,,,,,,,,,,,,
 emwz97whkc5g0e,2026-11-27,12:27:26,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,elbow-planks,Elbow Planks,,1,,,60,1,,,,,,,,,,,,
 emwz9bbnr30a0g,2026-11-27,12:30:05,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,side-planks,Side Planks,,1,,,50,0.83,,,,,,,,,,,,
 emwz9bbnrzsp0h,2026-11-27,12:30:05,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,side-planks,Side Planks,,2,,,50,0.83,,,,,,,,,,,,
+emwz90869q7b08,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,decline,1,,30,,,,,,,,,,,,,,
+emwz908695bo09,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,regular,2,,35,,,,,,,,,,,,,,
+emwz90869qpn0a,2026-11-27,12:21:28,generic,Common Machines,bodyweight-no-equipment,Bodyweight — No Equipment,push-ups,Push Ups,incline,3,,1,,,,,,,,,,,,,,
 emwxsn8zep7w01,2026-11-26,11:09:00,generic,Common Machines,outdoor-activities,Outdoor Activities,jog,Jog,,1,,,862,14.37,1.23,,,,131,25207258842,2,3,7.23,2,,Miami Beach Jog (Garmin 25207258842; 1.23 mi; +52 ft). Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1.
 emwwpuce076z01,2026-11-25,15:45:00,portofino,Portofino Gym,aerobic,Aerobic Room,pa04,Peloton,,1,,,1929,32.15,,,,,124,25199742270,9.15,13,9,1,,Indoor ride (Garmin 25199742270). Karvonen zones from cardio-minutes (RHR 46 / max 168); warmup below Z1 counted in zone1. Gym guessed from your other sessions that day; move it in the app if that's wrong.
 emwwmv7gf52f01,2026-11-25,16:26:10,portofino,Portofino Gym,weights,Weight Room,pw02,Lat Pulldown Machine,,1,60,20,,,,,,,,,,,,,,
