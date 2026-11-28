@@ -1,6 +1,6 @@
 {
-  "fetched_at": "2026-11-27T23:28:03Z",
-  "today": "2026-11-27",
+  "fetched_at": "2026-11-28T05:31:05Z",
+  "today": "2026-11-28",
   "recent_activities": [
     {
       "activity_id": "25218742263",
@@ -295,35 +295,21 @@
       "active_kcal": 74.0,
       "elevation_gain_ft": null,
       "speed_avg_mph": 1.12
-    },
-    {
-      "activity_id": "25066098614",
-      "date": "2026-11-13",
-      "start_time": "09:43:59",
-      "type": "other",
-      "name": "Miami Beach Jog",
-      "duration_sec": 986,
-      "distance_mi": 1.15,
-      "hr_avg_bpm": 109.0,
-      "hr_max_bpm": 127.0,
-      "active_kcal": 135.0,
-      "elevation_gain_ft": 20,
-      "speed_avg_mph": 4.19
     }
   ],
   "today_stats": {
-    "steps": 7851,
-    "floors": 3.00886,
+    "steps": 8696,
+    "floors": 5.33038,
     "resting_hr_bpm": 45,
-    "active_kcal": 227.0,
-    "body_battery": 64,
-    "stress_avg": 20,
-    "week_steps": 101504
+    "active_kcal": 234.0,
+    "body_battery": null,
+    "stress_avg": 22,
+    "week_steps": 91447
   },
   "training_readiness": {
-    "score": 84,
-    "level": "HIGH",
-    "feedback": "WELL_RECOVERED"
+    "score": null,
+    "level": null,
+    "feedback": null
   },
   "vo2max": 42.0,
   "intensity": {
@@ -347,9 +333,9 @@
     "respiration_brpm": 13.0,
     "spo2_pct": 95.0
   },
-  "spo2_avg_pct": 94.0,
+  "spo2_avg_pct": null,
   "respiration": {
-    "waking_brpm": 15.0,
-    "sleep_brpm": 13.0
+    "waking_brpm": null,
+    "sleep_brpm": null
   }
 }
